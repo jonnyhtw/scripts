@@ -1,10 +1,12 @@
 ungrouped views = graph, text
 #ungrouped views = graph
+#ungrouped views = text
 initial side-by-side views = True
 use theme = color-blind
 dot icon size = medium
 initial views =   graph, text
 #initial views =   graph
+#initial views =   text
 #sub-graphs on = True
 task states to filter out = runahead
 task filter highlight color = PowderBlue
