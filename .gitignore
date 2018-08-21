@@ -4,3 +4,4 @@
 *.log
 #*.nc
 #*.pp
+*.ipynb_checkpoints

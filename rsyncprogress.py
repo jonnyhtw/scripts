@@ -71,8 +71,8 @@ for line in read_stdin():
         if pbar is None:
             first_update = j
             pbar = progressbar.ProgressBar(widgets=widgets,
-                max_value=ntotal - first_update).start() 
-        pbar.max_value = ntotal - first_update
+                maxval=ntotal - first_update).start() 
+        pbar.maxval = ntotal - first_update
         pbar.update(j - first_update)
         
         #sys.stderr.write('Total:%.1f%%|File:%s|%s|%s|%s|\r' % (total_progress, file_progress,
