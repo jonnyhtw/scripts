@@ -3,5 +3,5 @@
 
 export suiteid=$1
 
-grep -r 'Atm_Step: Timestep' ~/cylc-run/$suiteid/work/*/*/pe_output/*|tail -1
+grep -r 'Atm_Step: Timestep' ~/cylc-run/$suiteid/work/*/*/pe_output/*|tail -c 20
 

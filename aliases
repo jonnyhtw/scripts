@@ -33,7 +33,7 @@ alias fdg='fcm diff -g &'
 # Alias for `cylc trigger` in PWD 
 alias trig='cylc trigger $(basename "$PWD")'
 # Aliases for local calls to '> cylc monitor/stop/kill [suite-ID]'. 
-alias mn='cylc monitor $(basename "$PWD")'
+alias mn='cylc monitor $(basename "$PWD") -r'
 alias cylc-stop='cylc stop $(basename "$PWD")'
 alias cylc-kill='cylc kill $(basename "$PWD")'
 alias ks='cylc kill $(basename "$PWD");cylc stop --now --now  $(basename "$PWD")'
