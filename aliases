@@ -81,6 +81,7 @@ alias sq='ssh kupe01 squeue'
 alias squ='ssh kupe01 squeue -u williamsjh'
 # go to my nobackup folder
 alias nobackup='cd /nesi/nobackup/williamsjh'
-
-
+# alias 'here' for the name of the current dir you're in. This is then accessed
+# with `here` (back ticks) or $(here).
+export here=$(basename $PWD)
 
