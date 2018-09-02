@@ -83,5 +83,5 @@ alias squ='ssh kupe01 squeue -u williamsjh'
 alias nobackup='cd /nesi/nobackup/williamsjh'
 # alias 'here' for the name of the current dir you're in. This is then accessed
 # with `here` (back ticks) or $(here).
-export here=$(basename $PWD)
+#alias here='$(basename $PWD)'
 
