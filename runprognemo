@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# this is a script to see where a run has got to...
+
+export suiteid=$1
+
+grep -r 'time-step' ~/cylc-run/$suiteid/work/*/*/ocean.output|tail -c 20
+

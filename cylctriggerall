@@ -1,0 +1,12 @@
+#script to poll all suites listed by `cylc scan`
+
+cylc scan > out
+
+while read p 
+    do 
+        echo 'polling  '${p%% *}
+        cylc trigger *.*{failed,submit-failed}  ${p%% *}
+    done < out; 
+
+rm out
+
