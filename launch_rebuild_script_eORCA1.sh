@@ -1,21 +1,28 @@
-#!/bin/csh
+#!/bin/bash
 
 module load slurm
 
-set DIR=/nesi/nobackup/roachla/cylc-run/NCKLR03-clim-wfsd/work
+export suite=u-bb016
+
+echo $SUITE
+
+for dir in /home/$USER/cylc-run/$SUITE/work/*/nemo_cice*/
+
+    do
+
+    echo $dir
+
+    cd $dir
+
+    echo 'rebuilding files in...'
+    echo $dir
 
 
-foreach file (`ls -d /nesi/nobackup/roachla/cylc-run/NCKLR03-clim-wfsd/work/*/nemo_cice/`)
+    echo sbatch rebuild_nemo_scrip_eORCA1.sl
 
-cd $file
+    sbatch rebuild_nemo_scrip_eORCA1.sl
 
-cp /nesi/nobackup/roachla/cylc-run/NCKLR03-clim-wfsd/rebuild_nemo_scrip_eORCA1.sl .
+done
 
-echo $file
 
-echo sbatch rebuild_nemo_scrip_eORCA1.sl
-
-sbatch rebuild_nemo_scrip_eORCA1.sl
-
-end
 
