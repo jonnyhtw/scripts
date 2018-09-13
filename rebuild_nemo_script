@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 for dir in /home/$USER/cylc-run/$1/work/*/nemo_cice*/
 
     do
