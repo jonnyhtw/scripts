@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export ID=u-bb016
+export SUITE=u-bb016
 echo $SUITE
 
 for dir in /home/$USER/cylc-run/$SUITE/work/*/nemo_cice*/
