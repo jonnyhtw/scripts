@@ -1,9 +1,7 @@
 #!/bin/bash
 
-export SUITE=u-bb016
-echo $SUITE
 
-for dir in /home/$USER/cylc-run/$SUITE/work/*/nemo_cice*/
+for dir in /home/$USER/cylc-run/$1/work/*/nemo_cice*/
 
     do
  
@@ -20,7 +18,7 @@ for dir in /home/$USER/cylc-run/$SUITE/work/*/nemo_cice*/
     echo $dir
 
 
-    export NP=72
+    export NP=$2
 
 
     if [ -f ${ID}*T.nc ] 
