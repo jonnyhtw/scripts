@@ -20,8 +20,8 @@ alias rb='firefox http://wrh-1.hpcf.niwa.co.nz:8080/suites/williamsjh &'
 alias c='clear'
 # Go to ~/roses
 alias r='cd ~/roses'
-# Go to ~branches/
-alias br='cd ~/branches'
+# Go to branches dir
+alias br='cd /nesi/nobackup/niwa00013/williamsjh/branches'
 # Alias log to 'rose suite-log'
 alias log='rose suite-log'
 # Alias cr to 'cd /nesi/noackup/williamsjh/cylc-run'
@@ -76,11 +76,11 @@ export PS1="$HOSTNAME|\d|\t|\W> "
 # Update contents of directory every 2s
 alias wtch='watch "ls -lth"'
 # alias to squeue
-alias sq='ssh kupe01 squeue'
+alias sq='ssh maui01 squeue'
 # alias to squeue -u williamsjh
-alias squ='ssh kupe01 squeue -u williamsjh'
+alias squ='ssh maui01 squeue -u williamsjh'
 # go to my nobackup folder
-alias nobackup='cd /nesi/nobackup/williamsjh'
+alias nobackup='cd /nesi/nobackup/niwa00013/williamsjh'
 # alias 'here' for the name of the current dir you're in. This is then accessed
 # with `here` (back ticks) or $(here).
 #alias here='$(basename $PWD)'
