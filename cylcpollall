@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #script to poll all suites listed by `cylc scan`
 
 cylc scan > out

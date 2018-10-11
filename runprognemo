@@ -3,5 +3,5 @@
 
 export suiteid=$1
 
-grep -r 'time-step' ~/cylc-run/$suiteid/work/*/*/ocean.output|tail -c 20
+grep -r 'DATE' ~/cylc-run/$suiteid/work/*/*/ocean.output|tail -c 45
 
