@@ -3,5 +3,19 @@
 
 export suiteid=$1
 
-grep -r 'Atm_Step: Timestep' ~/cylc-run/$suiteid/work/*/*/pe_output/*|tail -c 20
+cd ~/cylc-run/$suiteid/work
 
+latest_cycle_point=$(ls -td ./* | head -1)
+
+for dir in $latest_cycle_point/{atmos*,coupled*}
+
+do
+
+if [ -d "$dir/pe_output" ]; then
+    echo '---------------------------------'
+    echo  $(basename "$dir")
+      # Control will enter here if $DIRECTORY exists.
+    grep -srh 'Atm_Step: Timestep' $dir/pe_output/*|tail -1
+fi
+
+done

@@ -3,5 +3,5 @@
 
 export suiteid=$1
 
-grep -r 'DATE' ~/cylc-run/$suiteid/work/*/*/ocean.output|tail -c 45
+grep -r 'DATE' ~/cylc-run/$suiteid/work/*/coupled/ocean.output|tail -c 45
 
