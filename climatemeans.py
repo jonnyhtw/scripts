@@ -66,24 +66,12 @@ if len(years) >= 50 and len(years) <100:
 
 fnames = list(braceexpand(in_dir+'*pm*196[1-2]*{mar,apr,may}*'))
 
-#djf
-fnames = list(braceexpand(in_dir+'*pm*{196[1-9],197[0-9]}*{dec,jan,feb}.pp'))
-fnames.extend(braceexpand(in_dir+'*pm*1960*dec.pp'))
-fnames.extend(braceexpand(in_dir+'*pm*1960*{jan,feb}.pp'))
-
-#print 'fnames = '
-#print fnames
-
-sys.stdout.flush()
-
-
 months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
 
 for year in range(firstyear,firstyear+nyears):
 
     for month in months:
         
-
         print str(year)+':'+str(month)
 
         file =  'bc048a.pm'+str(year)+str(month)+'.pp'
@@ -92,9 +80,6 @@ for year in range(firstyear,firstyear+nyears):
 
         vars = iris.load(in_dir+'/'+file)
 
-        iris.save(vars,out_dir+'/supermeans'+'/'+runid+'a.m'+supermeanlabel+str(years[-1])+period+'.nc')
-        # the m in the previous line is the 'mean' indicator.
-
-
-
-
+        iris.save(vars,out_dir+'/supermeans'+'/'+runid+'a.m'+supermeanlabel+str(years[-1])+month+'.nc')
+        # the m in the previous line is the 'mean' indicator, not to be
+        # confused with the 'm for monthly' in the input files!
