@@ -1,0 +1,12 @@
+#script to poll all suites listed by `cylc scan`
+
+cylc scan > out
+
+while read p 
+    do 
+        echo 'launching the GUI for '${p%% *}
+        cylc gui ${p%% *} &
+    done < out; 
+
+rm out
+
