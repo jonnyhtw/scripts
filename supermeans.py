@@ -15,7 +15,7 @@ for name in dir():
 
 # Now import modules etc.
 
-# In[1]:
+# In[2]:
 
 
 import cartopy.crs as ccrs
@@ -27,9 +27,12 @@ import iris.quickplot as qplt
 import numpy as np
 import datetime
 from iris.time import PartialDateTime
+import copy
+import pickle
 import iris.analysis
 import netCDF4
 from netCDF4 import Dataset
+from braceexpand import braceexpand
 import os
 from pylab import *
 import cartopy.crs as ccrs
@@ -38,13 +41,26 @@ import re
 from os import listdir
 
 
-base_dir='/home/williamsjh/cylc-run/'
-runid='ai955'
+# # creating seasonal and annual means
 
-full_dir=base_dir+'u-'+runid+'/share/data/History_Data/'
-#full_dir='/nesi/nobackup/williamsjh/esmeval/user_data/williamsjh/model_data/u-ab747'
+# In[4]:
 
-firstyear=1989
+
+in_dir_base='/home/williamsjh/cylc-run/'
+runid='bc048'
+
+whoami='williamsjh'
+
+project='niwa00013'
+
+in_dir=in_dir_base+'u-'+runid+'/share/data/History_Data/'
+
+out_dir=in_dir+'/climate-meaning'
+
+if not os.path.exists(out_dir):
+    os.makedirs(out_dir)
+
+firstyear=1961
 
 nyears = 20
 
@@ -53,61 +69,89 @@ years=tuple(range(firstyear,firstyear+nyears))
 type(years)
 
 #print the years
-years
+print years
+
+print out_dir
 
 
-# In[3]:
+# In[56]:
 
 
-len(years)
+import copy
 
-if len(years) == 10:
-    supermeanlabel = 'a'
+year = 1961
+
+####
+
+#djf
+print 'doing djf'
+
+files = list(braceexpand(out_dir+'/../*pm*{'+str(year - 1)+'dec,'+str(year)+'{jan,feb}}.pp'))
+
+vars = iris.load(files)
+
+foo=copy.copy(vars)
+
+for i in range(len(vars)):
+    foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
+
+out = out_dir+'/'+runid+'a.ps'+str(year)+'djf'    
+pickle.dump(foo, open(out+'.pkl', "wb" ) )    
     
-if len(years) == 20:
-    supermeanlabel = 'k'
+iris.save(foo,out+'.pp')
 
-if len(years) == 2:
-    supermeanlabel = '2'
+###########################################################################################################################
 
-if len(years) >= 30 and len(years) <40:
-    supermeanlabel = 't'
+#mam
+print 'doing mam'
 
-if len(years) >= 50 and len(years) <100:
-    supermeanlabel = 'l'
+files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'*{mar,apr,may}.pp'))
 
+vars = iris.load(files)
+foo = copy.copy(vars)
 
-# In[ ]:
-
-
-for period in ['ann','djf','mam','jja','son']:
+for i in range(len(vars)):
+    foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
     
-    print period
-    sys.stdout.flush()
+out = out_dir+'/'+runid+'a.ps'+str(year)+'mam'    
     
-    if period == 'ann':
-        sys.stdout.flush()
-        fnames = [full_dir+'/*py*{}*'.format(year) for year in years]
-        print fnames
-        sys.stdout.flush()
-    else:
-        fnames = [full_dir+'/*ps*{}*'.format(year)+period+'*' for year in years]
-        print fnames
-        sys.stdout.flush()
-
-    native = iris.load(fnames)
-    nativemean = native 
+pickle.dump(foo, open(out+'.pkl', "wb" ) )    
     
-    for i in range(len(native)):
-        nativemean[i] = native[i].collapsed('time',iris.analysis.MEAN)
+iris.save(foo,out+'.pp')
+
+###########################################################################################################################
+
+#jja       
+print 'doing jja'
+
+files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'*{jun,jul,aug}.pp'))
+                         
+vars = iris.load(files)
+foo = copy.copy(vars)
+
+for i in range(len(vars)):
+    foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
+
+out = out_dir+'/'+runid+'a.ps'+str(year)+'jja'    
     
-    os.chdir(full_dir)
+pickle.dump(foo, open(out+'.pkl', "wb" ) )    
+    
+iris.save(foo,out+'.pp')
+###########################################################################################################################
 
-    if not os.path.exists(full_dir+'supermeans'):
-        os.makedirs(full_dir+'supermeans')
+#son          
+print 'doing son'
 
-    iris.save(nativemean,full_dir+'supermeans'+'/'+runid+'a.m'+supermeanlabel+str(years[-1])+period+'.pp')
+files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'*{sep,oct,nov}.pp'))
+                         
+vars = iris.load(files)
+foo = copy.copy(vars)
+
+for i in range(len(vars)):
+    foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
     
 
-
-
+out = out_dir+'/'+runid+'a.ps'+str(year)+'son'    
+pickle.dump(foo, open(out+'.pkl', "wb" ) )    
+    
+iris.save(foo,out+'.pp')
