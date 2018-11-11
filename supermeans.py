@@ -47,7 +47,7 @@ from os import listdir
 
 
 in_dir_base='/home/williamsjh/cylc-run/'
-runid='bc048'
+runid='bc331'
 
 whoami='williamsjh'
 
@@ -60,7 +60,7 @@ out_dir=in_dir+'/climate-meaning'
 if not os.path.exists(out_dir):
     os.makedirs(out_dir)
 
-firstyear=1961
+firstyear=1851
 
 nyears = 20
 
@@ -81,77 +81,74 @@ import copy
 
 year = 1961
 
-####
+for year in range(firstyear,firstyear + 20):
 
-#djf
-print 'doing djf'
+    print 'year = ',year
 
-files = list(braceexpand(out_dir+'/../*pm*{'+str(year - 1)+'dec,'+str(year)+'{jan,feb}}.pp'))
+    #djf
+    print 'doing djf, ', year
 
-vars = iris.load(files)
+    files = list(braceexpand(out_dir+'/../*pm*{'+str(year - 1)+'dec,'+str(year)+'{jan,feb}}.pp'))
 
-foo=copy.copy(vars)
+    vars = iris.load(files)
 
-for i in range(len(vars)):
-    foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
+    foo=copy.copy(vars)
 
-out = out_dir+'/'+runid+'a.ps'+str(year)+'djf'    
-pickle.dump(foo, open(out+'.pkl', "wb" ) )    
-    
-iris.save(foo,out+'.pp')
+    for i in range(len(vars)):
+        foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
 
-###########################################################################################################################
+    out = out_dir+'/'+runid+'a.ps'+str(year)+'djf'    
+        
+    iris.save(foo,out+'.pp')
 
-#mam
-print 'doing mam'
+    ###########################################################################################################################
 
-files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'*{mar,apr,may}.pp'))
+    #mam
+    print 'doing mam, ', year
 
-vars = iris.load(files)
-foo = copy.copy(vars)
+    files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'*{mar,apr,may}.pp'))
 
-for i in range(len(vars)):
-    foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
-    
-out = out_dir+'/'+runid+'a.ps'+str(year)+'mam'    
-    
-pickle.dump(foo, open(out+'.pkl', "wb" ) )    
-    
-iris.save(foo,out+'.pp')
+    vars = iris.load(files)
+    foo = copy.copy(vars)
 
-###########################################################################################################################
+    for i in range(len(vars)):
+        foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
+        
+    out = out_dir+'/'+runid+'a.ps'+str(year)+'mam'    
+        
+        
+    iris.save(foo,out+'.pp')
 
-#jja       
-print 'doing jja'
+    ###########################################################################################################################
 
-files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'*{jun,jul,aug}.pp'))
-                         
-vars = iris.load(files)
-foo = copy.copy(vars)
+    #jja       
+    print 'doing jja, ', year
 
-for i in range(len(vars)):
-    foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
+    files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'*{jun,jul,aug}.pp'))
+                             
+    vars = iris.load(files)
+    foo = copy.copy(vars)
 
-out = out_dir+'/'+runid+'a.ps'+str(year)+'jja'    
-    
-pickle.dump(foo, open(out+'.pkl', "wb" ) )    
-    
-iris.save(foo,out+'.pp')
-###########################################################################################################################
+    for i in range(len(vars)):
+        foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
 
-#son          
-print 'doing son'
+    out = out_dir+'/'+runid+'a.ps'+str(year)+'jja'    
+        
+        
+    iris.save(foo,out+'.pp')
+    ###########################################################################################################################
 
-files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'*{sep,oct,nov}.pp'))
-                         
-vars = iris.load(files)
-foo = copy.copy(vars)
+    #son          
+    print 'doing son, ', year
 
-for i in range(len(vars)):
-    foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
-    
+    files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'*{sep,oct,nov}.pp'))
+                             
+    vars = iris.load(files)
+    foo = copy.copy(vars)
 
-out = out_dir+'/'+runid+'a.ps'+str(year)+'son'    
-pickle.dump(foo, open(out+'.pkl', "wb" ) )    
-    
-iris.save(foo,out+'.pp')
+    for i in range(len(vars)):
+        foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
+
+    out = out_dir+'/'+runid+'a.ps'+str(year)+'son'    
+        
+    iris.save(foo,out+'.pp')
