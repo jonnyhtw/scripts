@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#works on w-clim01 22 nov 18
+
+#usage...
+
+# > rebuild_nemo_script u-bd224
+
+module unload netCDF/4.6.1-GCC-7.1.0
+module unload HDF5/1.10.1-GCC-7.1.0
+module load netCDF-Fortran/4.4.4-iccifort-2018.1.163-GCC-7.1.0
+
 for dir in /home/$USER/cylc-run/$1/work/*/nemo_cice*/
 
     do
@@ -10,58 +20,39 @@ for dir in /home/$USER/cylc-run/$1/work/*/nemo_cice*/
     export OMP_NUM_THREADS=4
     MPI_DSM_VERBOSE=1; export MPI_DSM_VERBOSE
 
-
+    export ID=NZ02-NEB004
+  
     cd $dir
 
     export DATADIR=$dir
     echo $dir
 
-
-    export NP=$2
-
+    export NP=6
 
     if [ -f ${ID}*T.nc ] 
     then  
     rm ${ID}*T.nc
     fi
 
-    if [ -f ${ID}*U.nc ]
-    then
-    rm ${ID}*U.nc
-    fi
-
-    if [ -f ${ID}*V.nc ]
-    then
-    rm ${ID}*V.nc
-    fi
-
-
-    ##
-    module load cray-netcdf
-    module load cray-hdf5
-    module load craype-broadwell 
-    echo "Modules loaded"
-
     ## base model monthly
     export TFILE5d=`ls -1 ${ID}*5d*_T_0000.nc`
     export UFILE5d=`ls -1 ${ID}*5d*_U_0000.nc`
     export VFILE5d=`ls -1 ${ID}*5d*_V_0000.nc`
+    export WFILE5d=`ls -1 ${ID}*5d*_W_0000.nc`
+    export TFILE1m=`ls -1 ${ID}*1m*_T_0000.nc`
+    export UFILE1m=`ls -1 ${ID}*1m*_U_0000.nc`
+    export VFILE1m=`ls -1 ${ID}*1m*_V_0000.nc`
+    export WFILE1m=`ls -1 ${ID}*1m*_W_0000.nc`
 
+    rebuild_nemo -t 4  `basename $TFILE5d _0000.nc` $NP
+    rebuild_nemo -t 4  `basename $UFILE5d _0000.nc` $NP
+    rebuild_nemo -t 4  `basename $VFILE5d _0000.nc` $NP
+    rebuild_nemo -t 4  `basename $WFILE5d _0000.nc` $NP
+    rebuild_nemo -t 4  `basename $TFILE1m _0000.nc` $NP
+    rebuild_nemo -t 4  `basename $UFILE1m _0000.nc` $NP
+    rebuild_nemo -t 4  `basename $VFILE1m _0000.nc` $NP
+    rebuild_nemo -t 4  `basename $WFILE1m _0000.nc` $NP
 
-
-    #combine T
-    /home/behrense/bin/rebuild_nemo_intel -t 4  `basename $TFILE5d _0000.nc` $NP
-
-    #combine U
-    /home/behrense/bin/rebuild_nemo_intel -t 4  `basename $UFILE5d _0000.nc` $NP
-
-    #combine V
-    /home/behrense/bin/rebuild_nemo_intel -t 4  `basename $VFILE5d _0000.nc` $NP
-
-    #combine W
-    #foo
-
-
-    done
+done
 
 cd ~/scripts/

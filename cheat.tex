@@ -1,0 +1,190 @@
+% \documentclass[9pt,a4paper,twocolumn,landscape,oneside]{amsart}
+\documentclass[9pt,a4paper,landscape,oneside]{amsart}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{fullpage}
+%\usepackage{geometry}
+\usepackage[landscape]{geometry}
+% \usepackage{listings}
+\usepackage{caption, subcaption}
+\usepackage[scaled]{beramono}
+\usepackage{color,graphicx,overpic}
+\usepackage{titling}
+\usepackage{datetime}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{hyperref}
+\usepackage{environ}
+
+
+% Minted (For code stuff)
+% \usepackage{minted}
+% \newcommand{\code}[1]{\inputminted[fontsize=\footnotesize]{c}{#1}}
+
+
+% This sets the margins to .5cm
+\geometry{top=0pt,left=.3cm,right=.3cm,bottom=1cm}
+
+\setlength{\headheight}{15.2pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Turn off header and footer
+% \pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+% Header/Footer
+% \geometry{includeheadfoot}
+% \fancyhf{}
+\pagestyle{fancy}
+\lhead{Reykjavík University -  - Formúlublað}
+\rhead{James Elías Sigurðarson\quad\thepage}
+\cfoot{}
+
+% Title/Author
+\title{Formúlublað}
+\subtitle{}
+\date{\ddmmyyyydate{\today{}}}
+
+% Output Verbosity
+\newif\ifverbose
+\verbosetrue
+% \verbosefalse
+
+% Some list helpers from graph theory
+\newcounter{temp}
+\newcounter{ilist_counter}
+\newcounter{iilist_counter}
+
+\newenvironment{ilist}{
+  \begin{list}{{\bf \arabic{ilist_counter}}}{
+      \usecounter{ilist_counter}
+      \addtolength{\labelsep}{.6ex}
+      \addtolength{\itemsep}{1ex}
+      \setlength{\leftmargin}{1.4em}}
+    %   \setcounter{ilist_counter}{\value{temp}}
+}{
+%   \setcounter{temp}{\value{ilist_counter}}  
+  \end{list}
+}
+
+\newenvironment{iilist}{
+  \begin{list}{{\bf \alph{iilist_counter}}}{
+      \usecounter{iilist_counter}
+      \addtolength{\labelsep}{.6ex}
+      \addtolength{\itemsep}{.5ex}
+      \setlength{\leftmargin}{1.7em}}
+}{
+  \end{list}
+}
+
+\newenvironment{iblist}{
+  \begin{list}{{\bf $\bullet$}}{
+      \addtolength{\labelsep}{.6ex}
+      \addtolength{\itemsep}{.5ex}
+      \setlength{\leftmargin}{1.7em}}
+}{
+  \end{list}
+}
+
+% Theorems and solutions
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{solution}{Solution}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{definition*}{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{example*}{Example}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem*{problem*}{Problem}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem*{remark*}{Remark}
+
+% For writing vectors
+\let\oldhat\hat
+\let\oldvec\vec
+\renewcommand{\vec}[1]{\oldvec{\mathbf{#1}}}
+\newcommand{\vecb}[1]{\mathbf{#1}}
+\renewcommand{\hat}[1]{\oldhat{\mathbf{#1}}}
+
+\newcommand{\cvect}[2]{ \begin{pmatrix} #1 \\ #2 \end{pmatrix} }
+\newcommand{\ctvect}[3]{ \begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix} }
+\newcommand{\vect}[2]{ \langle #1 , #2 \rangle }
+\newcommand{\tvect}[3]{ \langle #1 , #2 , #3 \rangle }
+\newcommand{\qvect}[4]{ \langle #1 , #2 , #3 \rangle }
+
+% For equations
+\NewEnviron{formula}{
+    \abovedisplayshortskip=0pt
+    \belowdisplayshortskip=0pt
+    \abovedisplayskip=0pt
+    \belowdisplayskip=0pt
+    \begin{align*}
+        \BODY
+    \end{align*}
+}
+\newcommand{\eqn}[1]{\begin{formula} #1 \end{formula}}
+% The actual document
+
+\begin{document}
+%\maketitle
+\thispagestyle{fancy}
+\raggedright
+\footnotesize
+\raggedcolumns
+\begin{multicols*}{3}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\end{multicols*}
+\end{document}

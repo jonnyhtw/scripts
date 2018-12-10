@@ -1,0 +1,50 @@
+#this is semi kinda pseudo code and won't atually work at the command line (yet...)
+
+
+vars=iris.load('../../../../climate-meaning/edited_bc048a.py*',constraint)
+
+
+vars[0].coord('latitude').guess_bounds()
+vars[0].coord('longitude').guess_bounds()
+
+weights = iris.analysis.cartography.area_weights(vars[0])
+
+foo=vars[0].collapsed(['latitude','longitude'],iris.analysis.MEAN,weights=weights)
+
+
+iris.save(foo,'./bc048_apy_m01s00i024_global.nc')
+
+==============
+
+tropics=iris.Constraint(latitude=lambda cell: -30. < cell < 30.)
+
+bar=vars[0].extract(tropics)
+
+
+bar.coord('latitude').guess_bounds()
+bar.coord('longitude').guess_bounds()
+
+weights = iris.analysis.cartography.area_weights(bar)
+
+baz=bar.collapsed(['latitude','longitude'],iris.analysis.MEAN,weights=weights)
+iris.save(baz,'./bc048_apy_m01s00i024_tropics.nc')
+
+
+========
+
+sst
+
+use cice
+
+cnvert to clssic netcdf
+
+extract as single ncfile
+
+rename dimension and varoables name from ni,j to lat,lon
+
+ncrename -O -v ni,longitude bar.nc bar.nc && ncrename -O -d ni,longitude bar.nc  bar.nc &&ncrename -O -v nj,latitude bar.nc bar.nc && ncrename -O -d nj,latitude bar.nc  bar.nc &
+
+
+
+
+icet[0].coord('latitude').units='degrees'
