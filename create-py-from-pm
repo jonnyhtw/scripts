@@ -1,0 +1,25 @@
+In [38]: for i in range(0,3):
+    ...:
+    ...:     print i
+    ...:
+    ...:     files = list(braceexpand('*pm19{7'+str(i)+'dec,7'+str(i+1)+'{jan,feb,mar,apr,may,jun,jul,aug,sep,o
+    ...: ct,nov}}*.pp'))
+    ...:
+    ...:     print files
+    ...:
+    ...:     cubes = iris.load(files)
+    ...:
+    ...:     foo = iris.cube.CubeList()
+    ...:
+    ...:     for cube in cubes:
+    ...:
+    ...:         newcube = cube.collapsed('time', iris.analysis.MEAN)
+    ...:
+    ...:         newcube.cell_methods = (iris.coords.CellMethod('mean', 'time', intervals='1 hour'),)
+    ...:
+    ...:         foo.append(newcube)
+    ...:
+    ...:
+    ...:     iris.save(foo, '../climate-meaning/lbtim122/bc048a.py197'+str(i+1)+'ann.pp')
+    ...:
+

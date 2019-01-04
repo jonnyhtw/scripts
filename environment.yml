@@ -1,0 +1,8 @@
+name: python-v3.6.6--iris-v2.2.0--cftime-v1.0.0b1
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.6.6
+  - iris=2.2.0
+  - cftime=1.0.0b1
