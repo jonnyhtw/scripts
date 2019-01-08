@@ -32,9 +32,18 @@ In [38]: for i in range(0,3):
     ...:
 
 
-In [34]: for i in range(len(fields)):
-    ...:     if str(fields[i].lbuser4).startswith('19') and len(str(fields[i].lbuser4)) == 5:
-    ...:         print fields[i].lbuser4
-    ...:         print 'setting lbtim in STASH code '+str(fields[i].lbuser4)+'to 24022'
-    ...:         fields[i].lbtim = 24022
 
+
+NOW FIX LBTIM to 122 and 24022 
+
+for file in sorted(glob.glob('*.pp')):
+
+    fields=pp.fields_from_pp_file(file)
+
+    for i in range(len(fields)):
+        if str(fields[i].lbuser4).startswith('19') and len(str(fields[i].lbuser4)) == 5:
+            print fields[i].lbuser4
+            print 'setting lbtim in STASH code '+str(fields[i].lbuser4)+'to 24022'
+            fields[i].lbtim = 24022
+
+    pp.fields_to_pp_file('new-'+file,fields)
