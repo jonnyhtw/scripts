@@ -1,0 +1,9 @@
+#!/bin/bash -l
+
+#SBATCH --ntasks=8      
+#SBATCH --partition=nesi_prepost
+
+module load Anaconda2/5.2.0-GCC-7.1.0
+
+python postproc_daily_vars.py
+
