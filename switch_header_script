@@ -1,0 +1,18 @@
+#! /bin/ksh
+
+MetO_file="bb835.nc"
+NIWA_file="bd889.nc"
+
+# loop over the only "coordinates" instances in MetO file
+#
+for coords in "TLON TLAT time" "ULON ULAT time" "TLON TLAT NCAT time"; do 
+   #
+   # identify variables with those coordinates
+   varList=$( ncdump -h ${MetO_file} |  grep ":coordinates" | grep "${coords}" | cut -d ":" -f 1 )
+   #
+   # loop over variables and hard-wire coordinates attribute using ncatted
+   for var in ${varList} ; do
+      ncatted -a coordinates,${var},o,c,"${coords}" ${NIWA_file}
+   done
+
+done
