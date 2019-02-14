@@ -79,8 +79,12 @@ export PS1="$HOSTNAME|\d|\t|\W> "
 alias wtch='watch "ls -lth"'
 # alias to squeue
 alias sq='ssh maui01 squeue --Format=jobid:10s,partition:15s,name:45s,username:12s,statecompact:5s,timeused:10s,numnodes:8s,nodelist:20s'
+# alias to squeue
+alias sq-ancil='squeue --Format=jobid:10s,partition:15s,name:45s,username:12s,statecompact:5s,timeused:10s,numnodes:8s,nodelist:20s'
 # alias to squeue -u williamsjh
 alias squ='ssh maui01 squeue --Format=jobid:10s,partition:15s,name:45s,username:12s,statecompact:5s,timeused:10s,numnodes:8s,nodelist:20s -u $USER'
+# go to my nobackup folder
+alias squ-ancil='squeue --Format=jobid:10s,partition:15s,name:45s,username:12s,statecompact:5s,timeused:10s,numnodes:8s,nodelist:20s -u $USER'
 # go to my nobackup folder
 alias nobackup='cd /nesi/nobackup/niwa00013/williamsjh'
 # alias 'here' for the name of the current dir you're in. This is then accessed

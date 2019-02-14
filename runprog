@@ -7,10 +7,6 @@ cd ~/cylc-run/$suiteid/work
 
 latest_cycle_point=$(ls -l . | tail -1)
 
-#echo '%%%%%%%%%%'
-#echo $latest_cycle_point
-#echo '%%%%%%%%%%'
-
 for dir in $latest_cycle_point/{atmos*,coupled*}
 
 do

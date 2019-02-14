@@ -29,4 +29,6 @@ done
 
 URL=$URL/trunk
 
-firefox $URL &
+echo $URL
+
+#firefox $URL &
