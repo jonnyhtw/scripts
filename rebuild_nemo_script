@@ -8,6 +8,7 @@
 
 module unload netCDF/4.6.1-GCC-7.1.0
 module unload HDF5/1.10.1-GCC-7.1.0
+module unload Szip
 module load netCDF-Fortran/4.4.4-iccifort-2018.1.163-GCC-7.1.0
 
 for dir in /home/$USER/cylc-run/$1/work/*/nemo_cice*/

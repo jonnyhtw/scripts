@@ -21,13 +21,11 @@ alias c='clear'
 # Go to ~/roses
 alias r='cd ~/roses'
 # Go to branches dir
-alias br='cd /nesi/nobackup/niwa00013/williamsjh/branches'
+alias br='cd /nesi/project/niwa00013/williamsjh/branches'
 # Alias log to 'rose suite-log'
 alias log='rose suite-log'
 # Alias cr to 'cd /nesi/nobackup/williamsjh/cylc-run'
 alias cr='cd /nesi/nobackup/niwa00013/williamsjh/cylc-run'
-# Alias deep to 'cd /nesi/nobackup/deepsouth'
-alias deep='cd /nesi/nobackup/deepsouth'
 # Alias project
 alias prj='cd /nesi/project/niwa00013/williamsjh'
 # Alias fdg to 'fcm diff -g &'
@@ -35,7 +33,8 @@ alias fdg='fcm diff -g &'
 # Alias for `cylc trigger` in PWD 
 alias trig='cylc trigger $(basename "$PWD")'
 # Aliases for local calls to '> cylc monitor/stop/kill [suite-ID]'. 
-alias mn='cylc monitor $(basename "$PWD") -r'
+alias mn='cylc monitor $(basename "$PWD")'
+alias mnr='cylc monitor $(basename "$PWD") -r'
 alias cylc-stop='cylc stop $(basename "$PWD")'
 alias cylc-kill='cylc kill $(basename "$PWD")'
 alias ks='cylc kill $(basename "$PWD");cylc stop --now --now  $(basename "$PWD")'
