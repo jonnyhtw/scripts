@@ -2,39 +2,40 @@ in  History_Data
 
 > for file in *a.pm19[6-7]*.pm ;do echo $file ; mule-select $file lbtim122/$file --include lbtim=122 ; done
 
-In [38]: for i in range(0,3):
-    ...:
-    ...:     print i
-    ...:
-    ...:     files = list(braceexpand('*pm19{7'+str(i)+'dec,7'+str(i+1)+'{jan,feb,mar,apr,may,jun,jul,aug,sep,o
-    ...: ct,nov}}*.pp'))
-    ...:
-    ...:     print files
-    ...:
-    ...:     cubes = iris.load(files)
-    ...:
-    ...:     foo = iris.cube.CubeList()
-    ...:
-    ...:     for cube in cubes:
-    ...:
-    ...:         newcube = cube.collapsed('time', iris.analysis.MEAN)
+for i in range(0,3):
+
+    print i
+
+    files = list(braceexpand('*pm19{7'+str(i)+'dec,7'+str(i+1)+'{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}}*.pp'))
+
+    print files
+
+    cubes = iris.load(files)
+
+    foo = iris.cube.CubeList()
+
+    for cube in cubes:
+
+        newcube = cube.collapsed('time', iris.analysis.MEAN)
 
 
 
-                 THIS NEXT LINE ASSUMES THE DEFAULT LBTIM OF 122 -> THE SECTION 19 DIAGS USE LBTIM = 24022 SO THE BIT AT THE END OF TYHIS FILE DEALS WITH THAT!!!!!!
-    ...:
-    ...:         newcube.cell_methods = (iris.coords.CellMethod('mean', 'time', intervals='1 hour'),)
-    ...:
-    ...:         foo.append(newcube)
-    ...:
-    ...:
-    ...:     iris.save(foo, '../climate-meaning/lbtim122/bc048a.py197'+str(i+1)+'ann.pp')
-    ...:
+# THIS NEXT LINE ASSUMES THE DEFAULT LBTIM OF 122 -> THE SECTION 19 DIAGS USE LBTIM = 24022 SO THE BIT AT THE END OF TYHIS FILE DEALS WITH THAT!!!!!!
+
+        newcube.cell_methods = (iris.coords.CellMethod('mean', 'time', intervals='1 hour'),)
+
+        foo.append(newcube)
+
+
+    iris.save(foo, '../climate-meaning/lbtim122/bc048a.py197'+str(i+1)+'ann.pp')
+
 
 
 
 
 NOW FIX LBTIM to 122 and 24022 
+
+import mule.pp as pp
 
 for file in sorted(glob.glob('*.pp')):
 

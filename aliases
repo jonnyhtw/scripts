@@ -3,7 +3,7 @@ alias gitfilelist='git ls-tree -r master --name-only'
 # Simple shortcut
 alias l='ls -lrth'
 # Simple shortcut
-alias ll='ls -lth'
+alias ll='ls -l'
 # Simple shortcut
 alias gcon='rose suite-gcontrol'
 # Display line numbers and percentage through file
@@ -75,7 +75,9 @@ export PS1="$HOSTNAME|\d|\t|\W> "
 #export PS1="> "
 #PS1='\[\e[0;32m\u@\w/:\[\e[m '
 # Update contents of directory every 2s
-alias wtch='watch "ls -lth"'
+alias wtch='watch "ls -lt"'
+# Update contents of directory every 2s
+alias wtchh='watch "ls -lth"'
 # alias to squeue
 alias sq='ssh maui01 squeue --Format=jobid:10s,partition:15s,name:45s,username:12s,statecompact:5s,timeused:10s,numnodes:8s,nodelist:20s'
 # alias to squeue
