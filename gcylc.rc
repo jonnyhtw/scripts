@@ -4,6 +4,7 @@ ungrouped views = graph, text
 initial side-by-side views = True
 use theme = color-blind
 dot icon size = medium
+transpose graph = true
 initial views =   graph, text
 initial views =   graph
 #initial views =   text
