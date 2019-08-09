@@ -91,17 +91,21 @@ iris.save(foo, base+'/climate-meaning/lbtim122and24022/'+outfile)
 
 os.chdir(base+'/climate-meaning/lbtim122and24022/')
          
-for file in sorted(glob.glob('*.pp')):
 
-    fields=pp.fields_from_pp_file(file)
+fields=pp.fields_from_pp_file(outfile)
 
-    for i in range(len(fields)):
-        if str(fields[i].lbuser4).startswith('19') and len(str(fields[i].lbuser4)) == 5:
-            #print fields[i].lbuser4
-            #print 'setting lbtim in STASH code '+str(fields[i].lbuser4)+' to 24022'
-            fields[i].lbtim = 24022
-            
-    pp.fields_to_pp_file('new-'+file,fields)
+for i in range(len(fields)):
+    if str(fields[i].lbuser4).startswith('19') and len(str(fields[i].lbuser4)) == 5:
+        print fields[i].lbuser4
+        print 'setting lbtim in STASH code '+str(fields[i].lbuser4)+' to 24022'
+        fields[i].lbtim = 24022
+        
+pp.fields_to_pp_file('new-'+outfile,fields)
 
-os.system('rename new-b b new-b*')
+os.rename('new-'+outfile, outfile)
+
+os.chdir(base)
+
+os.system('rm -rf lbtim122and24022')
+
 
