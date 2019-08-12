@@ -62,7 +62,7 @@ else:
 
 os.chdir(base)
 
-#os.system('for file in *a.pm'+str(year-1)+'dec*.pp *a.pm'+str(year)+'{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}*.pp   ;do echo $file ; mule-select $file interim-files-for-climate-meaning/$file --include lbtim=122,24022 ; done')
+os.system('for file in *a.pm'+str(year-1)+'dec*.pp *a.pm'+str(year)+'{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}*.pp   ;do echo $file ; mule-select $file interim-files-for-climate-meaning/$file --include lbtim=122,24022 ; done')
 
 os.chdir(base)
 import os
