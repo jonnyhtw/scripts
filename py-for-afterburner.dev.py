@@ -38,6 +38,7 @@ import re
 import argparse
 from os import listdir
 import mule
+import copy
 
 suite = sys.argv[1]
 year0=int(sys.argv[2])
@@ -53,59 +54,85 @@ base = '/home/'+user+'/cylc-run/'+suite+'/share/data/History_Data/'
 
 os.chdir(base)
 
-if not os.path.exists('lbtim122and24022'):
-    print('creating '+'lbtim122and24022'+' directory')
-    os.makedirs('lbtim122and24022')
+if not os.path.exists('interim-files-for-climate-meaning'):
+    print('creating '+'interim-files-for-climate-meaning'+' directory')
+    os.makedirs('interim-files-for-climate-meaning')
 else:
-    print('lbtim122and24022 directory already exists')
+    print('interim-files-for-climate-meaning directory already exists')
 
 os.chdir(base)
 
-
-os.system('for file in *a.pm'+str(year-1)+'dec*.pp *a.pm'+str(year)+'{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}*.pp   ;do echo $file ; mule-select $file lbtim122and24022/$file --include lbtim=122,24022 ; done')
+#os.system('for file in *a.pm'+str(year-1)+'dec*.pp *a.pm'+str(year)+'{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}*.pp   ;do echo $file ; mule-select $file interim-files-for-climate-meaning/$file --include lbtim=122,24022 ; done')
 
 os.chdir(base)
 import os
-if not os.path.exists(base+'/climate-meaning/lbtim122and24022'):
-    print('creating '+'climate-meaning/lbtim122and24022')
-    os.makedirs(base+'climate-meaning/lbtim122and24022')
+if not os.path.exists(base+'/climate-meaning'):
+    print('creating '+'climate-meaning')
+    os.makedirs(base+'/climate-meaning')
 else:
-    print('climate-meaning/lbtim122and24022 directory already exists')
+    print('climate-meaning directory already exists')
 
-os.chdir(base+'lbtim122and24022/')
+sory = ['y','s','s','s','s']
+suffices = ['ann.pp','djf.pp','mam.pp','jja.pp','son.pp']
 
-print year
-foo = iris.cube.CubeList()
-files=list(braceexpand('*pm'+'{'+str(year-1)+'dec'+','+str(year)+
-                       '{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}}*.pp'))
-cubes = iris.load(files)
-print files                           
-for cube in cubes:
-    newcube = cube.collapsed('time', iris.analysis.MEAN)
-    newcube.cell_methods = (iris.coords.CellMethod('mean', 'time', intervals='1 hour'),)
-    foo.append(newcube)
-    outfile = suite[2:]+'a.py'+str(year)+'ann.pp'
+stash = iris.AttributeConstraint(STASH='m01s00i024')
 
-print 'now saving '+outfile
-iris.save(foo, base+'/climate-meaning/lbtim122and24022/'+outfile)
 
-os.chdir(base+'/climate-meaning/lbtim122and24022/')
-         
+for j in range(len(sory)):
 
-fields=pp.fields_from_pp_file(outfile)
+    print 'creating means for '+str(suffices[j])
 
-for i in range(len(fields)):
-    if str(fields[i].lbuser4).startswith('19') and len(str(fields[i].lbuser4)) == 5:
-        print fields[i].lbuser4
-        print 'setting lbtim in STASH code '+str(fields[i].lbuser4)+' to 24022'
-        fields[i].lbtim = 24022
-        
-pp.fields_to_pp_file('new-'+outfile,fields)
+    os.chdir(base+'interim-files-for-climate-meaning/')
 
-os.rename('new-'+outfile, outfile)
+    if j == 0:#ann
+        files=list(braceexpand('*pm'+'{'+str(year-1)+'dec'+','+str(year)+
+                               '{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}}*.pp'))
+    if j == 1:#djf
+        files=list(braceexpand('*pm'+'{'+str(year-1)+'dec'+','+str(year)+
+                               '{jan,feb}}*.pp'))
+    if j == 2:#mam
+        files=list(braceexpand('*pm'+str(year)+'{mar,apr,may}*.pp'))
+    if j == 3:#jja
+        files=list(braceexpand('*pm'+str(year)+'{jun,jul,aug}*.pp'))
+    if j == 4:#son
+        files=list(braceexpand('*pm'+str(year)+'{sep,oct,nov}*.pp'))
 
-os.chdir(base)
+    print 'loading all the cubes for',year,suffices[j]
 
-os.system('rm -rf lbtim122and24022')
+    cubes = iris.load(files)#,stash)
+
+    print 'now doing the meaning for ... ',suffices[j]                          
+
+    #reset foo
+    if 'foo' in globals():
+            del foo
+
+    foo = iris.cube.CubeList()
+
+    for cube in cubes:
+        newcube = cube.collapsed('time', iris.analysis.MEAN)
+        newcube.cell_methods = (iris.coords.CellMethod('mean', 'time', intervals='1 hour'),)
+        foo.append(newcube)
+        outfile = suite[2:]+'a.p'+sory[j]+str(year)+suffices[j]
+
+    print 'now saving '+outfile
+    iris.save(foo, base+'/climate-meaning/'+outfile)
+
+    os.chdir(base+'/climate-meaning/')
+             
+    fields=pp.fields_from_pp_file(outfile)
+
+    for i in range(len(fields)):
+        if str(fields[i].lbuser4).startswith('19') and len(str(fields[i].lbuser4)) == 5:
+            print fields[i].lbuser4
+            print 'setting lbtim in STASH code '+str(fields[i].lbuser4)+' to 24022'
+            fields[i].lbtim = 24022
+            
+    pp.fields_to_pp_file('new-'+outfile,fields)
+
+    os.rename('new-'+outfile, outfile)
+
+    os.chdir(base)
+
 
 
