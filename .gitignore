@@ -1,4 +1,5 @@
 *.p
+*.err
 *.out
 *.swp
 *foo*

@@ -16,6 +16,7 @@ import numpy as np
 import datetime
 from iris.time import PartialDateTime
 import iris.analysis
+import multiprocessing
 import netCDF4
 from netCDF4 import Dataset
 import os
@@ -71,6 +72,13 @@ user = 'williamsjh'
 #base = '/home/'+user+'/cylc-run/'+suite+'/share/data/History_Data/'
 #base = 
 
+def load_cube(filename):
+    return iris.load(filename)
+
+pool = multiprocessing.Pool(int(os.environ.get('NPROC',1)))
+
+
+
 
 
 s_or_y = ['y','s','s','s','s']
@@ -123,6 +131,11 @@ for j in range(len(s_or_y)):
             files=list(braceexpand('*pm'+str(year)+'{sep,oct,nov}*.pp'))
 
         print 'loading all the cubes for',year,suffices[j]
+
+
+        #files_with_full_path = [base+'interim-files-for-climate-meaning/' +s  for s in files]
+
+        #cubes = pool.map(load_cube, files_with_full_path)
 
         cubes = iris.load(files)#,stash)
 
@@ -177,6 +190,8 @@ for j in range(len(s_or_y)):
 
         #if (year == year0+20) or (year == year0 + 50) or (year == year0+2):
         if (year == year0+20) or (year == year0 + 50):
+
+            print 'foo bar baz'
 
             if (year == year0+2):
                 supermean_indicator = '2'
@@ -255,7 +270,7 @@ for j in range(len(s_or_y)):
             pass
 
 if remove_interim_files_directory == True:
-    shutil.rmtree(base+'interim-files-for-climate-meaning')
+    shutil.rmtree(base+'/interim-files-for-climate-meaning')
     
 
 
