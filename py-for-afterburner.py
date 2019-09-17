@@ -58,7 +58,7 @@ print args.suite
 remove_interim_files_directory = False
 generate_monthly_means = True
 generate_annual_and_seasonal_means = True
-generate_supermeans = True
+generate_supermeans = False
 
 suite = args.suite
 year0= args.year0

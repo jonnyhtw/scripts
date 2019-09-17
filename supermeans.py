@@ -1,91 +1,56 @@
-
-# coding: utf-8
-
-# # generate 'supermeans' for validation notes
-
-# Firstly, clear all variables in the local memory.
-
-# In[29]:
-
-
-for name in dir():
-    if not name.startswith('_'):
-        del globals()[name]
-
-
-# Now import modules etc.
-
-# In[30]:
-
-
-import cartopy.crs as ccrs
-import matplotlib
-import matplotlib.pyplot as plt
 import iris
 import iris.plot as iplt
 import iris.quickplot as qplt
 import numpy as np
+import glob
 import datetime
 from iris.time import PartialDateTime
 import copy
-import pickle
 import iris.analysis
 import netCDF4
 from netCDF4 import Dataset
-from braceexpand import braceexpand
 import os
 from pylab import *
-import cartopy.crs as ccrs
-import iris.analysis.cartography
 import re
 from os import listdir
+import argparse
 import copy
 
+parser = argparse.ArgumentParser()
+   
+parser.add_argument('--nyears', required=True, type=int)
+parser.add_argument('--firstyear', required=True, type=int)
+parser.add_argument('--runid', required=True, type=str)
+parser.add_argument('--in_dir', required=True, type=str)
+args = parser.parse_args()
 
+runid=args.runid
+print('runid is', runid)
+in_dir=args.in_dir
+print('in_dir is', in_dir)
 
-# # creating seasonal and annual means
-
-# In[32]:
-
-
-in_dir_base='/home/williamsjh/cylc-run/'
-runid='bb075'
-runid='bl274'
-
-whoami='williamsjh'
-
-project='niwa00013'
-
-in_dir=in_dir_base+'u-'+runid+'/share/data/History_Data/'
-
-#in_dir = '/nesi/project/niwa00013/williamsjh/MASS/u-'+runid+'/apm.pp/'
-
-out_dir=in_dir+'/supermeans'
+out_dir=in_dir+'/supermeans/'
 
 if not os.path.exists(out_dir):
     os.makedirs(out_dir)
 
-firstyear=1951
+firstyear=args.firstyear
+print('firstyear is', firstyear)
 
-nyears = 2
+nyears = args.nyears
+print('nyears is', nyears)
+
+print('%%%%%%%%%%%%%%%%%%')
+print('nyears = ', nyears)
+print('%%%%%%%%%%%%%%%%%%')
 
 years=tuple(range(firstyear,firstyear+nyears))
 
-type(years)
-
-#print the years
-print years
-
-print out_dir
-
-
-# In[33]:
-
-
-len(years)
-
 if len(years) == 2:
     supermeanlabel = '2'
+
+if len(years) == 3:
+    supermeanlabel = '3'
 
 if len(years) == 10:
     supermeanlabel = 'a'
@@ -99,10 +64,6 @@ if len(years) >= 30 and len(years) <40:
 if len(years) >= 50 and len(years) <100:
     supermeanlabel = 'l'
 
-
-# In[38]:
-
-
 if not os.path.exists('out_dir'):
     print 'supermean dir not there, creating it now...'
     os.makedirs('out_dir')
@@ -110,32 +71,38 @@ if not os.path.exists('out_dir'):
 else:
     print 'supermeans dir already there'
 
-
-# In[ ]:
-
-
 times = ['djf','mam','jja','son','ann']
-times = ['mam','jja','son','ann']
 
 for time in times:
 
-    for year in years:
-        if time == 'djf':
-            files = list(braceexpand(out_dir+'/../*pm*{'+str(year - 1)+'dec,'+str(year)+'{jan,feb}}.pp'))
-        if time == 'mam':
-            files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'{mar,apr,may}.pp'))
-        if time == 'jja':
-            files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'{jun,jul,aug}.pp'))
-        if time == 'son':
-            files = list(braceexpand(out_dir+'/../*pm*'+str(year)+'{sep,oct,nov}.pp'))
-        if time == 'ann':
-            files = list(braceexpand(out_dir+'/../*pm*{'+str(year - 1)+'dec,'+str(year)+
-                                     '{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}}.pp'))
+    print(time)
 
-        if year == firstyear:
-            allfiles = files
-        else:
-            allfiles.extend(files)    
+    files_grabbed = []
+    for year in years:
+        print('year is')
+        print(year)
+
+        if time == 'djf':
+            types = (runid+'a.pm'+str(year - 1)+'dec.pp',runid+'a.pm'+str(year)+'jan.pp',runid+'a.pm'+str(year)+'feb.pp')
+        if time == 'mam':
+            types = (runid+'a.pm'+str(year)+'mar.pp',runid+'a.pm'+str(year)+'apr.pp',runid+'a.pm'+str(year)+'may.pp')
+        if time == 'jja':
+            types = (runid+'a.pm'+str(year)+'jun.pp',runid+'a.pm'+str(year)+'jul.pp',runid+'a.pm'+str(year)+'aug.pp')
+        if time == 'son':
+            types = (runid+'a.pm'+str(year)+'sep.pp',runid+'a.pm'+str(year)+'oct.pp',runid+'a.pm'+str(year)+'nov.pp')
+        if time == 'ann':
+            types = (runid+'a.pm'+str(year - 1)+'dec.pp',runid+'a.pm'+str(year)+'jan.pp',runid+'a.pm'+str(year)+'feb.pp',runid+'a.pm'+str(year)+'mar.pp',runid+'a.pm'+str(year)+'apr.pp',runid+'a.pm'+str(year)+'may.pp',runid+'a.pm'+str(year)+'jun.pp',runid+'a.pm'+str(year)+'jul.pp',runid+'a.pm'+str(year)+'aug.pp',runid+'a.pm'+str(year)+'sep.pp',runid+'a.pm'+str(year)+'oct.pp',runid+'a.pm'+str(year)+'nov.pp')
+
+        for files in types:
+            print(in_dir+'/'+files)
+            files_grabbed.extend(glob.glob(in_dir+'/'+files))
+
+    allfiles = copy.copy(files_grabbed)
+
+    print('files_grabbed...')
+    print(files_grabbed)
+    print('allfiles...')
+    print(allfiles)        
 
     vars = iris.load(allfiles)
 
@@ -144,16 +111,5 @@ for time in times:
     for i in range(len(vars)):
         foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
 
-    iris.save(foo,out_dir+'/'+runid+'a.m'+supermeanlabel+str(years[:])+time+'.pp')
-
-
-os.chdir(out_dir)
-
-files = out_dir+'/b*.pp'
-
-for file in glob.glob(runid+'*'):
-    os.system('mule-select '+str(file)+' 1d_vars_removed_'+str(file)+' --exclude lbuser4=30464,30465,30466,30467')
-
-
-
+    iris.save(foo,out_dir+'/all-vars-'+runid+'a.m'+supermeanlabel+str(years[-1])+time+'.pp')
 
