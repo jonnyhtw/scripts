@@ -13,10 +13,14 @@ for i in range(len(suites)):
     print('the global mean temperature of u-'+suites[i]+' is '+str(cubes[0].data[0]))
     arr.append(cubes[0].data[0])        
 
-print(arr)
 
 arr = np.array(arr)
 
 inds = arr.argsort()
 
+
+print('from low to high, the order of suite IDs is...')
 print(suites[inds])
+
+print('and their temperatures are...')
+print(arr[inds])
