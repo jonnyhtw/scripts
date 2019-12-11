@@ -5,11 +5,11 @@ echo 'task|cycle|run-time'
 while IFS= read -r line; do
     if [[ -n "$line" ]]; then
         start_time="$(cut -d '|' -f 3 <<< "${line}")"
-        run_time="$(isodatetime "${start_time}" now)"
+        run_time="$(rose date "${start_time}" now)"
         sed "s/${start_time}/${run_time}/" <<< "${line}"
     fi
 done <<< $(sqlite3 \
-    "${HOME}/cylc-run/u-bo721/log/db" \
+    "${HOME}/cylc-run/$1/log/db" \
     'SELECT name, cycle, time_run FROM task_jobs WHERE time_run IS NOT NULL AND time_run_exit IS NULL')
 
 
