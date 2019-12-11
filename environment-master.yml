@@ -79,7 +79,6 @@ dependencies:
   - ipykernel=4.9.0=py27_0
   - ipython=5.8.0=py27_0
   - ipython_genutils=0.2.0=py_1
-  - ipywidgets=7.4.2=py_0
   - iris=1.9.2=py27_1
   - iris-grib=0.12.0=py27_0
   - iris-sample-data=2.1.0=py_0
@@ -127,10 +126,10 @@ dependencies:
   - locket=0.2.0=py_2
   - lxml=4.2.2=py27hc9114bc_0
   - markupsafe=1.0=py27h470a237_1
-  - matplotlib=1.5.3=np111py27_2
   - mistune=0.8.3=py27h470a237_2
   - mkl=2019.4=243
   - mo_pack=0.2.0=py27h3010b51_1003
+  - mock=3.0.5=py27_0
   - mpfr=3.1.5=0
   - mpi=1.0=mpich
   - mpich=3.2.1=h26a2512_7
@@ -183,6 +182,7 @@ dependencies:
   - pyqt=4.11.4=py27_3
   - pyshp=1.2.12=py_0
   - pysocks=1.6.8=py27_0
+  - pyspharm=1.0.9=py27h6091dcd_1003
   - python=2.7.11=0
   - python-dateutil=2.7.3=py_0
   - python-ecmwf_grib=1.27.0=py27h4ab38f1_1001
@@ -225,7 +225,7 @@ dependencies:
   - wcwidth=0.1.7=py_1
   - webencodings=0.5.1=py_1
   - wheel=0.33.4=py27_0
-  - widgetsnbextension=3.4.2=py27_0
+  - windspharm=1.7.0=py27_1000
   - xarray=0.10.9=py27_0
   - xerces-c=3.1.4=2
   - xorg-imake=1.0.7=0
@@ -259,12 +259,15 @@ dependencies:
     - data==0.4
     - funcsigs==1.0.2
     - future==0.17.1
+    - ipywidgets==7.5.1
     - latex==0.7.0
+    - matplotlib==2.2.4
     - mule==2018.7.1
     - shutilwhich==1.1.0
     - svgwrite==1.2.1
     - tempdir==0.7.1
     - tree==0.2.4
     - um-utils==2018.7.1
+    - widgetsnbextension==3.5.1
 prefix: /nesi/nobackup/niwa00013/williamsjh/miniconda2/envs/master
 

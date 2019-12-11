@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Edit command prompt - simple
 export PS1="> "
 

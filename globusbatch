@@ -17,6 +17,6 @@ rm in.txt ; for file in *a.${stream}*.pp; do echo $file ;  echo -ne "$file $file
 
 export destination=/gws/nopw/j04/aerchemmip_vol1/data/$suite/$stream/
 
-globus transfer $globus_maui:/home/$user/cylc-run/$suite/share/data/History_Data/ $globus_jasmin:$destination --batch --label "CLI batch all ${stream} ${suite}" < ./in.txt
+globus transfer $globus_nesi:/home/$user/cylc-run/$suite/share/data/History_Data/ $globus_jasmin:$destination --batch --label "CLI batch all ${stream} ${suite}" < ./in.txt
 
 

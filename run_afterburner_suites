@@ -1,0 +1,40 @@
+#!/bin/bash
+
+echo 'the date is ...'
+date
+
+cd ~/roses/afterburner/u-bm722
+set-hpc-project
+FILE=~/cylc-run/u-bm722/.service/contact
+if [ ! -f "$FILE" ]; then
+        echo "$FILE doesn't exist, running monitoring suite u-bm722"
+        rose suite-run --no-gcontrol
+fi
+
+if [  -f "$FILE" ]; then
+        echo "$FILE exists and so u-bm722 is already running!"
+fi
+
+cd ~/roses/afterburner/u-bj568
+set-hpc-project
+FILE=~/cylc-run/u-bj568/.service/contact
+if [ ! -f "$FILE" ]; then
+        echo "$FILE doesn't exist, running monitoring suite u-bj568"
+        rose suite-run --no-gcontrol
+fi
+
+if [  -f "$FILE" ]; then
+        echo "$FILE exists and so u-bj568 is already running!"
+fi
+
+cd ~/roses/afterburner/u-bo878
+set-hpc-project
+FILE=~/cylc-run/u-bo878/.service/contact
+if [ ! -f "$FILE" ]; then
+        echo "$FILE doesn't exist, running monitoring suite u-bo878"
+        rose suite-run --no-gcontrol
+fi
+
+if [  -f "$FILE" ]; then
+        echo "$FILE exists and so u-bo878 is already running!"
+fi

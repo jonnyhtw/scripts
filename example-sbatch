@@ -1,0 +1,5 @@
+#!/bin/bash -l
+
+#SBATCH --ntasks=1      
+
+echo 'hello vidya'
