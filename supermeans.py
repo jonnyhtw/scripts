@@ -21,11 +21,16 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--nyears', required=True, type=int)
 parser.add_argument('--firstyear', required=True, type=int)
 parser.add_argument('--runid', required=True, type=str)
+parser.add_argument('--prefix', required=True, type=str)
 parser.add_argument('--in_dir', required=True, type=str)
 args = parser.parse_args()
 
 runid=args.runid
 print('runid is', runid)
+
+prefix=args.runid
+print('raw data file prefix is ', prefix)
+
 in_dir=args.in_dir
 print('in_dir is', in_dir)
 
@@ -83,19 +88,23 @@ for time in times:
         print(year)
 
         if time == 'djf':
-            types = (runid+'a.pm'+str(year - 1)+'dec.pp',runid+'a.pm'+str(year)+'jan.pp',runid+'a.pm'+str(year)+'feb.pp')
+            types = (prefix+'a.pm'+str(year - 1)+'dec.pp',prefix+'a.pm'+str(year)+'jan.pp',prefix+'a.pm'+str(year)+'feb.pp')
         if time == 'mam':
-            types = (runid+'a.pm'+str(year)+'mar.pp',runid+'a.pm'+str(year)+'apr.pp',runid+'a.pm'+str(year)+'may.pp')
+            types = (prefix+'a.pm'+str(year)+'mar.pp',prefix+'a.pm'+str(year)+'apr.pp',prefix+'a.pm'+str(year)+'may.pp')
         if time == 'jja':
-            types = (runid+'a.pm'+str(year)+'jun.pp',runid+'a.pm'+str(year)+'jul.pp',runid+'a.pm'+str(year)+'aug.pp')
+            types = (prefix+'a.pm'+str(year)+'jun.pp',prefix+'a.pm'+str(year)+'jul.pp',prefix+'a.pm'+str(year)+'aug.pp')
         if time == 'son':
-            types = (runid+'a.pm'+str(year)+'sep.pp',runid+'a.pm'+str(year)+'oct.pp',runid+'a.pm'+str(year)+'nov.pp')
+            types = (prefix+'a.pm'+str(year)+'sep.pp',prefix+'a.pm'+str(year)+'oct.pp',prefix+'a.pm'+str(year)+'nov.pp')
         if time == 'ann':
-            types = (runid+'a.pm'+str(year - 1)+'dec.pp',runid+'a.pm'+str(year)+'jan.pp',runid+'a.pm'+str(year)+'feb.pp',runid+'a.pm'+str(year)+'mar.pp',runid+'a.pm'+str(year)+'apr.pp',runid+'a.pm'+str(year)+'may.pp',runid+'a.pm'+str(year)+'jun.pp',runid+'a.pm'+str(year)+'jul.pp',runid+'a.pm'+str(year)+'aug.pp',runid+'a.pm'+str(year)+'sep.pp',runid+'a.pm'+str(year)+'oct.pp',runid+'a.pm'+str(year)+'nov.pp')
+            types = (prefix+'a.pm'+str(year - 1)+'dec.pp',prefix+'a.pm'+str(year)+'jan.pp',prefix+'a.pm'+str(year)+'feb.pp',prefix+'a.pm'+str(year)+'mar.pp',prefix+'a.pm'+str(year)+'apr.pp',prefix+'a.pm'+str(year)+'may.pp',prefix+'a.pm'+str(year)+'jun.pp',prefix+'a.pm'+str(year)+'jul.pp',prefix+'a.pm'+str(year)+'aug.pp',prefix+'a.pm'+str(year)+'sep.pp',prefix+'a.pm'+str(year)+'oct.pp',prefix+'a.pm'+str(year)+'nov.pp')
 
         for files in types:
-            print(in_dir+'/'+files)
-            files_grabbed.extend(glob.glob(in_dir+'/'+files))
+            if os.path.exists(in_dir+'/'+files):
+                print(in_dir+'/'+files)
+                files_grabbed.extend(glob.glob(in_dir+'/'+files))
+            else:
+                print(in_dir+'/'+files+' does not exist!')
+                quit()
 
     allfiles = copy.copy(files_grabbed)
 
