@@ -51,23 +51,32 @@ print('%%%%%%%%%%%%%%%%%%')
 
 years=tuple(range(firstyear,firstyear+nyears))
 
-if len(years) == 2:
-    supermeanlabel = '2'
-
-if len(years) == 3:
-    supermeanlabel = '3'
-
-if len(years) == 10:
+if len(years) <= 9:
+    supermeanlabel = str(len(years))
+elif len(years) <= 10:
     supermeanlabel = 'a'
-    
-if len(years) == 20:
+elif len(years) <= 19:
+    supermeanlabel = 'b'
+elif len(years) <= 24:
     supermeanlabel = 'k'
-    
-if len(years) >= 30 and len(years) <40:
+elif len(years) <= 29:
+    supermeanlabel = 's'
+elif len(years) <= 39:
     supermeanlabel = 't'
-
-if len(years) >= 50 and len(years) <100:
+elif len(years) <= 49:
+    supermeanlabel = 'q'
+elif len(years) <= 99:
     supermeanlabel = 'l'
+elif len(years) <= 249:
+    supermeanlabel = 'u'
+elif len(years) <= 499:
+    supermeanlabel = 'w'
+else:
+    supermeanlabel = 'd'
+
+print('%%%%%%%%%%%%%%%%%%')
+print('supermeanlabel = ', supermeanlabel)
+print('%%%%%%%%%%%%%%%%%%')
 
 if not os.path.exists('out_dir'):
     print 'supermean dir not there, creating it now...'
