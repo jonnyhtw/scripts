@@ -28,7 +28,7 @@ args = parser.parse_args()
 runid=args.runid
 print('runid is', runid)
 
-prefix=args.runid
+prefix=args.prefix
 print('raw data file prefix is ', prefix)
 
 in_dir=args.in_dir
