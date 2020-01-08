@@ -38,3 +38,15 @@ fi
 if [  -f "$FILE" ]; then
         echo "$FILE exists and so u-bo878 is already running!"
 fi
+
+cd ~/roses/afterburner/u-bq392
+set-hpc-project
+FILE=~/cylc-run/u-bq392/.service/contact
+if [ ! -f "$FILE" ]; then
+        echo "$FILE doesn't exist, running monitoring suite u-bq392"
+        rose suite-run --no-gcontrol
+fi
+
+if [  -f "$FILE" ]; then
+        echo "$FILE exists and so u-bo878 is already running!"
+fi
