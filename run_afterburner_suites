@@ -1,64 +1,27 @@
 #!/bin/bash
 
+. ~/.profile
+
 echo 'the date is ...'
 date
 
-cd ~/roses/afterburner/u-bm722
+for suite in u-bj568 u-bm722 u-bo878 u-bq392 bar
+
+do
+
+cd ~/roses/afterburner/$suite
 set-hpc-project
-FILE=~/cylc-run/u-bm722/.service/contact
+FILE=~/cylc-run/$suite/.service/contact
+
+if [  -f "$FILE" ]; then
+        echo "$FILE exists and so " $suite "is already running!"
+fi
+
+
 if [ ! -f "$FILE" ]; then
-        echo "$FILE doesn't exist, running monitoring suite u-bm722"
+        echo "$FILE doesn't exist, running monitoring suite " $SUITE
         rose suite-run --no-gcontrol
 fi
 
-if [  -f "$FILE" ]; then
-        echo "$FILE exists and so u-bm722 is already running!"
-fi
 
-cd ~/roses/afterburner/u-bj568
-set-hpc-project
-FILE=~/cylc-run/u-bj568/.service/contact
-if [ ! -f "$FILE" ]; then
-        echo "$FILE doesn't exist, running monitoring suite u-bj568"
-        rose suite-run --no-gcontrol
-fi
-
-if [  -f "$FILE" ]; then
-        echo "$FILE exists and so u-bj568 is already running!"
-fi
-
-cd ~/roses/afterburner/u-bo878
-set-hpc-project
-FILE=~/cylc-run/u-bo878/.service/contact
-if [ ! -f "$FILE" ]; then
-        echo "$FILE doesn't exist, running monitoring suite u-bo878"
-        rose suite-run --no-gcontrol
-fi
-
-if [  -f "$FILE" ]; then
-        echo "$FILE exists and so u-bo878 is already running!"
-fi
-
-cd ~/roses/afterburner/u-bq392
-set-hpc-project
-FILE=~/cylc-run/u-bq392/.service/contact
-if [ ! -f "$FILE" ]; then
-        echo "$FILE doesn't exist, running monitoring suite u-bq392"
-        rose suite-run --no-gcontrol
-fi
-
-if [  -f "$FILE" ]; then
-        echo "$FILE exists and so u-bq392 is already running!"
-fi
-
-cd ~/roses/afterburner/bar
-set-hpc-project
-FILE=~/cylc-run/bar/.service/contact
-if [ ! -f "$FILE" ]; then
-        echo "$FILE doesn't exist, running monitoring suite bar"
-        rose suite-run --no-gcontrol
-fi
-
-if [  -f "$FILE" ]; then
-        echo "$FILE exists and so bar is already running!"
-fi
+done
