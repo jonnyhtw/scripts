@@ -7,21 +7,19 @@ date
 
 for suite in u-bj568 u-bm722 u-bo878 u-bq392
 
-do
+    do
 
-cd ~/roses/afterburner/$suite
-set-hpc-project
-FILE=~/cylc-run/$suite/.service/contact
+        cd ~/roses/afterburner/$suite
+        set-hpc-project
+        FILE=~/cylc-run/$suite/.service/contact
 
-if [  -f "$FILE" ]; then
-        echo "$FILE exists and so " $suite "is already running!"
-fi
+        if [  -f "$FILE" ]; then
+                echo "$FILE exists and so " $suite "is already running!"
+        fi
 
+        if [ ! -f "$FILE" ]; then
+                echo "$FILE doesn't exist, running monitoring suite " $SUITE
+                rose suite-run --no-gcontrol
+        fi
 
-if [ ! -f "$FILE" ]; then
-        echo "$FILE doesn't exist, running monitoring suite " $SUITE
-        rose suite-run --no-gcontrol
-fi
-
-
-done
+    done
