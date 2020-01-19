@@ -4,8 +4,8 @@ cylc scan > out
 
 while read p 
     do 
-        echo 'polling  '${p%% *}
-        cylc trigger *.*{failed,submit-failed}  ${p%% *}
+        echo 'triggering '${p%% *}
+        cylc trigger ${p%% *} *.*:{failed,submit-failed}
     done < out; 
 
 rm out
