@@ -5,7 +5,7 @@ export suiteid=$1
 
 cd ~/cylc-run/$suiteid/work
 
-latest_cycle_point=$(ls -l . | tail -1)
+latest_cycle_point=$(ls -ld  ????????T????Z | tail -1)
 
 for dir in $latest_cycle_point/{atmos*,coupled*}
 

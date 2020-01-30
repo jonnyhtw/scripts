@@ -5,7 +5,7 @@
 echo 'the date is ...'
 date
 
-for suite in u-bj568 u-bm722 u-bo878 u-bq392
+for suite in  u-bq392 u-bq974
 
     do
 
@@ -19,7 +19,7 @@ for suite in u-bj568 u-bm722 u-bo878 u-bq392
 
         if [ ! -f "$FILE" ]; then
                 echo "$FILE doesn't exist, running monitoring suite " $SUITE
-                rose suite-run --no-gcontrol
+                rose suite-run --no-gcontrol --host=w-cylc02
         fi
 
     done

@@ -4,8 +4,12 @@ cylc scan > out
 
 while read p 
     do 
-        echo 'triggering '${p%% *}
-        cylc trigger ${p%% *} *.*:{failed,submit-failed, retrying}
+        echo 'triggering all failed - '${p%% *}
+        cylc trigger ${p%% *} *.*:failed
+        echo 'triggering all submit-failed - '${p%% *}
+        cylc trigger ${p%% *} *.*:submit-failed
+        echo 'triggering all retrying - '${p%% *}
+        cylc trigger ${p%% *} *.*:retrying
     done < out; 
 
 rm out
