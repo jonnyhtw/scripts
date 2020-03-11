@@ -1,0 +1,2 @@
+#!/bin/bash
+watch 'ssh maui01 squeue --Format=jobid:10s,partition:15s,name:45s,username:12s,statecompact:5s,timeused:10s,numnodes:8s,nodelist:50s,account:9s '

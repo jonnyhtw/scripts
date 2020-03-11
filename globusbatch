@@ -2,21 +2,21 @@
 
 . ~/.profile
 
-export user=$1
+export userid=$1
 export suite=$2
 export stream=$3
 
 echo $suite
-echo $user
+echo $userid
 
-cd /home/$user/cylc-run/$suite/share/data/History_Data/
+cd /home/$userid/cylc-run/$suite/share/data/History_Data/
 
 echo 'I am now here ->' $PWD
 
 rm in.txt ; for file in *a.${stream}*.pp; do echo $file ;  echo -ne "$file $file\n" >> in.txt ; done
 
-export destination=/gws/nopw/j04/aerchemmip_vol1/data/$suite/$stream/
+export destination=/gws/nopw/j04/aerchemmip_vol1/data/$suite/a$stream/
 
-globus transfer $globus_nesi:/home/$user/cylc-run/$suite/share/data/History_Data/ $globus_jasmin:$destination --batch --label "CLI batch all ${stream} ${suite}" < ./in.txt
+globus transfer $globus_nesi:/home/$userid/cylc-run/$suite/share/data/History_Data/ $globus_jasmin:$destination --batch --label "CLI batch all ${stream} ${suite}" < ./in.txt
 
 

@@ -37,6 +37,7 @@ alias trig='cylc trigger $(basename "$PWD")'
 # Aliases for local calls to '> cylc monitor/stop/kill [suite-ID]'. 
 alias mn='cylc monitor $(basename "$PWD")'
 alias mnr='cylc monitor $(basename "$PWD") -r'
+alias mnro='cylc monitor $(basename "$PWD") -ro'
 alias cylc-stop='cylc stop $(basename "$PWD")'
 alias cylc-kill='cylc kill $(basename "$PWD")'
 alias ks='cylc kill $(basename "$PWD");cylc stop --now --now  $(basename "$PWD")'
@@ -77,15 +78,9 @@ export PS1="$HOSTNAME|\d|\t|\W> "
 #export PS1="> "
 #PS1='\[\e[0;32m\u@\w/:\[\e[m '
 # Update contents of directory every 2s
-alias wtch='watch "ls -lt"'
+alias wtch='watch "ls -lta"'
 # Update contents of directory every 2s
-alias wtchh='watch "ls -lth"'
-# alias to squeue
-alias sq='ssh maui01 squeue --Format=jobid:10s,partition:15s,name:45s,username:12s,statecompact:5s,timeused:10s,numnodes:8s,nodelist:50s,account:9s '
-# alias to squeue -u williamsjh
-alias squ='ssh maui01 squeue --Format=jobid:10s,partition:15s,name:45s,username:12s,statecompact:5s,timeused:10s,numnodes:8s,nodelist:50s,account:9s  -u $USER'
-# alias to squeue -u williamsjh on maui_ancil
-alias squancil=' squeue --Format=jobid:15s,partition:15s,name:45s,username:12s,statecompact:5s,timeused:10s,numnodes:8s,nodelist:50s,account:9s  -u $USER'
+alias wtchh='watch "ls -ltha"'
 # go to my nobackup folder
 alias nobackup='cd /nesi/nobackup/niwa00013/williamsjh'
 # alias 'here' for the name of the current dir you're in. This is then accessed
