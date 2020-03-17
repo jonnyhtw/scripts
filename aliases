@@ -8,8 +8,6 @@ alias ll='ls -l'
 alias gcon='rose suite-gcontrol'
 # Display line numbers and percentage through file
 alias less='less -M -N'
-# Alias to `rose suite-run`
-alias rsr='rose suite-run'
 # Go to /hpcf/working/williamsjh directory
 alias working='cd /hpcf/working/williamsjh/'
 # Go to /hpcf/data/williamsjh directory
