@@ -2,6 +2,10 @@ import iris, glob
 
 suite = 'u-bl658'
 
+#STASH codes
+#16222 - PMSL
+#5216 - total precipitation rate
+#24 - surface air temperature
 stash = ['m01s16i222','m01s05i216','m01s00i024']
 
 for year in range(1950,2015):
