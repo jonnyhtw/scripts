@@ -36,6 +36,7 @@ alias trig='cylc trigger $(basename "$PWD")'
 alias mn='cylc monitor $(basename "$PWD")'
 alias mnr='cylc monitor $(basename "$PWD") -r'
 alias mnro='cylc monitor $(basename "$PWD") -ro'
+alias mno='cylc monitor $(basename "$PWD") -o'
 # cd to a Cylc suite's `work` directory and see how may atmos t steps have run
 alias wtchsuite='watch "grep -ir atm_step */*/pe_output/*00|tail"'
 # Open 'fcm diff' in less

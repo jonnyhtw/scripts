@@ -6,7 +6,7 @@ cylc scan > out
 
 while read p 
     do 
-        echo 'polling  '${p%% *}
+        echo 'polling '${p%% *}
         cylc poll  ${p%% *}
     done < out; 
 
