@@ -60,8 +60,6 @@ alias cfcm='clear ; fcm'
 alias gitdifftool='git difftool -y'
 # Saving location of nf-config
 alias nf-config='/opt/niwa/netcdf/AIX/4.3.3.1/parallel/bin/nf-config'
-# My Vim install
-alias myvim='/home/williamsjh/bin/vim'
 # Open all ~/cylc-run directories in GCylc
 alias gconall='for folder in *; do cd ~/cylc-run; cd $folder; rose suite-gcontrol & cd ..; done'
 # Some git aliases
