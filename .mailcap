@@ -1,2 +1,6 @@
-application/pdf; open %s
-
+text/html; open -a Chrome '%s'; needsterminal; description=HTML Text; nametemplate=%s.html
+image/gif; open -a Preview %s
+image/jpg; open -a Preview %s; needsterminal; description=JPEG Image; nametemplate=%s.jpg
+image/jpeg; open -a Preview %s; needsterminal; description=JPEG Image; nametemplate=%s.jpg
+text/text; vim '%s'; needsterminal; description=Text Text; nametemplate=%s.txt
+application/pdf; open -a Preview '%s' ; copiousoutput
