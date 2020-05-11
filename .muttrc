@@ -1,0 +1,9 @@
+source ~/.mutt/.muttrc-private
+source ~/scripts/.muttrc-colours
+auto_view text/html
+set mail_check=300
+set editor="vim"
+set header_cache="~/.mutt/cache/bodies"
+set sort = reverse-threads
+set mailcap_path = ~/scripts/.mailcap
+
