@@ -46,8 +46,6 @@ alias re='rose edit &'
 # Force tmux to use 256 colours, tip from
 # http://askubuntu.com/questions/125526/vim-in-tmux-display-wrong-colors
 alias tmux='tmux -2'
-# Shorthand alias to tmux
-alias x='tmux'
 # Clear terminal before running fcm commands. This is particularly useful for
 # 'fcm diff'. 
 alias cfcm='clear ; fcm'
