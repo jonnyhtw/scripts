@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+
+#####################
+# Script to prepare # 
+# NZESM runs for    #
+# the nearline      #
+# archive.          #
+#                   #
+# Started 20200517  #
+#                   #
+#####################
+
+. ~/.profile
+
+export suite=$1
+
+# Tar up the fcm_make_* dirs in the cylc-run share dir.
+
+cd ~/cylc-run/$suite/share
+
+for thing in drivers ocean pp um
+    do tar --remove-files -cvf fcm_make_${thing}.tar fcm_make_${thing}
+    done
+
+
+
