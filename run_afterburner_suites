@@ -5,7 +5,7 @@
 echo 'the date is ...'
 date
 
-for suite in  u-bq392 
+for suite in  u-bu205
 
     do
 

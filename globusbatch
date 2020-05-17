@@ -19,4 +19,4 @@ export destination=/gws/nopw/j04/aerchemmip_vol1/data/$suite/a$stream/
 
 globus transfer $globus_nesi:/home/$userid/cylc-run/$suite/share/data/History_Data/ $globus_jasmin:$destination --batch --label "CLI batch all ${stream} ${suite}" < ./in.txt
 
-
+rm ./in.txt
