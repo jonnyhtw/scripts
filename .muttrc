@@ -6,5 +6,4 @@ set editor="vim"
 set header_cache="~/.mutt/cache/bodies"
 set sort = reverse-threads
 set mailcap_path = ~/scripts/.mailcap
-
 set pager_index_lines=10
