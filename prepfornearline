@@ -19,7 +19,7 @@ export suite=$1
 
 cd ~/cylc-run/$suite/share
 
-for thing in drivers ocean pp um
+for thing in drivers ocean pp um um_rigorous
     do tar --remove-files -cvf fcm_make_${thing}.tar fcm_make_${thing}
     done
 
