@@ -25,3 +25,6 @@ for thing in drivers ocean pp um
 
 
 
+
+
+    export nprocs=foo ; export mysuite=ab123 ; for suite in $mysuite 1_$mysuite ; do  for trc in restart restart_trc; do   for icebergs in  _icebergs_ _ ; do  for month in 01 02 03 04 05 06 07 08 09 10 11 12; do for year in {1850..2200} ;  do rebuild_nemo -t 40 ${suite}o${icebergs}${year}${month}01_${trc} $nprocs &&  rm ${suite}o${icebergs}${year}${month}01_${trc}_????.nc  ; done ; done  ; done ; done ;done
