@@ -78,4 +78,7 @@ alias nobackup='cd /nesi/nobackup/niwa00013/williamsjh'
 # alias 'here' for the name of the current dir you're in. This is then accessed
 # with `here` (back ticks) or $(here).
 alias here='$(basename $PWD)'
-
+#clim01
+alias clim01='ssh -AY w-clim01'
+#miniconda3
+alias miniconda3='export PATH=/nesi/project/niwa00013/williamsjh/miniconda3/bin:$PATH'

@@ -86,6 +86,7 @@ else:
     print 'supermeans dir already there'
 
 times = ['djf','mam','jja','son','ann']
+#times = ['ann']
 
 for time in times:
 
