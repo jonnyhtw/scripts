@@ -1,0 +1,2 @@
+for suite in bc179 bc292 bc370 bb075 az513 az515 az524 bb277 bc470 bd288 bd416 bd483 bf647 bf656 bf703 bh162 ; do echo $suite;  done
+

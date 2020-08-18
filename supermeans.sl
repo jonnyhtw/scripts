@@ -1,22 +1,30 @@
 #!/bin/bash -l
 
 # DIRECTIVES:
-#SBATCH --time=12:00:00
+#SBATCH --time=24:00:00
 ##SBATCH --error=supermeans.err
 ##SBATCH --out=supermeans.out
 #SBATCH --job-name=supermeans
-#SBATCH --partition=nesi_research
+#SBATCH --partition=nesi_prepost
 #SBATCH --cpus-per-task=1
 #SBATCH --account=niwa00013
 #SBATCH --hint=nomultithread
-#SBATCH --mem-per-cpu=2G
+#SBATCH --mem-per-cpu=200G
 #SBATCH --nodes=1
-#SBATCH --hint=nomultithread
-#SBATCH --ntasks=40
+#SBATCH --ntasks=1
+
+export runid=bb075
+export nyears=20
+
+echo $runid 'for ' $nyears ' years!'
 
 export PATH=/nesi/nobackup/niwa00013/williamsjh/miniconda2/bin:$PATH
-source activate foo
 
-/nesi/nobackup/niwa00013/williamsjh/miniconda2/envs/foo/bin/python  -u ~/scripts/supermeans.py --nyears=20 --in_dir=/nesi/project/niwa00013/williamsjh/MASS/u-bb075/apm.pp/ --runid=bb075 --firstyear=1989 --prefix=bb075
-#/nesi/nobackup/niwa00013/williamsjh/miniconda2/envs/foo/bin/python  -u ~/scripts/supermeans.py --nyears=20 --in_dir=/nesi/project/niwa00013/williamsjh/MASS/u-bb075/apm.pp/ --runid=bb075 --firstyear=1989
+source activate python2-validation-note_env
+
+/nesi/nobackup/niwa00013/williamsjh/miniconda2/envs/python2-validation-note_env/bin/python  -u ~/scripts/supermeans.py --nyears=$nyears --in_dir=/nesi/project/niwa00013/williamsjh/MASS/u-bb075/apm.pp/ --runid=bb075 --firstyear=1989 --prefix=bb075
+
+source activate master
+
+/nesi/nobackup/niwa00013/williamsjh/miniconda2/envs/master/bin/python  -u ~/scripts/supermeans-ann.py --nyears=$nyears --in_dir=/nesi/project/niwa00013/williamsjh/MASS/u-bb075/apm.pp/ --runid=bb075 --firstyear=1989 --prefix=bb075
 
