@@ -6,6 +6,6 @@
 *.pdf
 *.aux
 *.log
-#*.nc
-#*.pp
+*.nc
+*.pp
 *.ipynb_checkpoints

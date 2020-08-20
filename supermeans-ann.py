@@ -106,7 +106,7 @@ for file in files:
     os.system('mule-select '+out_dir+'/'+str(file)+' '+out_dir+'/1d_vars_removed_'+str(file)+' --exclude lbuser4=30464,30465,30466,30467')
 
 print('now loading all seasons')
-cubes = iris.load(list(braceexpand(out_dir+'/'+runid+'a.m'+supermeanlabel+str(years[-1])+'{djf,mam,jja,son}'+'*.pp')))
+cubes = iris.load(list(braceexpand(out_dir+'/1d_vars_removed_all-vars-'+runid+'a.m'+supermeanlabel+str(years[-1])+'{djf,mam,jja,son}'+'*.pp')))
 
 print('now creating annual mean')
 bar = iris.cube.CubeList()
