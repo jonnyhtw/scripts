@@ -132,16 +132,3 @@ for time in times:
 
     iris.save(foo,out_dir+'/all-vars-'+runid+'a.m'+supermeanlabel+str(years[-1])+time+'.pp')
 
-################################
-#do the annual mean
-################################
-
-cubes = iris.load(list(braceexpand(out_dir+'/all-vars-'+runid+'a.m'+supermeanlabel+str(years[-1])+'{djf,mam,jja,son}'+'*.pp')))
-
-bar = iris.cube.CubeList()
-for cube in cubes:
-    print(cube)
-    newcube = cube.collapsed('time', iris.analysis.MEAN)
-    bar.append(newcube)
-
-iris.save(foo,out_dir+'/all-vars-'+runid+'a.m'+supermeanlabel+str(years[-1])+'ann.pp')
