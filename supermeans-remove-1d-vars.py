@@ -87,27 +87,21 @@ else:
     print 'supermeans dir already there'
 
 ################################
-#remove 1d vars
+#do the annual mean
 ################################
 
 print(in_dir)
 print(out_dir)
 
-print('now loading all seasons')
+files = list(braceexpand('all-vars-'+runid+'a.m'+supermeanlabel+str(years[-1])+'{djf,mam,jja,son}'+'.pp'))
 
-all_seasons_files = list(braceexpand(out_dir+'/1d_vars_removed_all-vars-'+runid+'a.m'+supermeanlabel+str(years[-1])+'{djf,mam,jja,son}'+'*.pp'))
+print(files)
 
-print(all_seasons_files)
+for file in files:
 
-cubes = iris.load(all_seasons_files)
+    print(file)
+    
+    print(out_dir+'/'+str(file)+' '+out_dir+'/1d_vars_removed_'+str(file)+' --exclude lbuser4=30464,30465,30466,30467')
 
-print('now creating annual mean')
-bar = iris.cube.CubeList()
-for cube in cubes:
-    print(cube)
-    newcube = cube.collapsed('time', iris.analysis.MEAN)
-    bar.append(newcube)
+    os.system('mule-select '+out_dir+'/'+str(file)+' '+out_dir+'/1d_vars_removed_'+str(file)+' --exclude lbuser4=30464,30465,30466,30467')
 
-iris.save(bar,out_dir+'/1d_vars_removed_all-vars-'+runid+'a.m'+supermeanlabel+str(years[-1])+'ann.pp')
-
-os.system('rename 1d_vars_removed_all-vars-'+runid+' '+runid+' '+out_dir+'/1d_vars_removed_all-vars-'+runid+'*.pp')
