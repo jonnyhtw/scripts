@@ -8,3 +8,5 @@ set sort = reverse-threads
 set sort = reverse-date-received
 set mailcap_path = ~/scripts/.mailcap
 set pager_index_lines=10
+set alias_file=~/.mutt/aliases # where I keep my aliases
+source $alias_file
