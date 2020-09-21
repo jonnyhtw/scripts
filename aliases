@@ -41,8 +41,6 @@ alias mno='cylc monitor $(basename "$PWD") -o'
 alias wtchsuite='watch "grep -ir atm_step */*/pe_output/*00|tail"'
 # Open 'fcm diff' in less
 alias fcmdiff='fcm diff|less'
-# Alias to '> rose edit &'
-alias re='rose edit &'
 # Force tmux to use 256 colours, tip from
 # http://askubuntu.com/questions/125526/vim-in-tmux-display-wrong-colors
 alias tmux='tmux -2'

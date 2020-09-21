@@ -13,7 +13,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 
-export runid=bd483
+export runid=bb075
 export nyears=20
 export firstyear=1989
 export in_dir=/nesi/project/niwa00013/williamsjh/MASS/u-$runid/apm.pp
