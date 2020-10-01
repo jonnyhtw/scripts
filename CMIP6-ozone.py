@@ -1,6 +1,5 @@
 # Script to process ozone data to make CMIP6 forcing ancillary file.
 
-import matplotlib.pyplot as plt
 import numpy as np
 import iris
 
