@@ -1,3 +1,4 @@
+import iris
 
 def area_avg_cube(cube, guess_bounds=False, missing_data_value=None, stdev=False):
     if guess_bounds:
