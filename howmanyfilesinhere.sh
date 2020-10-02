@@ -1,5 +1,7 @@
+#!/bin/bash
+
 echo 'there are this many files in...'
-echo $PWD
+echo "$PWD"
 find . -true -print | wc -l
 
 
