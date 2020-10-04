@@ -5,7 +5,6 @@ import iris
 import iris.plot as iplt
 import iris.quickplot as qplt
 from braceexpand import braceexpand
-import numpy as np
 import datetime
 from iris.time import PartialDateTime
 import iris.analysis
