@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 module load CDO
 module load NCO
 
