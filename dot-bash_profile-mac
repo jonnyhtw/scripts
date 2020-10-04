@@ -3,5 +3,6 @@
 export PS1="\d|\t|\W> "
 #add scripts directory to $PATH
 export PATH=~/scripts:$PATH
+export PATH=~/miniconda3/bin:$PATH
 set -o vi
 

@@ -10,7 +10,7 @@ for dir in /home/$USER/cylc-run/$SUITE/work/*/nemo_cice*/
 
     do
 
-    echo $dir
+    echo "$dir"
 
     cd $dir
 
