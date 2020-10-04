@@ -1,6 +1,5 @@
 # Script to process ozone data to make CMIP6 forcing ancillary file.
 
-import numpy as np
 import iris
 
 iris.FUTURE.netcdf_no_unlimited=True
