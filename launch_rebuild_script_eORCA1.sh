@@ -12,10 +12,10 @@ for dir in /home/$USER/cylc-run/$SUITE/work/*/nemo_cice*/
 
     echo "$dir"
 
-    cd $dir
+    cd "$dir"
 
     echo 'rebuilding files in...'
-    echo $dir
+    echo "$dir"
 
 
     echo sbatch rebuild_nemo_scrip_eORCA1.sl

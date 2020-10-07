@@ -1,4 +1,5 @@
 import iris
+import numpy as np
 
 def area_avg_cube(cube, missing_data_value=None, stdev=False):
 
