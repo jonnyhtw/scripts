@@ -1,0 +1,230 @@
+#!/usr/bin/env python3
+"""Prepare EasyAerosol input files (SOCRATES - Mie scattering fit).
+
+Usage: prepare_ea_socrates_fit <orog>
+"""
+
+import sys
+import numpy as np
+import ds_format as ds
+import aquarius_time as aq
+
+NUMBER_DENSITY = 10. # m-3 this is MP number concentration
+
+FRACT_TOP = 0.3
+H_TOP = 10000 # m
+
+#change these arrays for fiber optical properties
+SW_ABS = np.array([
+	2.81158369e-11,
+	1.77962749e-11,
+	2.08364126e-11,
+	5.14508882e-11,
+	3.07313372e-10,
+	2.54537590e-09,
+]) # m-1
+
+SW_SCA = np.array([
+	2.76736909e-08,
+	2.77087682e-08,
+	2.77304626e-08,
+	2.77420879e-08,
+	2.75660197e-08,
+	2.54975269e-08,
+]) # m-1
+
+SW_ASY = np.array([ 
+	1.65049428,
+	1.66641819,
+	1.67297959,
+	1.67567701,
+	1.67876239,
+	1.71209572,
+]) # 1
+
+LW_ABS = np.array([
+	5.46044537e-09,
+	7.83862314e-09,
+	8.73329251e-09,
+	8.73896642e-09,
+	8.49942788e-09,
+	8.46115076e-09,
+	7.82993746e-09,
+	7.28748169e-09,
+	3.93569214e-09,
+]) # m-1
+
+LW_SCA = np.array([
+	2.43824945e-08,
+	2.12505464e-08,
+	2.00217649e-08,
+	2.00278374e-08,
+	1.99839631e-08,
+	1.99987942e-08,
+	2.05330068e-08,
+	2.10225261e-08,
+	2.41769027e-08,
+]) # m-1
+
+LW_ASY = np.array([
+	1.66021919,
+	1.75677416,
+	1.79811520,
+	1.79765865,
+	1.80880019,
+	1.80927079,
+	1.80119707,
+	1.79288004,
+	1.73629761,
+]) # 1
+
+#Do not change ETA. LER, 4/9/20
+ETA = np.array([0.0002352941, 0.000627451, 0.001176471, 0.001882353, 0.002745098,
+0.003764706, 0.004941176, 0.00627451, 0.007764705, 0.009411764, 0.01121569,
+0.01317647, 0.01529412, 0.01756863, 0.02, 0.02258823, 0.02533333, 0.02823529,
+0.03129411, 0.0345098, 0.03788235, 0.04141176, 0.04509804, 0.04894118,
+0.05294117, 0.05709804, 0.06141176, 0.06588235, 0.0705098, 0.07529411,
+0.08023529, 0.08533333, 0.09058823, 0.09600001, 0.1015687, 0.1072942, 0.1131767,
+0.1192161, 0.1254127, 0.1317666, 0.1382781, 0.1449476, 0.1517757, 0.1587633,
+0.1659115, 0.1732221, 0.1806969, 0.188339, 0.1961518, 0.20414, 0.2123093,
+0.2206671, 0.2292222, 0.2379856, 0.2469709, 0.2561942, 0.2656752, 0.2754372,
+0.285508, 0.2959203, 0.3067128, 0.3179307, 0.3296266, 0.3418615, 0.3547061,
+0.3682416, 0.3825613, 0.3977717, 0.4139944, 0.4313675, 0.4500474, 0.4702109,
+0.4920571, 0.5158098, 0.5417201, 0.5700686, 0.6011688, 0.6353697, 0.673059,
+0.7146671, 0.7606701, 0.8115944, 0.8680208, 0.9305884, 1.0])
+
+MODEL_LEVEL_NUMBER = np.arange(1, 86)
+
+SW_SPECBANDS = np.arange(1, 7)
+LW_SPECBANDS = np.arange(1, 10)
+
+TIME = np.array([
+	aq.from_date([1, 2000, m, 16])
+	for m in range(1, 13)
+])
+
+VARS = [
+	'easy_%s_%s' % (x, y)
+	for x in ['extinction', 'absorption', 'asymmetry']
+	for y in ['sw', 'lw']
+]
+
+VAR_META = {
+	'.dims': ['time', 'specband', 'model_level_number', 'latitude', 'longitude'],
+	'vertical_scaling': 'all_levels',
+	'_FillValue': np.nan,
+}
+
+META = {
+	'.': {
+		'Conventions': 'CF-1.5',
+		'update_freq_in_hours': '120',
+		'update_type': '2',
+	},
+	'longitude': {
+		'.dims': ['longitude'],
+		'standard_name': 'longitude',
+		'units': 'degrees_east',
+	},
+	'latitude': {
+		'.dims': ['latitude'],
+		'standard_name': 'latitude',
+		'units': 'degrees_north',
+	},
+	'model_level_number': {
+		'.dims': ['model_level_number'],
+		'long_name': 'model rho levels (Charney-Phillips grid)',
+		'units': '1',
+	},
+	'specband': {
+		'.dims': ['specband'],
+		'long_name': 'spectral band',
+		'units': '1',
+	},
+	'time': {
+		'.dims': ['time'],
+		'calendar': '360_day',
+		'calendar_flexible': 1,
+		'standard_name': 'time',
+		'units': 'days since 2000-01-01 00:00:00'
+	},
+}
+
+for var in VARS:
+	META[var] = VAR_META
+	META[var].update({
+		'standard_name': var,
+		'long_name': var.replace('_', ' '),
+	})
+	META[var]['units'] = '1' if var == 'asymmetry' else 'm-1'
+
+if __name__ == '__main__':
+	if len(sys.argv) != 2:
+		sys.stderr.write(sys.modules[__name__].__doc__)
+		sys.exit(1)
+
+	orog_file = sys.argv[1]
+
+	d_orog = ds.read(orog_file, [
+		'latitude',
+		'longitude',
+		'surface_altitude',
+	])
+
+	orog = d_orog['surface_altitude']
+
+	n = len(d_orog['latitude'])
+	m = len(d_orog['longitude'])
+	l = len(ETA)
+
+	zfull = np.full((l, n, m), np.nan, np.float64)
+	for i in range(n):
+		for j in range(m):
+			zfull[:,i,j] = \
+				ETA*85000. + orog[i,j]*(1. - ETA/ETA[51])**2
+
+	h = zfull - zfull[0,:,:]
+	fract = FRACT_TOP**(h/H_TOP)
+	fract[zfull > H_TOP] = 0
+
+	d0 = {
+		'latitude': d_orog['latitude'],
+		'longitude': d_orog['longitude'],
+		'time': TIME - aq.from_date([1, 2000, 1, 1]),
+		'model_level_number': MODEL_LEVEL_NUMBER,
+	}
+	d0['.'] = META
+	for var in VARS:
+		d = {}
+		d.update(d0)
+		if var.endswith('_sw'):
+			abs_ = SW_ABS
+			sca = SW_SCA
+			asy = SW_ASY
+			specbands = SW_SPECBANDS
+		else:
+			abs_ = LW_ABS
+			sca = LW_SCA
+			asy = LW_ASY
+			specbands = LW_SPECBANDS
+		d['specband'] = specbands
+		size = [
+			len(TIME),
+			len(specbands),
+			l,
+			n,
+			m,
+		]
+		d[var] = np.zeros(size, np.float64)
+		for i in (specbands - 1):
+			for j in range(len(TIME)):
+				if var.startswith('easy_asymmetry_'):
+					d[var][j,i,:,:,:] = asy[i]
+				elif var.startswith( 'easy_extinction_'):
+					d[var][j,i,:,:,:] = \
+						(abs_[i] + sca[i])*\
+						NUMBER_DENSITY*fract
+				elif var.startswith('easy_absorption_'):
+					d[var][j,i,:,:,:] = \
+						abs_[i]*NUMBER_DENSITY*fract
+		ds.write('%s.nc' % var, d)
