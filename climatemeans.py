@@ -26,8 +26,8 @@ project='niwa00013'
 
 out_dir='/nesi/nobackup/'+project+'/'+whoami+'/esmeval/user_data/'+whoami+'/model_data/u-'+runid
 
-print 'out_dir = '
-print out_dir
+print('out_dir = ')
+print(out_dir)
 
 in_dir=in_dir_base+'u-'+runid+'/share/data/History_Data/'
 
