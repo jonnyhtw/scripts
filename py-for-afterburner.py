@@ -51,9 +51,9 @@ parser.add_argument('--base', required=True, type=str)
 
 args = parser.parse_args()
 
-print args.year0
-print args.year
-print args.suite
+print(args.year0)
+print(args.year)
+print(args.suite)
 
 remove_interim_files_directory = False
 generate_monthly_means = True
@@ -65,7 +65,7 @@ year0= args.year0
 year= args.year
 base = args.base
 
-print 'the suite ID is ',suite
+print('the suite ID is ',suite)
 
 user = 'williamsjh'
 
@@ -113,7 +113,7 @@ for j in range(len(s_or_y)):
 
     if generate_annual_and_seasonal_means == True:
 
-        print 'creating means for '+str(suffices[j])
+        print('creating means for '+str(suffices[j])
 
         os.chdir(base+'/interim-files-for-climate-meaning/')
 
@@ -130,7 +130,7 @@ for j in range(len(s_or_y)):
         if j == 4:#son
             files=list(braceexpand('*pm'+str(year)+'{sep,oct,nov}*.pp'))
 
-        print 'loading all the cubes for',year,suffices[j]
+        print('loading all the cubes for',year,suffices[j])
 
 
         #files_with_full_path = [base+'interim-files-for-climate-meaning/' +s  for s in files]
@@ -139,7 +139,7 @@ for j in range(len(s_or_y)):
 
         cubes = iris.load(files)#,stash)
 
-        print 'now doing the meaning for ... ',suffices[j]                          
+        print('now doing the meaning for ... ',suffices[j])
 
         #reset foo
         if 'foo' in globals():
@@ -153,7 +153,7 @@ for j in range(len(s_or_y)):
             foo.append(newcube)
             outfile = suite[2:]+'a.p'+s_or_y[j]+str(year)+suffices[j]
 
-        print 'now saving '+outfile
+        print('now saving '+outfile)
         iris.save(foo, base+'/climate-meaning/'+outfile)
 
         os.chdir(base+'/climate-meaning/')
@@ -162,8 +162,8 @@ for j in range(len(s_or_y)):
 
         for i in range(len(fields)):
             if str(fields[i].lbuser4).startswith('19') and len(str(fields[i].lbuser4)) == 5:
-                print fields[i].lbuser4
-                print 'setting lbtim in STASH code '+str(fields[i].lbuser4)+' to 24022'
+                print(fields[i].lbuser4)
+                print('setting lbtim in STASH code '+str(fields[i].lbuser4)+' to 24022')
                 fields[i].lbtim = 24022
                 
         pp.fields_to_pp_file('new-'+outfile,fields)
@@ -191,7 +191,7 @@ for j in range(len(s_or_y)):
         #if (year == year0+20) or (year == year0 + 50) or (year == year0+2):
         if (year == year0+20) or (year == year0 + 50):
 
-            print 'foo bar baz'
+            print('foo bar baz')
 
             if (year == year0+2):
                 supermean_indicator = '2'
@@ -209,7 +209,7 @@ for j in range(len(s_or_y)):
                 supermean_files.append(supermean_file)
 
             print('******')
-            print supermean_files
+            print(supermean_files)
             print('******')
 
             # get filenames of files to be read in for supermeaning after they've
@@ -225,14 +225,14 @@ for j in range(len(s_or_y)):
             #    print('==================')
             #    os.system('mule-select '+str(file)+' 1d_vars_removed_'+str(file)+' --exclude lbuser4=30464,30465,30466,30467')
 
-            print 'making supermeans for these files...'
-            #print _1d_vars_removed_supermean_files
-            print supermean_files
+            print('making supermeans for these files...')
+            #print(_1d_vars_removed_supermean_files)
+            print(supermean_files)
 
-            print 'now loading the constituent supermean files for '+suffices[j]
+            print('now loading the constituent supermean files for '+suffices[j])
             supermean_cubes = iris.load(supermean_files)
 
-            print 'now meaning the supermean files for '+suffices[j]
+            print('now meaning the supermean files for '+suffices[j])
 
             #reset bar
             if 'bar' in globals():
@@ -247,19 +247,19 @@ for j in range(len(s_or_y)):
                 
             supermean_outfile = suite[2:]+'a.p'+supermean_indicator+str(year)+suffices[j]
 
-            print 'now saving '+supermean_outfile
+            print('now saving '+supermean_outfile)
             iris.save(bar, base+'/climate-meaning/'+supermean_outfile)
 
             #for file in glob.glob('./1d_vars_removed*'):
-            #    print file
+            #    print(file)
             #    os.remove(file)
 
             supermean_fields=pp.fields_from_pp_file(supermean_outfile)
 
             for field in supermean_fields:
                 if str(field.lbuser4).startswith('19') and len(str(field.lbuser4)) == 5:
-                    print field.lbuser4
-                    print 'setting lbtim in STASH code '+str(field.lbuser4)+' to 24022'
+                    print(field.lbuser4)
+                    print('setting lbtim in STASH code '+str(field.lbuser4)+' to 24022')
                     field.lbtim = 24022
                     
             pp.fields_to_pp_file('new-'+supermean_outfile,supermean_fields)

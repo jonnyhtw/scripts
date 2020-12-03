@@ -28,7 +28,7 @@ with open('./stratosphere.monthly.g.txt') as f:
 
 for i in range(0,len(lines)):
     lines[i] = lines[i].replace(" ","")
-    print lines[i]
+    print(lines[i])
 
 
 
@@ -73,7 +73,7 @@ import iris.fileformats.pp as pp
 with open('apg.pp', 'wb') as fh:
     i = 0
     for cube in cat:
-        #  print i
+        #  print(i)
         for sub_cube, field in pp.save_pairs_from_cube(cube):
             if field.lbnpt == 0:
                 field.bdx = 1

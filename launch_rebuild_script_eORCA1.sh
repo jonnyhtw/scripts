@@ -4,7 +4,7 @@ module load slurm
 
 export suite=u-bb016
 
-echo $SUITE
+echo "$SUITE"
 
 for dir in /home/$USER/cylc-run/$SUITE/work/*/nemo_cice*/
 
