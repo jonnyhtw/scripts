@@ -7,8 +7,6 @@
 
 
 import iris
-import datetime
-from iris.time import PartialDateTime
 import copy
 
 
@@ -120,7 +118,7 @@ for i in range(len(stash_constraint)):
         all_cubes.append(cubes_1_hour_interval)
 
 
-    
+
 
 
 # In[21]:

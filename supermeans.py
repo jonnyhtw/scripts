@@ -1,11 +1,8 @@
 import iris
 from braceexpand import braceexpand
 import iris.plot as iplt
-import iris.quickplot as qplt
 import numpy as np
 import glob
-import datetime
-from iris.time import PartialDateTime
 import copy
 import iris.analysis
 import netCDF4
@@ -18,7 +15,7 @@ import argparse
 import copy
 
 parser = argparse.ArgumentParser()
-   
+ 
 parser.add_argument('--nyears', required=True, type=int)
 parser.add_argument('--firstyear', required=True, type=int)
 parser.add_argument('--runid', required=True, type=str)

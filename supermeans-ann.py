@@ -3,7 +3,6 @@ from braceexpand import braceexpand
 import iris.plot as iplt
 import iris.quickplot as qplt
 import numpy as np
-import glob
 import datetime
 from iris.time import PartialDateTime
 import copy

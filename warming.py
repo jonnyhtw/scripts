@@ -6,7 +6,6 @@ import iris
 import iris.analysis.cartography
 import iris.quickplot as qplt
 import glob
-import iris
 
 plt.ion()
 
@@ -35,7 +34,7 @@ read_data = True
 if read_data:
 
     mean = []
-    
+
     for file in tqdm_gui(files):
         print(file)
         cube = iris.load_cube(file)
