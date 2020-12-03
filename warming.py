@@ -1,10 +1,7 @@
 import matplotlib
-import cf_units as unit
 import numpy as np
-from tqdm import tqdm
 from tqdm import tqdm_gui
 import matplotlib.pyplot as plt
-import cartopy.crs as ccrs
 import iris
 import iris.analysis.cartography
 import iris.quickplot as qplt

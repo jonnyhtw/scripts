@@ -35,7 +35,7 @@ def read_stdin():
         try:
             c = sys.stdin.read(1)
         except IOError as e:
-            print e
+            print(e)
             continue
         if c == '\r':
             # line is being updated
@@ -81,7 +81,7 @@ for line in read_stdin():
     elif not line.startswith(' '):
         # total progress
         file_name = line
-        if len(parts) == 6: print parts[1].endswith('%'), parts[-1].startswith('to-check='),
+        if len(parts) == 6: print(parts[1].endswith('%'), parts[-1].startswith('to-check='),)
         if len(file_name) > 40:
             short_file_name = file_name[:12] + '...' + file_name[-(28-3):]
         else:

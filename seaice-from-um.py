@@ -1,9 +1,6 @@
 import iris
 import glob
 import numpy as np
-import matplotlib as plt
-import os
-import numpy.ma as ma
 
 stash_constraint = iris.AttributeConstraint(STASH='m01s00i031')
 mask_constraint = iris.AttributeConstraint(STASH='m01s00i030')

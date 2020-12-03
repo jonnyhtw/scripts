@@ -23,7 +23,7 @@ do
 
     cdo setctomiss,0 /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/zos-new.nc /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/zos-new-miss.nc
 
-    ncks -A -v zos /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/zos-new-miss.nc /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/$file
+    ncks -A -v zos /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/zos-new-miss.nc /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/"$file"
 
 done
 

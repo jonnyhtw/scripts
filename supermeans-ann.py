@@ -80,11 +80,11 @@ print('supermeanlabel = ', supermeanlabel)
 print('%%%%%%%%%%%%%%%%%%')
 
 if not os.path.exists('out_dir'):
-    print 'supermean dir not there, creating it now...'
+    print('supermean dir not there, creating it now...')
     os.makedirs('out_dir')
-    print 'done'
+    print('done')
 else:
-    print 'supermeans dir already there'
+    print('supermeans dir already there')
 
 ################################
 #remove 1d vars
