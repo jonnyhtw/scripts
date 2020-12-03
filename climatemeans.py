@@ -8,7 +8,6 @@ from braceexpand import braceexpand
 import datetime
 from iris.time import PartialDateTime
 import iris.analysis
-import netCDF4
 from netCDF4 import Dataset
 import os
 from pylab import *
