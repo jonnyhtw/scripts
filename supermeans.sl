@@ -13,11 +13,11 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 
-export runid=bb075
+export runid=bx226
 export nyears=20
 export firstyear=1989
 export in_dir=/nesi/project/niwa00013/williamsjh/MASS/u-$runid/apm.pp
-#export in_dir=/home/williamsjh/cylc-run/u-$runid/share/data/History_Data
+export in_dir=/home/williamsjh/cylc-run/u-$runid/share/data/History_Data
 
 echo $runid 'for ' $nyears ' years starting in' $firstyear '!'
 
