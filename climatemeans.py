@@ -1,20 +1,10 @@
-import cartopy.crs as ccrs
-import matplotlib
-import matplotlib.pyplot as plt
 import iris
-import iris.plot as iplt
-import iris.quickplot as qplt
 from braceexpand import braceexpand
-import datetime
-from iris.time import PartialDateTime
 import iris.analysis
-from netCDF4 import Dataset
 import os
 from pylab import *
 import cartopy.crs as ccrs
 import iris.analysis.cartography
-import re
-from os import listdir
 
 in_dir_base='/home/williamsjh/cylc-run/'
 runid='bc048'
@@ -42,7 +32,7 @@ if nyears == 2:
 
 if nyears == 10:
     supermeanlabel = 'a'
-    
+
 if nyears == 20:
     supermeanlabel = 'k'
 
