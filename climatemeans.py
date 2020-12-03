@@ -49,10 +49,10 @@ period = 'mam'
 
 print(fnames)
 
-vars = iris.load(fnames)
+_vars = iris.load(fnames)
 
-#varsmean = vars.collapsed('time',iris.analysis.MEAN)
+#_varsmean = _vars.collapsed('time',iris.analysis.MEAN)
 
-#iris.save(varsmean,out_dir+'/supermeans'+'/'+runid+'a.m'+supermeanlabel+str(year)+period+'.pp')
+#iris.save(_varsmean,out_dir+'/supermeans'+'/'+runid+'a.m'+supermeanlabel+str(year)+period+'.pp')
         # the m in the previous line is the 'mean' indicator, not to be
         # confused with the 'm for monthly' in the input files!

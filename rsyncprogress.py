@@ -71,7 +71,7 @@ for line in read_stdin():
         if pbar is None:
             first_update = j
             pbar = progressbar.ProgressBar(widgets=widgets,
-                maxval=ntotal - first_update).start() 
+                maxval=ntotal - first_update).start()
         pbar.maxval = ntotal - first_update
         pbar.update(j - first_update)
         

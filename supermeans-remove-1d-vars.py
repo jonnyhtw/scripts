@@ -5,7 +5,6 @@ import iris.quickplot as qplt
 import numpy as np
 import glob
 import datetime
-from iris.time import PartialDateTime
 import copy
 import iris.analysis
 import netCDF4
@@ -13,7 +12,6 @@ from netCDF4 import Dataset
 import os
 from pylab import *
 import re
-from os import listdir
 import argparse
 import copy
 
