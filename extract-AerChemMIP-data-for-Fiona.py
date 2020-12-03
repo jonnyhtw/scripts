@@ -113,7 +113,7 @@ def one_hour_interval_selector(cube):
 
 
 for i in range(len(stash_constraint)):
-    print 'i = ',i
+    print('i = ',i)
     cubes_1_hour_interval = iris.load(directory + '*py*', stash_constraint[i] &
                                       iris.Constraint(cube_func=one_hour_interval_selector))
     if i == 0:

@@ -49,7 +49,7 @@ fnames = list(braceexpand(in_dir+'*pm*{196[0-9],197[0-9]}*{mar,apr,may}*'))
 
 period = 'mam'
 
-print fnames
+print(fnames)
 
 vars = iris.load(fnames)
 
