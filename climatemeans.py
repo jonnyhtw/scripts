@@ -2,8 +2,6 @@ import iris
 from braceexpand import braceexpand
 import iris.analysis
 import os
-from pylab import *
-import cartopy.crs as ccrs
 import iris.analysis.cartography
 
 in_dir_base='/home/williamsjh/cylc-run/'
