@@ -1,14 +1,12 @@
 
 # coding: utf-8
 
-# # Jupyter notebook to extract specific STASH codes and years from UM data 
+# # Jupyter notebook to extract specific STASH codes and years from UM data
 
 # In[1]:
 
 
 import iris
-import numpy
-import os
 import datetime
 from iris.time import PartialDateTime
 import copy
@@ -18,7 +16,7 @@ import copy
 
 
 stash_list =['m01s01i207','m01s01i208','m01s01i209','m01s02i205','m01s02i206']
-stash_constraint = [iris.AttributeConstraint(STASH=stash) for stash in stash_list]  
+stash_constraint = [iris.AttributeConstraint(STASH=stash) for stash in stash_list]
 
 
 # In[3]:
@@ -68,7 +66,7 @@ directory = '/nesi/nobackup/niwa00003/'+user+'/cylc-run/'+suite+'/share/data/His
 # In[10]:
 
 
-#for i in range(len(cubes)): 
+#for i in range(len(cubes)):
 #    print cubes[i].cell_methods
 
 
@@ -96,7 +94,7 @@ outdir = '/nesi/project/niwa00013/williamsjh/CMIP6/data-for-fiona/'
 #if os.path.exists(outfile):
 #    os.remove(outfile)
 
-#for i in range(len(cubes_1_hour_interval)): 
+#for i in range(len(cubes_1_hour_interval)):
 #    iris.save(cubes_1_hour_interval[i].extract(years),outdir+outfile,append=True)
 
 
@@ -128,6 +126,6 @@ for i in range(len(stash_constraint)):
 # In[21]:
 
 
-for i in range(len(cubes_1_hour_interval)): 
-    iris.save(cubes_1_hour_interval[i].extract(years),outdir+'foo.pp',append=True) 
+for i in range(len(cubes_1_hour_interval)):
+    iris.save(cubes_1_hour_interval[i].extract(years),outdir+'foo.pp',append=True)
 
