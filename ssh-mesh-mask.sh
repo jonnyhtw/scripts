@@ -13,11 +13,11 @@ for file in *1y*grid*T*
 
 do
 
-    echo $file
+    echo "$file"
 
-    rsync -rvLP $file /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/
+    rsync -rvLP "$file" /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/
 
-    cdo selvar,zos $file /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/zos.nc
+    cdo selvar,zos "$file" /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/zos.nc
 
     cdo mul /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/zos.nc /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/mesh_mask_eORCA1-tmask-sellevidx1.nc /nesi/project/niwa00013/williamsjh/NZESM/ssh-mask/zos-new.nc
 
