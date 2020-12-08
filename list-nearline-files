@@ -1,0 +1,25 @@
+#!/usr/bin/env bash 
+
+export project=niwa00013
+
+export search_folder=/nesi/nobackup/$project/$USER
+
+rm ~/nobackup-expiry-check
+
+for d in $search_folder/*/
+
+do 
+
+    echo $d
+
+    echo 'searching for ' $d in /nesi/nobackup/$project/.policy/to_delete/latest.filelist.gz
+
+    zless /nesi/nobackup/$project/.policy/to_delete/latest.filelist.gz |grep $d >> ~/nobackup-expiry-check
+
+done
+
+echo ‘the next file expiry date is…’ >> ~/nobackup-expiry-check
+
+realpath  /nesi/nobackup/$project/.policy/to_delete/latest.filelist.gz >> ~/nobackup-expiry-check
+
+
