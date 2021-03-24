@@ -7,3 +7,6 @@ for file in *.nc; do cdo setgatt,update_freq_in_hours,12 $file ${file%.*}-12h.nc
 
 # my conda PATH
 export PATH=/nesi/project/niwa00013/williamsjh/miniconda2/bin:$PATH
+
+#vlab
+w-mauivlab01.maui.nesi.org.nz

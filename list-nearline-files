@@ -22,3 +22,4 @@ echo ‘the next file expiry date is…’ >> ~/nobackup-expiry-check
 
 realpath  /nesi/nobackup/$project/.policy/to_delete/latest.filelist.gz >> ~/nobackup-expiry-check
 
+echo 'now look at the output in ~/nobackup-expiry-check'
