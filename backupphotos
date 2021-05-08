@@ -1,0 +1,7 @@
+#!/usr/bin/env bash 
+
+cd /Volumes/Data/Pictures/
+
+mkdir "$(date +"%d-%m-%Y")" && cd $_
+
+rsync -rvLP --remove-source-files ~/Dropbox/Camera\ Uploads/* .
