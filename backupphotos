@@ -1,5 +1,7 @@
 #!/usr/bin/env bash 
 
+#foo
+
 cd /Volumes/Data/Pictures/
 
 mkdir "$(date +"%d-%m-%Y")" && cd $_
