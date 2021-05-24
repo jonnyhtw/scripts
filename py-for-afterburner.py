@@ -113,7 +113,7 @@ for j in range(len(s_or_y)):
 
     if generate_annual_and_seasonal_means == True:
 
-        print('creating means for '+str(suffices[j])
+        print('creating means for '+str(suffices[j]))
 
         os.chdir(base+'/interim-files-for-climate-meaning/')
 
