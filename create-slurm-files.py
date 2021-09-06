@@ -9,20 +9,24 @@ account = 'niwa00013'
 hint = 'nomultithread'
 nodes = '1'
 ntasks = '1'
-stashmodel = 01
-rawstashs=[34001,03206,30207, 
+stashmodel = '01'
+rawstashs=['34001','03236','30207',] 
+#rawstashs=['03236'] 
 stashs = ['m01s34i001','m01s03i236']
+descriptions = ['O3-MMR','Temperature-at-1.5m','Geopotential-height-on-P-levs']
 suite = 'u-bn013'
 years = range(2015,2100)
 months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
 
-for stash in stashs:
+os.system('rm ./*.sl')
+
+for rawstash in rawstashs:
 
     for year in years:
 
         for month in months:
 
-            with open('slurm.file.'+suite+'.'+str(stash)+'.'+str(year)+'.'+month+'.sl', 'w') as f:
+            with open('slurm.file.'+suite+'.'+str(rawstash)+'.'+str(year)+'.'+month+'.sl', 'w') as f:
                     f.write('#!/usr/bin/env bash')
                     f.write('\n')
                     f.write('\n')
@@ -41,18 +45,13 @@ for stash in stashs:
                     f.write('rm $outdir/slurm-*.out\n')
                     f.write('mkdir -p $outdir\n')
                     f.write('export file='+suite[2:]+'a.pm'+str(year)+month+'.pp\n')
-                    f.write('export stash='+str(stash)+'\n')
-                    f.write('export lbuser4=34001\n')
-                    f.write('mule-select /nesi/nobackup/niwa00013/williamsjh/nearline/niwa00013/williamsjh/cylc-run/'+suite+'/share/data/History_Data/$file $outdir/${stash}-$file --include lbuser4=${lbuser4}\n')
+                    f.write('export lbuser4='+str(rawstash).lstrip('0')+'\n')
+                    f.write('mule-select /nesi/nobackup/niwa00013/williamsjh/nearline/niwa00013/williamsjh/cylc-run/'+suite+'/share/data/History_Data/$file $outdir/${lbuser4}-$file --include lbuser4=${lbuser4}\n')
                     f.close()
 
-#syscom = 'for file in *suite*.slsbatch *'+suite+'*.sl'
-#print('now running...'+syscom)
+subproc ='for file in *'+suite+'*.sl;  do sbatch $file; done' 
 
-#os.system(syscom)
-
-
-subprocess.run('for file in *'+suite+'*.sl;  do sbatch $file; done', shell=True)
+subprocess.run(subproc, shell=True)
 
 
 
