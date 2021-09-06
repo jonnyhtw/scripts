@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import subprocess
 
 time = '24:00:00'
@@ -10,15 +11,13 @@ hint = 'nomultithread'
 nodes = '1'
 ntasks = '1'
 stashmodel = '01'
-rawstashs=['34001','03236','30207',] 
-#rawstashs=['03236'] 
-stashs = ['m01s34i001','m01s03i236']
-descriptions = ['O3-MMR','Temperature-at-1.5m','Geopotential-height-on-P-levs']
+rawstashs=np.array(['34001','03236','30207',]) 
+descriptions = np.array(['O3-MMR','Temperature-at-1.5m','Geopotential-height-on-P-levs'])
 suite = 'u-bn013'
-years = range(2015,2100)
+years = range(2015,2016)
 months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
 
-os.system('rm ./*.sl')
+os.system('rm ./*.{sl,out}')
 
 for rawstash in rawstashs:
 
@@ -33,6 +32,7 @@ for rawstash in rawstashs:
                     f.write('# DIRECTIVES:\n')
                     f.write('#SBATCH --time='+time+'\n')
                     f.write('#SBATCH --job-name='+job_name+'\n')
+                    f.write('#SBATCH --array='+str(firstyear)+'-'+str(lastyear)+'\n')
                     f.write('#SBATCH --partition='+partition+'\n')
                     f.write('#SBATCH --cpus-per-task='+cpus_per_task+'\n')
                     f.write('#SBATCH --account='+account+'\n')
@@ -42,11 +42,10 @@ for rawstash in rawstashs:
                     f.write('\n')
                     f.write('module load Mule\n')
                     f.write('export outdir=/nesi/project/niwa00013/williamsjh/NZESM/quick-access-data/'+suite+'/\n')
-                    f.write('rm $outdir/slurm-*.out\n')
                     f.write('mkdir -p $outdir\n')
                     f.write('export file='+suite[2:]+'a.pm'+str(year)+month+'.pp\n')
                     f.write('export lbuser4='+str(rawstash).lstrip('0')+'\n')
-                    f.write('mule-select /nesi/nobackup/niwa00013/williamsjh/nearline/niwa00013/williamsjh/cylc-run/'+suite+'/share/data/History_Data/$file $outdir/${lbuser4}-$file --include lbuser4=${lbuser4}\n')
+                    f.write('mule-select /nesi/nobackup/niwa00013/williamsjh/nearline/niwa00013/williamsjh/cylc-run/'+suite+'/share/data/History_Data/$file ${outdir}/STASH-CODE-'+rawstash+'_'+descriptions[np.where(rawstash == rawstashs)][0]+'_$file --include lbuser4=${lbuser4}\n')
                     f.close()
 
 subproc ='for file in *'+suite+'*.sl;  do sbatch $file; done' 
