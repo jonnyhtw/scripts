@@ -12,45 +12,19 @@ nodes = '1'
 ntasks = '1'
 stashmodel = '01'
 rawstashs=np.array(['34001','03236','30207',]) 
-descriptions = np.array(['O3-MMR','Temperature-at-1.5m','Geopotential-height-on-P-levs'])
+descriptions = np.array(['O3_MMR','Temperature_at_1.5m','Geopotential_height_on_P_levs'])
 suite = 'u-bn013'
 years = range(2015,2016)
 months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
 
-os.system('rm ./*.{sl,out}')
+for j in range(len(rawstashs)):
 
-for rawstash in rawstashs:
+    for i in range(len(months)):
 
-    for year in years:
+        mulecom = ' mule-select /nesi/nobackup/niwa00013/williamsjh/nearline/niwa00013/williamsjh/cylc-run/'+suite+'/share/data/History_Data/'+suite[2:]+'a.pm2015'+months[i]+'.pp /nesi/project/niwa00013/williamsjh/NZESM/quick-access-data/u-bn013/m'+stashmodel+'s'+rawstashs[j][0:2]+'i'+rawstashs[j][2:]+'-'+descriptions[j]+'-'+suite[2:]+'a.pm2015'+months[i]+'.pp --include lbuser4='+rawstashs[j]
 
-        for month in months:
+        os.system('module load Mule;'+  mulecom)
 
-            with open('slurm.file.'+suite+'.'+str(rawstash)+'.'+str(year)+'.'+month+'.sl', 'w') as f:
-                    f.write('#!/usr/bin/env bash')
-                    f.write('\n')
-                    f.write('\n')
-                    f.write('# DIRECTIVES:\n')
-                    f.write('#SBATCH --time='+time+'\n')
-                    f.write('#SBATCH --job-name='+job_name+'\n')
-                    f.write('#SBATCH --array='+str(firstyear)+'-'+str(lastyear)+'\n')
-                    f.write('#SBATCH --partition='+partition+'\n')
-                    f.write('#SBATCH --cpus-per-task='+cpus_per_task+'\n')
-                    f.write('#SBATCH --account='+account+'\n')
-                    f.write('#SBATCH --hint='+hint+'\n')
-                    f.write('#SBATCH --nodes='+nodes+'\n')
-                    f.write('#SBATCH --ntasks='+ntasks+'\n')
-                    f.write('\n')
-                    f.write('module load Mule\n')
-                    f.write('export outdir=/nesi/project/niwa00013/williamsjh/NZESM/quick-access-data/'+suite+'/\n')
-                    f.write('mkdir -p $outdir\n')
-                    f.write('export file='+suite[2:]+'a.pm'+str(year)+month+'.pp\n')
-                    f.write('export lbuser4='+str(rawstash).lstrip('0')+'\n')
-                    f.write('mule-select /nesi/nobackup/niwa00013/williamsjh/nearline/niwa00013/williamsjh/cylc-run/'+suite+'/share/data/History_Data/$file ${outdir}/STASH-CODE-'+rawstash+'_'+descriptions[np.where(rawstash == rawstashs)][0]+'_$file --include lbuser4=${lbuser4}\n')
-                    f.close()
-
-subproc ='for file in *'+suite+'*.sl;  do sbatch $file; done' 
-
-subprocess.run(subproc, shell=True)
 
 
 
