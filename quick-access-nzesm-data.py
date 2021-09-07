@@ -47,7 +47,3 @@ for j in range(len(rawstashs)):
         #remove pp files
         os.system('rm '+outdir+outfile)
 
-        
-
-
- 
