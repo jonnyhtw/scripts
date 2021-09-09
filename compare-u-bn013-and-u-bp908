@@ -1,0 +1,8 @@
+#!/usr/bin/env bash 
+
+rm foo bar
+
+ls u-bn013/ > foo
+
+ls u-bp908/ > bar
+
