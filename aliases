@@ -43,7 +43,7 @@ alias wtchsuite='watch "grep -ir atm_step */*/pe_output/*00|tail"'
 alias fcmdiff='fcm diff|less'
 # Force tmux to use 256 colours, tip from
 # http://askubuntu.com/questions/125526/vim-in-tmux-display-wrong-colors
-alias tmux='tmux -2'
+#alias tmux='tmux -2'
 # Clear terminal before running fcm commands. This is particularly useful for
 # 'fcm diff'. 
 alias cfcm='clear ; fcm'
