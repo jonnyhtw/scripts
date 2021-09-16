@@ -14,7 +14,7 @@
 
 module load Mule
 
-export suite=u-bl658
+export suite=u-bx226
 
 /opt/nesi/CS500_centos7_skl/Anaconda2/2019.10-GCC-7.1.0/bin/python -u quick-access-nzesm-data.py --year=$SLURM_ARRAY_TASK_ID --suite=$suite
 
