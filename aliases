@@ -82,3 +82,5 @@ alias clim01='ssh -AY w-clim01'
 alias miniconda3='export PATH=/nesi/project/niwa00013/williamsjh/miniconda3/bin:$PATH'
 #go back to system python 
 alias syspy='export PATH=/usr/bin:$PATH'
+#vi to vim
+alias vi='vim'
