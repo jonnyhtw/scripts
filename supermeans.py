@@ -125,6 +125,7 @@ for time in times:
     foo=copy.copy(vars)
 
     for i in range(len(vars)):
+        print(i,' out of ',len(vars),' vars')
         foo[i] = vars[i].collapsed('time',iris.analysis.MEAN)
 
     iris.save(foo,out_dir+'/all-vars-'+runid+'a.m'+supermeanlabel+str(years[-1])+time+'.pp')

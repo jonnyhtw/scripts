@@ -2,8 +2,8 @@
 
 # DIRECTIVES:
 #SBATCH --time=24:00:00
-##SBATCH --error=supermeans.err
-##SBATCH --out=supermeans.out
+#SBATCH --error=supermeans-u-bp907.err
+#SBATCH --out=supermeans-u-bp907.out
 #SBATCH --job-name=supermeans
 #SBATCH --partition=nesi_prepost
 #SBATCH --cpus-per-task=1
@@ -13,11 +13,12 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 
-export runid=bx226
+export runid=bp907
 export nyears=20
-export firstyear=1989
+export firstyear=2081
 export in_dir=/nesi/project/niwa00013/williamsjh/MASS/u-$runid/apm.pp
 export in_dir=/home/williamsjh/cylc-run/u-$runid/share/data/History_Data
+export in_dir=/nesi/nobackup/niwa00013/williamsjh/nearline/niwa00013/williamsjh/cylc-run/u-bp907/share/data/History_Data
 
 echo $runid 'for ' $nyears ' years starting in' $firstyear '!'
 

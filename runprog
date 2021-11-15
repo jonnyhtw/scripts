@@ -15,7 +15,7 @@ if [ -d "$dir/pe_output" ]; then
 #    echo '---------------------------------'
     echo  $(basename "$dir")$i
       # Control will enter here if $DIRECTORY exists.
-    grep -srh 'Atm_Step: Timestep' $dir/pe_output/*|tail -1
+    grep -sarh 'Atm_Step: Timestep' $dir/pe_output/*0|tail -1
 fi
 
 done

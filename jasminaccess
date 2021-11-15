@@ -2,5 +2,4 @@
 
 exec ssh-agent $SHELL
 ssh-add ~/.ssh/id_rsa_jasmin
-# ssh -AY jasmin-xfer1.ceda.ac.uk
-# ssh -X mass-cli1.ceda.ac.uk
+ssh -AY login2.jasmin.ac.uk
