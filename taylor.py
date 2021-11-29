@@ -1,40 +1,39 @@
-#https://pythonforundergradengineers.com/creating-taylor-series-functions-with-python.html
+#adapted from https://pythonforundergradengineers.com/creating-taylor-series-functions-with-python.html
 
 import math
 
-def func_cos(x, n):
-    cos_approx = 0
+def func_sinxoverx(x, n):
+    sinxoverx_approx = 0
     for i in range(n):
         coef = (-1)**i
-        num = x**(2*i)
-        denom = math.factorial(2*i)
-        cos_approx += ( coef ) * ( (num)/(denom) )
+        num = x**(2*i+1)
+        denom = math.factorial(2*i+1)*x
+        sinxoverx_approx += ( coef ) * ( (num)/(denom) )
     
-    return cos_approx
+    return sinxoverx_approx
 
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-# if using a Jupyter notebook, include:
-#%matplotlib inline
 
-angles = np.arange(-2*np.pi,2*np.pi,0.1)
-p_cos = np.cos(angles)
+angles = np.arange(-2*np.pi,2*np.pi,0.1)*2
+p_sinxoverx = np.sin(angles)/angles
 
-fig, ax = plt.subplots()
-ax.plot(angles,p_cos)
+ax = plt.subplot(1,1,1)
+ax.plot(angles,p_sinxoverx, label = 'sin(x)/x')
 
-# add lines for between 1 and 6 terms in the Taylor Series
-for i in range(1,6):
-    t_cos = [func_cos(angle,i) for angle in angles]
-    ax.plot(angles,t_cos)
+nterms = np.arange(2,7)*2
 
-ax.set_ylim([-7,4])
+for i in nterms:
+    t_sinxoverx = [func_sinxoverx(angle,i) for angle in angles]
+    ax.plot(angles,t_sinxoverx,'-o',fillstyle = 'none',label = str(i), alpha = i/np.max(nterms))
 
-# set up legend
-legend_lst = ['cos() function']
-for i in range(1,6):
-    legend_lst.append(f'Taylor Series - {i} terms')
-ax.legend(legend_lst, loc=3)
+plt.title('sin(x)/x and its taylor expansion to n terms')
+
+plt.grid()
+
+ax.set_ylim([-1,1])
+
+plt.legend()
 
 plt.show()
