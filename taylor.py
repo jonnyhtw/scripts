@@ -22,18 +22,26 @@ p_sinxoverx = np.sin(angles)/angles
 ax = plt.subplot(1,1,1)
 ax.plot(angles,p_sinxoverx, label = 'sin(x)/x')
 
-nterms = np.arange(2,14)
+maxterms = 20
+
+nterms = np.arange(maxterms)
 
 for i in nterms:
     t_sinxoverx = [func_sinxoverx(angle,i) for angle in angles]
     ax.plot(angles,t_sinxoverx,'-o',fillstyle = 'none',label = str(i), alpha = i/np.max(nterms))
 
-plt.title('sin(x)/x and its taylor expansion to n terms')
+plt.title('sin(x)/x and its taylor expansion to '+str(maxterms)+' terms')
 
 plt.grid()
 
 ax.set_ylim([-1,1])
 
-plt.legend()
+#plt.legend()
+
+import matplotlib.ticker as ticker
+
+
+ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%g'))
+
 
 plt.show()
