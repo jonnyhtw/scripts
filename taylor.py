@@ -22,7 +22,7 @@ p_sinxoverx = np.sin(angles)/angles
 ax = plt.subplot(1,1,1)
 ax.plot(angles,p_sinxoverx, label = 'sin(x)/x')
 
-nterms = np.arange(2,7)*2
+nterms = np.arange(2,14)
 
 for i in nterms:
     t_sinxoverx = [func_sinxoverx(angle,i) for angle in angles]
