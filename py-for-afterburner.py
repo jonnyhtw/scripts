@@ -69,6 +69,14 @@ print('the suite ID is ',suite)
 
 user = 'williamsjh'
 
+use_pm = True
+
+if use_pm == True:
+    stream = 'pm'
+else:
+    stream = 'p5'
+
+
 #base = '/home/'+user+'/cylc-run/'+suite+'/share/data/History_Data/'
 #base = 
 
@@ -104,7 +112,7 @@ if generate_monthly_means == True:
     else:
        print('interim-files-for-climate-meaning directory already exists')
 
-    os.system('for file in *a.pm'+str(year-1)+'dec*.pp *a.pm'+str(year)+'{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}*.pp   ;do echo $file ; mule-select $file interim-files-for-climate-meaning/$file --include lbtim=122,24022 --exclude lbuser4=30464,30465,30466,30467; done')
+    os.system('for file in *a.'+stream+str(year-1)+'dec*.pp *a.'+stream+str(year)+'{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}*.pp   ;do echo $file ; mule-select $file interim-files-for-climate-meaning/$file --include lbtim=122,24022 --exclude lbuser4=30464,30465,30466,30467; done')
 
 else:
     pass
@@ -118,17 +126,17 @@ for j in range(len(s_or_y)):
         os.chdir(base+'/interim-files-for-climate-meaning/')
 
         if j == 0:#ann
-            files=list(braceexpand('*pm'+'{'+str(year-1)+'dec'+','+str(year)+
+            files=list(braceexpand('*'+stream+'{'+str(year-1)+'dec'+','+str(year)+
                                    '{jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov}}*.pp'))
         if j == 1:#djf
-            files=list(braceexpand('*pm'+'{'+str(year-1)+'dec'+','+str(year)+
+            files=list(braceexpand('*'+stream+'{'+str(year-1)+'dec'+','+str(year)+
                                    '{jan,feb}}*.pp'))
         if j == 2:#mam
-            files=list(braceexpand('*pm'+str(year)+'{mar,apr,may}*.pp'))
+            files=list(braceexpand('*'+stream+str(year)+'{mar,apr,may}*.pp'))
         if j == 3:#jja
-            files=list(braceexpand('*pm'+str(year)+'{jun,jul,aug}*.pp'))
+            files=list(braceexpand('*'+stream+str(year)+'{jun,jul,aug}*.pp'))
         if j == 4:#son
-            files=list(braceexpand('*pm'+str(year)+'{sep,oct,nov}*.pp'))
+            files=list(braceexpand('*'+stream+str(year)+'{sep,oct,nov}*.pp'))
 
         print('loading all the cubes for',year,suffices[j])
 
