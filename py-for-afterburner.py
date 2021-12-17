@@ -90,7 +90,7 @@ pool = multiprocessing.Pool(int(os.environ.get('NPROC',1)))
 
 
 s_or_y = ['y','s','s','s','s']
-suffices = ['ann.pp','djf.pp','mam.pp','jja.pp','son.pp']
+suffices = ['1201.pp','djf.pp','mam.pp','jja.pp','son.pp']
 
 stash = iris.AttributeConstraint(STASH='m01s00i024')
 
