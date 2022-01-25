@@ -86,3 +86,4 @@ alias syspy='export PATH=/usr/bin:$PATH'
 alias vi='vim'
 #most recently edited file
 alias latest='vim `ls -rt | tail -1`'
+alias taillatest='tail -f  `ls -t | head -1`'
