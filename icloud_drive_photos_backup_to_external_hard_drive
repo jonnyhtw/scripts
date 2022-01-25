@@ -1,0 +1,11 @@
+#!/usr/bin/env bash 
+
+cd /Volumes/Data/Pictures/
+
+#https://docs.oracle.com/cd/E19857-01/817-6248-10/crtime.html
+mkdir $(date +'%h_%e_%Y_%H_%M_%S')
+
+cd $_
+
+rsync -rvLP --remove-source-files /Users/Jonny/Library/Mobile\ Documents/com\~apple\~CloudDocs/* .
+
