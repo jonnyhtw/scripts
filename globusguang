@@ -1,20 +1,13 @@
 #!/usr/bin/env bash
 
-
-#globus endpoint activate --web ee3aa1a0-7e4c-11e6-afc4-22000b92c261
-
 export centre=MOHC
 export model=UKESM1-0-LL
-export var=o3
+export var=ta
 
-mkdir -p ${centre}-${model}-${var}
+rm available-files-${centre}-${model}-${var}
 
-
-#for ssp in 126 245 370 585 ; do echo    /esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp${ssp}; globus ls  $globus_llnl:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp${ssp}/; done
-
-#for realisation in {1..19}; do for ssp in 126 245 370 585  ; do for file in $(globus ls $globus_llnl:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp${ssp}/r${realisation}i1p1f2/Amon/${var}/gn/latest/); do echo $file ; done ; done;done
-
-#for realisation in {1..19}; do for ssp in 126 245 370 585  ; do for file in $(globus ls $globus_llnl:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp${ssp}/r${realisation}i1p1f2/Amon/${var}/gn/latest/); do echo $file ; globus transfer $globus_llnl:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp${ssp}/r${realisation}i1p1f2/Amon/${var}/gn/latest/$file $globus_nesi:$PWD/${centre}-${model}-${var}/$file;done; done;done
+#for forcing in 2 ;do for realisation in {1..19}; do for ssp in 126 245 370 585; do for file in $(globus ls ${globus_llnl}:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp$ssp/r${realisation}i1p1f${forcing}/Amon/${var}/gn/latest/); do echo $file ; done; done; done; done
 
 
-for realisation in {1..19}; do for ssp in 126 245 370 585; do for file in $(globus ls $globus_llnl:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp$ssp/r${realisation}i1p1f2/Amon/${var}/gn/latest/); do echo $file ; globus transfer $globus_llnl:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp$ssp/r${realisation}i1p1f2/Amon/${var}/gn/latest/$file $globus_nesi:~/$file; done; done; done
+
+for forcing in 2 ;do for realisation in {1..19}; do for ssp in 126 245 370 585; do for file in $(globus ls ${globus_llnl}:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp$ssp/r${realisation}i1p1f${forcing}/Amon/${var}/gn/latest/);do echo -ne "/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp$ssp/r${realisation}i1p1f${forcing}/Amon/${var}/gn/latest/$file $PWD/$file\n" available-files-${centre}-${model}-${var}; done; done; done; done
