@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
 
-export centre=MOHC
-export model=UKESM1-0-LL
-export var=ta
+export centre=NCAR
+export model=CESM2-WACCM
+export var=zg
+export forcing=1
+export grid=gn
+export mean=Amon
+export initialisation=1
+export physics=1
 
-rm available-files-${centre}-${model}-${var}
+export outfile=available-files-${centre}-${model}-${var}-i${initialisation}p${physics}f${forcing}
 
-#for forcing in 2 ;do for realisation in {1..19}; do for ssp in 126 245 370 585; do for file in $(globus ls ${globus_llnl}:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp$ssp/r${realisation}i1p1f${forcing}/Amon/${var}/gn/latest/); do echo $file ; done; done; done; done
+rm $outfile 
+
+for realisation in {1..19}; do for ssp in 126 245 370 585; do for file in $(globus ls ${globus_llnl}:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp$ssp/r${realisation}i${initialisation}p${physics}f${forcing}/${mean}/${var}/${grid}/latest/);do echo -ne "/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp$ssp/r${realisation}i${initialisation}p${physics}f${forcing}/${mean}/${var}/${grid}/latest/$file $PWD/$file\n" >> $outfile; done; done; done
+
+#do batch transfer with... 
+#globus transfer $globus_llnl $globus_nesi --batch  ./available-files-MOHC-UKESM1-0-LL-zg
 
 
-
-for forcing in 2 ;do for realisation in {1..19}; do for ssp in 126 245 370 585; do for file in $(globus ls ${globus_llnl}:/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp$ssp/r${realisation}i1p1f${forcing}/Amon/${var}/gn/latest/);do echo -ne "/esg_cmip6/CMIP6/ScenarioMIP/${centre}/${model}/ssp$ssp/r${realisation}i1p1f${forcing}/Amon/${var}/gn/latest/$file $PWD/$file\n" available-files-${centre}-${model}-${var}; done; done; done; done
