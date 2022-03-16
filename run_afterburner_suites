@@ -5,7 +5,10 @@
 echo 'the date is ...'
 date
 
+
 for suite in  u-bu205
+
+    mkdir -p /nesi/project/nesi00442/$USER/afterburner/caches/streamsplit/${suite}/apy/
 
     do
 
