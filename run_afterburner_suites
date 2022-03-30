@@ -5,13 +5,11 @@
 echo 'the date is ...'
 date
 
+export project=niwa00013
 
-for suite in  u-bu205
+for suite in u-ck290
 
     do
-
-    mkdir -p /nesi/project/nesi00442/$USER/afterburner/caches/streamsplit/${suite}/apy/
-
 
         cd ~/roses/afterburner/$suite
         set-hpc-project
