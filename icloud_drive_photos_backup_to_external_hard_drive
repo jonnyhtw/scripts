@@ -7,5 +7,5 @@ mkdir $(date +'%h_%e_%Y_%H_%M_%S')
 
 cd $_
 
-rsync -rvLP --remove-source-files /Users/Jonny/Library/Mobile\ Documents/com\~apple\~CloudDocs/* .
+rsync -vLP --remove-source-files /Users/Jonny/Library/Mobile\ Documents/com\~apple\~CloudDocs/* .
 

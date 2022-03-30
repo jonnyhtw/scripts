@@ -1,0 +1,29 @@
+source ~/.mutt/.muttrc-private
+bind index G imap-fetch-mail
+set mark_old=no
+
+set sidebar_visible = no
+source ~/scripts/.muttrc-colours
+auto_view text/html
+set mail_check=300
+set timeout=30
+set editor="vim"
+set header_cache="~/.mutt/cache/bodies"
+set sort = reverse-threads
+set sort = reverse-date-received
+set mailcap_path = ~/scripts/.mailcap
+set pager_index_lines=10
+set alias_file=~/.mutt/aliases # where I keep my aliases
+source $alias_file
+source ~/.mutt/sidebar
+
+auto_view text/x-vcard text/html text/enriched
+set smtp_authenticators = "login"
+
+
+macro index A \
+    "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
+    "mark all new as read"
+
+set index_format="%F %T"
+set index_format="%Z %{%Y %b %e  %H:%M} %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
