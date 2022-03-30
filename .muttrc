@@ -51,7 +51,7 @@ set sidebar_visible=yes
 
 # which mailboxes to list in the sidebar,
 # you can add your Labels in Gmail to the Sidebar.
-mailboxes = INBOX = "+[Gmail]/Sent Mail"
+mailboxes = "+[Gmail]/INBOX"= "+[Gmail]/Sent Mail"
 
 # color of folders with new mail
 color sidebar_new yellow default
