@@ -19,5 +19,4 @@ set index_format="%F %T"
 set index_format="%Z %{%Y %b %e  %H:%M} %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
 set sidebar_width=24
 set sidebar_visible=yes
-#mailboxes = $spoolfile "+[Gmail]/Sent Mail" "+[Gmail]/Drafts"
 set imap_check_subscribed
