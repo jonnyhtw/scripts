@@ -51,26 +51,26 @@ set sidebar_visible=yes
 
 # which mailboxes to list in the sidebar,
 # you can add your Labels in Gmail to the Sidebar.
-mailboxes =All\ Mail =INBOX =Drafts =Sent\ Mail =Trash
+mailboxes = INBOX = "+[Gmail]/Sent Mail"
 
 # color of folders with new mail
 color sidebar_new yellow default
 
 #Sidebar Navigation
-bind index \CP sidebar-prev
-bind index \CN sidebar-next
-bind index \CO sidebar-open
-bind pager \CP sidebar-prev
-bind pager \CN sidebar-next
-bind pager \CO sidebar-open
-
-# b toggles sidebar visibility
-macro index b 'toggle sidebar_visible'
-macro pager b 'toggle sidebar_visible'
-
-# Remap bounce-message function to "B"
-bind index B bounce-message
-
+#bind index \CP sidebar-prev
+#bind index \CN sidebar-next
+#bind index \CO sidebar-open
+#bind pager \CP sidebar-prev
+#bind pager \CN sidebar-next
+#bind pager \CO sidebar-open
+#
+## b toggles sidebar visibility
+#macro index b 'toggle sidebar_visible'
+#macro pager b 'toggle sidebar_visible'
+#
+## Remap bounce-message function to "B"
+#bind index B bounce-message
+#
 #make mutt colorful!
 #color attachment magenta default
 #color error brightred default
@@ -84,4 +84,4 @@ bind index B bounce-message
 #color signature red default
 #color status brightwhite default
 #color tilde magenta default
-color tree magenta default
+#color tree magenta default
