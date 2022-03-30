@@ -1,7 +1,6 @@
 source ~/.mutt/.muttrc-private
 bind index G imap-fetch-mail
 set mark_old=no
-
 source ~/scripts/.muttrc-colours
 auto_view text/html
 set mail_check=300
@@ -14,74 +13,11 @@ set mailcap_path = ~/scripts/.mailcap
 set pager_index_lines=10
 set alias_file=~/.mutt/aliases # where I keep my aliases
 source $alias_file
-
 auto_view text/x-vcard text/html text/enriched
 set smtp_authenticators = "login"
-
-
-macro index A \
-    "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
-    "mark all new as read"
-
 set index_format="%F %T"
 set index_format="%Z %{%Y %b %e  %H:%M} %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
-
-# Header related stuff
-#ignore "Authentication-Results:"
-#ignore "DomainKey-Signature:"
-#ignore "DKIM-Signature:"
-#hdr_order Date From To Cc
-#
-#ignore *
-#unignore from: date subject to cc
-#unignore x-mailing-list: posted-to:
-#unignore x-mailer:
-
-# Sorting, Markers etc.
-#set markers=no # don't put '+' at the beginning of wrapped lines
-#set pager_index_lines= 5 # how large is the index window?
-#set sort = 'threads'
-#set sort_aux = 'last-date-received'
-#set forward_format = "Fw: %s"
-# set up the sidebar
 set sidebar_width=24
 set sidebar_visible=yes
-#set sidebar_delim='|'
-#set sidebar_sort=no
-
-# which mailboxes to list in the sidebar,
-# you can add your Labels in Gmail to the Sidebar.
-mailboxes = "+[Gmail]/INBOX"= "+[Gmail]/Sent Mail"
-
-# color of folders with new mail
-color sidebar_new yellow default
-
-#Sidebar Navigation
-#bind index \CP sidebar-prev
-#bind index \CN sidebar-next
-#bind index \CO sidebar-open
-#bind pager \CP sidebar-prev
-#bind pager \CN sidebar-next
-#bind pager \CO sidebar-open
-#
-## b toggles sidebar visibility
-#macro index b 'toggle sidebar_visible'
-#macro pager b 'toggle sidebar_visible'
-#
-## Remap bounce-message function to "B"
-#bind index B bounce-message
-#
-#make mutt colorful!
-#color attachment magenta default
-#color error brightred default
-#color hdrdefault red default
-#color indicator red default
-#color markers cyan default
-#color message cyan default
-#color normal default default
-#color quoted brightblue default
-#color search default green
-#color signature red default
-#color status brightwhite default
-#color tilde magenta default
-#color tree magenta default
+#mailboxes = $spoolfile "+[Gmail]/Sent Mail" "+[Gmail]/Drafts"
+set imap_check_subscribed
