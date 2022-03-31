@@ -15,8 +15,11 @@ set alias_file=~/.mutt/aliases # where I keep my aliases
 source $alias_file
 auto_view text/x-vcard text/html text/enriched
 set smtp_authenticators = "login"
-set index_format="%F %T"
-set index_format="%Z %{%Y %b %e  %H:%M} %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
+set index_format="%Z %D %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
+set imap_check_subscribed
 set sidebar_width=24
 set sidebar_visible=yes
-set imap_check_subscribed
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
+
