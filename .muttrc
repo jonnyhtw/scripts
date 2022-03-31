@@ -22,4 +22,4 @@ set sidebar_visible=yes
 bind index,pager \CP sidebar-prev
 bind index,pager \CN sidebar-next
 bind index,pager \CO sidebar-open
-
+set date_format = "%F %H:%M %Z"
