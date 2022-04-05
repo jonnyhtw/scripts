@@ -3,8 +3,8 @@ bind index G imap-fetch-mail
 set mark_old=no
 source ~/scripts/.muttrc-colours
 auto_view text/html
-set mail_check=300
-set timeout=30
+set mail_check=5
+set timeout=5
 set editor="vim"
 set header_cache="~/.mutt/cache/bodies"
 set sort = reverse-threads
@@ -18,8 +18,11 @@ set smtp_authenticators = "login"
 set index_format="%Z %D %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
 set imap_check_subscribed
 set sidebar_width=24
+set sidebar_divider_char='|'
 set sidebar_visible=yes
 bind index,pager \CP sidebar-prev
 bind index,pager \CN sidebar-next
 bind index,pager \CO sidebar-open
 set date_format = "%F %H:%M %Z"
+bind pager <up> previous-line
+bind pager <down> next-line
