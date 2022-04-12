@@ -1,0 +1,7 @@
+#!/usr/bin/env bash 
+
+echo 'pending jobs...'
+squeue -u $USER -h -t pending -r | wc -l
+echo 'running jobs'
+squeue -u $USER -h -t running -r | wc -l
+
