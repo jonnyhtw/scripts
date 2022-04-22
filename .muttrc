@@ -10,7 +10,7 @@ set header_cache="~/.mutt/cache/bodies"
 set sort = reverse-threads
 set sort = reverse-date-received
 set mailcap_path = ~/scripts/.mailcap
-set pager_index_lines=10
+set pager_index_lines=15
 set alias_file=~/.mutt/aliases # where I keep my aliases
 source $alias_file
 auto_view text/x-vcard text/html text/enriched
