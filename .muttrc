@@ -1,6 +1,6 @@
 source ~/.mutt/.muttrc-private
 bind index G imap-fetch-mail
-set mark_old=no
+set mark_old=yes
 source ~/scripts/.muttrc-colours
 auto_view text/html
 set mail_check=5
