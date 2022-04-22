@@ -1,42 +1,40 @@
-# COLOURS
-color attachment brightmagenta black  
-color error brightwhite red   # errors yell at you in red
-color hdrdefault red black   # headers
-color indicator brightyellow magenta # currently selected message
-color markers brightcyan black  # the + for wrapped pager lines
-color message brightcyan black  # informational messages, not mail
-color normal white black    # plain text
-color quoted green black  # quoted text
-color search brightgreen black # hilite search patterns in the pager
-color signature red black    # signature (after "-- ") is red 
-color status brightyellow blue # status bar is yellow *on blue*   
-color tilde blue black  # ~'s after message body
-color tree red black    # thread tree in index menu is magenta
-color signature brightred black
-color underline yellow black
-color header cyan black ^(From|Subject): # Important headers
-color body magenta black "(ftp|http)://[^ ]+"  # picks up URLs
-color body magenta black [-a-z_0-9.]+@[-a-z_0-9.]+ 
+color hdrdefault yellow black
+color quoted brightred black
+color signature magenta black
+color indicator brightwhite red
+color attachment black green
+color error red black
+color message white black
+color search brightwhite magenta
+color status brightyellow blue
+color tree red black
+color normal white black
+color tilde green black
+color bold brightyellow black
+color markers red black
+color header yellow black ".*:"
+color header brightwhite black "^(From|Subject):"
+mono header bold "^(From|Subject):"
+color index brightblue black ~N
+color index red black ~F
+color index black green ~T
+color index brightwhite black ~D
+mono index bold ~N
+mono index bold ~F
+mono index bold ~T
+mono index bold ~D
 
-#  Coloring quoted text - coloring the first 7 levels:
-color quoted    cyan black
-color quoted1   yellow black
-color quoted2   red black
-color quoted3   green black
-color quoted4   cyan black
-color quoted5   yellow black
-color quoted6   red black
-color quoted7   green black
+# Various smilies and the like
+color body brightgreen black "<[Ee]?[Bb]?[Gg]>"
+color body brightgreen black "<[Bb][Gg]>"
+color body brightgreen black " [;:]-*[)>(<|]"
 
-#  Colorize smileys:  :-)  ;-)  :-/  :-(
-color body  yellow black "[;:]-[)/(|]"
-color body  yellow black "[;:][)/(|]"
-color body  green black "[[:alpha:]]\+://[^ ]*"
+# URLs
+color body brightblue black "(http|ftp|news|telnet|finger)://[^ \”\t\r\n]*"
+color body brightblue black "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+mono body bold "(http|ftp|news|telnet|finger)://[^ \”\t\r\n]*"
+mono body bold "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
 
-color index brightyellow black ~N      # New
-color index yellow black ~O              # Old
-color index magenta black ~F
-color index blue black ~T
-color index red black ~D
-
-
+# email addresses
+color body brightblue black “[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+”
+mono body bold “[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+”
