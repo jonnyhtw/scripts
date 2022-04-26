@@ -87,3 +87,5 @@ alias vi='vim'
 #most recently edited file
 alias vimlatest='vim `ls -rt | tail -1`'
 alias taillatest='tail `ls -rt | tail -1`'
+#go to mac pictures folder
+alias pics='cd /Volumes/Data/Pictures'
