@@ -3,7 +3,7 @@ import cdsapi
 c = cdsapi.Client()
 
 c.retrieve(
-    'reanalysis-era5-single-levels',
+    'reanalysis-era5-single-levels-preliminary-back-extension',
     {
         'product_type': 'reanalysis',
         'variable': 'mean_sea_level_pressure',
