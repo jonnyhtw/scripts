@@ -23,3 +23,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+#allows ctrl+O to work in mutt when opening sidebar mailbox
+stty flush undef

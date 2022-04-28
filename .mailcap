@@ -4,5 +4,5 @@ image/png; open -a Preview %s; needsterminal; description=PNG Image; nametemplat
 image/jpeg; open -a Preview %s; needsterminal; description=JPEG Image; nametemplate=%s.jpg
 text/text; vim '%s'; needsterminal; description=Text Text; nametemplate=%s.txt
 application/pdf; open -a Preview '%s' ; copiousoutput
-text/html;                      lynx -dump %s; nametemplate=%s.html; copiousoutput
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
 
