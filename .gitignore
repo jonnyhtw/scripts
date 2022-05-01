@@ -1,4 +1,5 @@
 *.p
+*.swo
 *.err
 *.out
 *.swp
