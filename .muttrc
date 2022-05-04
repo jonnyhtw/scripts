@@ -8,9 +8,8 @@ set timeout=5
 set editor="vim"
 set header_cache="~/.mutt/cache/bodies"
 set sort = reverse-threads
-set sort = reverse-date-received
 set mailcap_path = ~/scripts/.mailcap
-set pager_index_lines=15
+set pager_index_lines=10
 set alias_file=~/.mutt/aliases # where I keep my aliases
 source $alias_file
 auto_view text/x-vcard text/html text/enriched
@@ -26,3 +25,6 @@ bind index,pager \CO sidebar-open
 set date_format = "%F %H:%M %Z"
 bind pager <up> previous-line
 bind pager <down> next-line
+set mime_forward=yes
+set sort = reverse-threads
+set sort_aux = last-date

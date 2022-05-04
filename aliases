@@ -89,3 +89,7 @@ alias vimlatest='vim `ls -rt | tail -1`'
 alias taillatest='tail `ls -rt | tail -1`'
 #go to mac pictures folder
 alias pics='cd /Volumes/Data/Pictures'
+# mutt in japamese
+#alias mutt='export LANG=ja_JP; mutt'
+# mutt in koream
+#alias mutt='export LANG=ko_KR; mutt'
