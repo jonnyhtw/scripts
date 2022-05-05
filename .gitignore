@@ -1,6 +1,7 @@
 *.p
 *.swo
 *foo
+*bar
 *.err
 *.out
 *.swp
