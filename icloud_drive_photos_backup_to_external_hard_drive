@@ -3,9 +3,11 @@
 cd /Volumes/Data/Pictures/
 
 #https://docs.oracle.com/cd/E19857-01/817-6248-10/crtime.html
-mkdir $(date +'%h_%e_%Y_%H_%M_%S')
+export date=$(date +'%h_%e_%Y_%H_%M_%S')
+mkdir $date 
+echo 'created '$PWD/$date
 
-cd $_
+cd $date
 
 rsync -vLP --remove-source-files /Users/Jonny/Library/Mobile\ Documents/com\~apple\~CloudDocs/* .|python ~/scripts/rsyncprogress.py
 
