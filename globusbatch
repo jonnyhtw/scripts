@@ -13,6 +13,8 @@ cd /home/$userid/cylc-run/$suite/share/data/History_Data/
 
 echo 'I am now here ->' $PWD
 
+echo $USER
+
 rm in.txt ; for file in *a.${stream}*.pp; do echo $file ;  echo -ne "$file $file\n" >> in.txt ; done
 
 export destination=/gws/nopw/j04/aerchemmip_vol3/data/$suite/a$stream/
