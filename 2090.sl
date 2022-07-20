@@ -10,3 +10,5 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 
+cd /nesi/nobackup/niwa00013/williamsjh/nearline/niwa00013/williamsjh/cylc-run/u-bp908/share/data/History_Data
+tar -xvf bp908a.2090.tar \*a.{p{c,8}\*.pp,pr\*}
