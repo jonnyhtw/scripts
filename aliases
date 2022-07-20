@@ -93,3 +93,5 @@ alias pics='cd /Volumes/Data/Pictures'
 #alias mutt='export LANG=ja_JP; mutt'
 # mutt in koream
 #alias mutt='export LANG=ko_KR; mutt'
+#run ~/.bashrc
+alias runbash='. ~/.bashrc'
