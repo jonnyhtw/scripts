@@ -68,9 +68,9 @@ export PS1="$HOSTNAME|\d|\t|\W> "
 #export PS1="> "
 #PS1='\[\e[0;32m\u@\w/:\[\e[m '
 # Update contents of directory every 2s
-alias wtch='watch "ls -lta"'
+alias wtch='cd . ; watch "ls -lta"'
 # Update contents of directory every 2s
-alias wtchh='watch "ls -ltha"'
+alias wtchh='cd .; watch "ls -ltha"'
 # go to my nobackup folder
 alias nobackup='cd /nesi/nobackup/niwa00013/williamsjh'
 # alias 'here' for the name of the current dir you're in. This is then accessed
@@ -93,3 +93,5 @@ alias pics='cd /Volumes/Data/Pictures'
 #alias mutt='export LANG=ja_JP; mutt'
 # mutt in koream
 #alias mutt='export LANG=ko_KR; mutt'
+#run ~/.bashrc
+alias runbash='. ~/.bashrc'

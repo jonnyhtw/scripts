@@ -1,0 +1,3 @@
+#!/bin/bash
+watch 'squeue --Format=jobid:20,name:45,username:12,statecompact:5,timeused:10 -u $USER'
+
