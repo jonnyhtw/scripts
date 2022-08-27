@@ -1,0 +1,6 @@
+#https://docs.oracle.com/cd/E19857-01/817-6248-10/crtime.html
+export date=$(date +'%h_%e_%Y_%H_%M_%S')
+mkdir $date 
+echo 'created '$PWD/$date
+cd $date
+
