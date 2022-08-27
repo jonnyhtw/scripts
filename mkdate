@@ -2,5 +2,4 @@
 export date=$(date +'%h_%e_%Y_%H_%M_%S')
 mkdir $date 
 echo 'created '$PWD/$date
-cd $date
 
