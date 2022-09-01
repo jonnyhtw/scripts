@@ -2,7 +2,9 @@ import matplotlib.pyplot as plt
 import iris
 import numpy as np
 
-all_data = iris.load('/scale_wlg_nobackup/filesets/nobackup/niwa00013/williamsjh/nearline/niwa00013/williamsjh/cylc-run/u-bl658/share/data/History_Data/nzwam/temp*197101*.pp')
+plt.ion()
+
+cubes = iris.load('/scale_wlg_nobackup/filesets/nobackup/niwa00013/williamsjh/nearline/niwa00013/williamsjh/cylc-run/u-bl658/share/data/History_Data/nzwam/temp*197101*.pp')
 
 all_data = []
 
