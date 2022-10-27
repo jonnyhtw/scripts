@@ -1,0 +1,11 @@
+#!/usr/bin/env bash 
+
+#find-missing $variable $year 
+
+file=*${1}*${2}*
+
+if [ -f $file ]; then
+    true
+else
+    echo "file $file does not exist"
+fi
