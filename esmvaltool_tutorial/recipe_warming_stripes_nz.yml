@@ -36,5 +36,5 @@ diagnostics:
         preprocessor: anomalies_nz
     scripts:
       warming_stripes_script:
-        script: ~/esmvaltool_tutorial/warming_stripes.py
+        script: ~/scripts/esmvaltool_tutorial/warming_stripes_nz.py
         colormap: 'bwr'
