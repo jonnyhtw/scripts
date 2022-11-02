@@ -35,3 +35,4 @@ macro index AN \
 macro index AO \
     "<tag-pattern>~O<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
     "mark all new as read"
+set copy = no
