@@ -7,10 +7,6 @@ documentation:
   authors:
     - righi_mattia
 
-diagnostics:
-  dummy_diagnostic_1:
-    scripts: null
-
 datasets:
   - {dataset: BCC-ESM1, project: CMIP6, mip: Amon, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   - {dataset: UKESM1-0-LL, project: CMIP6, mip: Amon, exp: historical,
@@ -29,34 +25,11 @@ preprocessors:
         end_year: 2010
         end_month: 12
         end_day: 31
-      standardize: fa
+    standardize: false 
     multi_model_statistics:  
       span: overlap
       statistics: [mean, median]
       keep_input_datasets: true
-  select_january:
-    extract_month:
-      month: 1
-
-  annual_mean_amsterdam:
-    extract_point:
-      latitude: 52.379189
-      longitude: 4.899431
-      scheme: linear
-    annual_statistics:
-      operator: mean
-    multi_model_statistics:
-      statistics:
-        - mean
-      span: overlap
-
-  annual_mean_global:
-    area_statistics:
-      operator: mean
-      fx_variables:
-        areacella:
-    annual_statistics:
-      operator: mean
 
 diagnostics:
   diagnostic_warming_stripes:
@@ -69,46 +42,3 @@ diagnostics:
       warming_stripes_script:
         script: ~/scripts/esmvaltool_tutorial/warming_stripes.py
         colormap: 'bwr'
-  map:
-    description: Global map of temperature in January 2000.
-    themes:
-      - phys
-    realms:
-      - atmos
-    variables:
-      tas:
-        mip: Amon
-        preprocessor: select_january
-        start_year: 2000
-        end_year: 2000
-    scripts:
-      script1:
-        script: examples/diagnostic.py
-        quickplot:
-          plot_type: pcolormesh
-          cmap: Reds
-
-  timeseries:
-    description: Annual mean temperature in Amsterdam and global mean since 1850.
-    themes:
-      - phys
-    realms:
-      - atmos
-    variables:
-      tas_amsterdam:
-        short_name: tas
-        mip: Amon
-        preprocessor: annual_mean_amsterdam
-        start_year: 1850
-        end_year: 2000
-      tas_global:
-        short_name: tas
-        mip: Amon
-        preprocessor: annual_mean_global
-        start_year: 1850
-        end_year: 2000
-    scripts:
-      script1:
-        script: examples/diagnostic.py
-        quickplot:
-          plot_type: plot

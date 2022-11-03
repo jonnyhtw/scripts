@@ -1,0 +1,46 @@
+# ESMValTool
+# recipe_global_mean_time_series.yml
+---
+documentation:
+  description: Recipe that plots a timeseries of temperature.
+
+  title: Recipe that plots a timeseries of temperature.
+
+  authors:
+    - righi_mattia
+
+datasets:
+
+  - {dataset: UKESM1-0-LL, project: CMIP6, mip: Amon, exp: historical,
+  ensemble: r1i1p1f2, grid: gn, start_year: 1850, end_year: 2014}
+
+preprocessors:
+
+  annual_mean_global:
+    area_statistics:
+      operator: mean
+      fx_variables:
+        areacella:
+    annual_statistics:
+      operator: mean
+
+diagnostics:
+
+  timeseries:
+    description: Annual, global mean temperature since 1850.
+    themes:
+      - phys
+    realms:
+      - atmos
+    variables:
+      tas_global:
+        short_name: tas
+        mip: Amon
+        preprocessor: annual_mean_global
+        start_year: 1850
+        end_year: 2000
+    scripts:
+      script1:
+        script: ./global_mean_time_series_diagnostic.py
+        quickplot:
+          plot_type: plot
