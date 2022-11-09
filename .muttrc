@@ -34,4 +34,4 @@ macro index AN \
     "mark all new as read"
 macro index AO \
     "<tag-pattern>~O<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
-    "mark all new as read"
+    "mark all old as read"
