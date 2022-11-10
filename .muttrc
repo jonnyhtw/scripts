@@ -33,6 +33,6 @@ macro index AN \
     "mark all new as read"
 macro index AO \
     "<tag-pattern>~O<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
-    "mark all new as read"
+    "mark all old as read"
 set copy = no
 macro attach B "<pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>"
