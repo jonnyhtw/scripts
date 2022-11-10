@@ -1,7 +1,6 @@
 source ~/.mutt/.muttrc-private
 bind index G imap-fetch-mail
 set mark_old=yes
-auto_view text/html
 set mail_check=5
 set timeout=5
 set editor="vim"
@@ -36,3 +35,4 @@ macro index AO \
     "<tag-pattern>~O<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
     "mark all new as read"
 set copy = no
+macro attach B "<pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>"
