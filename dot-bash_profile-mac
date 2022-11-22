@@ -35,3 +35,5 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export BROWSER='open -a "Google Chrome"'
+
+export TERM=xterm-256color
