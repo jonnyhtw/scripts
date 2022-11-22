@@ -1,8 +1,8 @@
 source ~/.mutt/.muttrc-private
 bind index G imap-fetch-mail
 set mark_old=yes
-set mail_check=5
-set timeout=5
+set mail_check=90
+set timeout=15
 set editor="vim"
 set header_cache="~/.mutt/cache/bodies"
 set mailcap_path = ~/scripts/.mailcap
