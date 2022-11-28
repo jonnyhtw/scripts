@@ -1,18 +1,18 @@
 source ~/.mutt/.muttrc-private
 bind index G imap-fetch-mail
 set mark_old=yes
-auto_view text/html
-set mail_check=5
-set timeout=5
+set mail_check=90
+set timeout=15
 set editor="vim"
 set header_cache="~/.mutt/cache/bodies"
 set mailcap_path = ~/scripts/.mailcap
-set pager_index_lines=10
+set pager_index_lines=5
 set alias_file=~/.mutt/aliases # where I keep my aliases
 source $alias_file
 auto_view text/x-vcard text/html text/enriched
 set smtp_authenticators = "login"
 set index_format="%Z %D %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
+set folder_format="%2C %t %8s %d %f "
 set imap_check_subscribed
 set sidebar_width=24
 set sidebar_divider_char='|'
@@ -34,4 +34,6 @@ macro index AN \
     "mark all new as read"
 macro index AO \
     "<tag-pattern>~O<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
-    "mark all new as read"
+    "mark all old as read"
+set copy = no
+macro attach B "<pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>"
