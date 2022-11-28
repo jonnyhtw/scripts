@@ -41,6 +41,6 @@ diagnostics:
         end_year: 2000
     scripts:
       script1:
-        script: ./global_mean_time_series_diagnostic.py
+        script: /home/users/williamsjh/scripts/esmvaltool_tutorial/global_mean_time_series_diagnostic.py
         quickplot:
           plot_type: plot
