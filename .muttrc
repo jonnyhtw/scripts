@@ -29,11 +29,8 @@ set sort = reverse-date-received
 set sort_aux = last-date
 source ~/.mutt/dracula.muttrc
 macro index ga "<change-folder>=[Gmail]/All<tab><enter>" "Go to all mail"
-macro index AN \
+macro index A \
     "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
     "mark all new as read"
-macro index AO \
-    "<tag-pattern>~O<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
-    "mark all old as read"
 set copy = no
 macro attach B "<pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>"
