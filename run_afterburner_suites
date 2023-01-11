@@ -7,7 +7,7 @@ date
 
 export project=niwa00013
 
-for suite in u-ck290
+for suite in u-ct262 
 
     do
 
