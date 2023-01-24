@@ -95,3 +95,4 @@ alias pics='cd /Volumes/Data/Pictures'
 #alias mutt='export LANG=ko_KR; mutt'
 #run ~/.bashrc
 alias runbash='. ~/.bashrc'
+alias startx='startxwin -- -listen tcp &'
