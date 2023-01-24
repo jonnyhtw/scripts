@@ -4,4 +4,4 @@
 SVN_URL=$(fcm info | egrep '^URL:' | sed -e 's/URL: //')
 TMP_URL=${SVN_URL/svn/trac}
 TRAC_URL=${TMP_URL/roses-u/roses-u\/log}
-firefox $TRAC_URL &
+echo $TRAC_URL 
