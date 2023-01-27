@@ -12,8 +12,13 @@ def get_num_lines(file_path):
         lines += 1
     return lines
 
-
-from tqdm import tqdm
+try:
+    from tqdm import tqdm
+    _tqdm = True
+    print('The tqdm progress bar software is available in this version of Python.')
+except ImportError:
+    _tqdm = False
+    print('The tqdm progress bar software is not available in this version of Python.')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--file', required=True, type=str)
@@ -29,7 +34,12 @@ with open(file) as f:
 
     new_list = []
     concat = False
-    for line in tqdm(f, total=get_num_lines(file)):
+    if _tqdm:
+        my_iterator = tqdm(f, total=get_num_lines(file)) 
+    else:
+        my_iterator = f
+
+    for line in my_iterator:
         if line.startswith('>'):
             new_list.append('>'+line[line.find('Eukaryota'):].replace('\n',''))
         if set(line.strip()) == {'A', 'C', 'G', 'T'}:
