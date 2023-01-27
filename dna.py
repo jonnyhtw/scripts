@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 import argparse 
-
-
 import mmap
+try:
+    from tqdm import tqdm
+    _tqdm = True
+    print('The tqdm progress bar software is available in this version of Python.')
+except ImportError:
+    _tqdm = False
+    print('The tqdm progress bar software is not available in this version of Python.')
 
 def get_num_lines(file_path):
     fp = open(file_path, "r+")
@@ -12,14 +17,6 @@ def get_num_lines(file_path):
         lines += 1
     return lines
 
-try:
-    from tqdm import tqdm
-    _tqdm = True
-    print('The tqdm progress bar software is available in this version of Python.')
-except ImportError:
-    _tqdm = False
-    print('The tqdm progress bar software is not available in this version of Python.')
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--file', required=True, type=str)
 args = parser.parse_args()
@@ -27,10 +24,7 @@ args = parser.parse_args()
 file=args.file
 print('file is', file)
 
-i = 0
-
 with open(file) as f:
-
 
     new_list = []
     concat = False
@@ -55,5 +49,4 @@ file = open(file+'-edited.txt','w')
 for item in new_list:
     file.write(item+"\n")
 file.close()
-
 
