@@ -1,0 +1,5 @@
+#!/usr/bin/env bash 
+
+for d in */; do echo -n "$d: "; find "$d" -type f | wc -l; done
+
+# from https://stackoverflow.com/a/67719334/6288682
