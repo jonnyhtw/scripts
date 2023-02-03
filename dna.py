@@ -39,7 +39,15 @@ with open(file) as f:
 
     for line in my_iterator:
         if line.startswith(">"):
-            new_list.append(">" + line[line.find("Eukaryota") :].replace("\n", ""))
+            new_list.append(
+                            ">" + line[line.find("Eukaryota") :].
+                            replace("\n", ";").
+                            replace('phylum_class_order_family_genus_','').
+                            replace('class_order_family_genus_','').
+                            replace('order_family_genus_','').
+                            replace('family_genus_','').
+                            replace('genus_','')
+                            )
         if set(line.strip()) == {"A", "C", "G", "T"}:
             if concat:
                 new_list[-1] += line.strip()
