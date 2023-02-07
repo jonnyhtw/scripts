@@ -1,0 +1,5 @@
+#!/usr/bin/env bash 
+
+for d in */; do echo -n "$d: "; find "$d" -type f | wc -l; done
+echo 'in total...'
+find . -type f | wc -l

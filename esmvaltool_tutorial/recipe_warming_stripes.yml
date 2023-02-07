@@ -7,10 +7,6 @@ documentation:
   authors:
     - righi_mattia
 
-diagnostics:
-  dummy_diagnostic_1:
-    scripts: null
-
 datasets:
   - {dataset: BCC-ESM1, project: CMIP6, mip: Amon, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
       

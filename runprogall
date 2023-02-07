@@ -11,7 +11,7 @@ while read p
         echo ''
         echo ${p%% *} 
         runprog ${p%% *} 
-        cylc monitor -ro  ${p%% *}
+        #cylc monitor -ro  ${p%% *}
     done < out; 
 
 rm out

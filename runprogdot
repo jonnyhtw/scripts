@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# this is a script to see where a run has got to...
+
+cd ~/cylc-run/$(basename $PWD)/work
+
+latest_cycle_point=$(ls -ld  ????????T????Z | tail -1)
+
+for dir in $latest_cycle_point/{atmos*,coupled*}
+
+do
+
+if [ -d "$dir/pe_output" ]; then
+#    echo '---------------------------------'
+    echo  $(basename "$dir")$i
+      # Control will enter here if $DIRECTORY exists.
+    grep -sarh 'Atm_Step: Timestep' $dir/pe_output/*0|tail -1
+fi
+
+done
+
