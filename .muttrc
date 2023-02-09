@@ -14,12 +14,6 @@ set smtp_authenticators = "login"
 set index_format="%Z %D %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
 set folder_format="%2C %t %8s %d %f "
 set imap_check_subscribed
-set sidebar_width=24
-set sidebar_divider_char='|'
-set sidebar_visible=yes
-bind index,pager \CP sidebar-prev
-bind index,pager \CN sidebar-next
-bind index,pager \CO sidebar-open
 set date_format = "%F %H:%M %Z"
 bind pager <up> previous-line
 bind pager <down> next-line
@@ -34,3 +28,18 @@ macro index A \
     "mark all new as read"
 set copy = no
 macro attach B "<pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>"
+
+bind index N search-opposite
+# Ctrl-n toggles whether a mail is considered new or not
+bind index \cn toggle-new
+
+bind index ? search-reverse
+# ? used to show help, so we remap that
+bind index <F1> help
+
+set sidebar_width=24
+set sidebar_divider_char='|'
+set sidebar_visible=yes
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open

@@ -3,7 +3,7 @@
 cd /Volumes/Data/Pictures/
 
 #https://docs.oracle.com/cd/E19857-01/817-6248-10/crtime.html
-export date=$(date +'%h_%e_%Y_%H_%M_%S')
+export date=$(date +%Y%m%d%H%M%S)
 mkdir $date 
 echo 'created '$PWD/$date
 
