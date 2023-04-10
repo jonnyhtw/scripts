@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # this is a script to see where a run has got to...
 
-cd ~/cylc-run/$(basename $PWD)/work
+cd ~/cylc-run/$(basename $PWD)/runN/work
 
 latest_cycle_point=$(ls -ld  ????????T????Z | tail -1)
 
