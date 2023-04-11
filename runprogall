@@ -1,17 +1,22 @@
-#script to run `cylc monitor` on all suites listed by `cylc scan`
+#script to find out where all runnign suites have got to...
 
 cylc scan > out
 
 clear >$(tty)
 
+echo 'looping through running workflows using...'
+echo '> cylc scan'
+echo -e 'here we go...\n'
+
+count=0
 
 while read p 
+
     do 
-        #echo '---------------------------------------------------------'
-        echo ''
-        echo ${p%% *} 
+        (( count++ ))
+        echo ${count}')'
+        echo 'workflow name is ---> '${p%% *} 
         runprog ${p%% *} 
-        #cylc monitor -ro  ${p%% *}
     done < out; 
 
 rm out

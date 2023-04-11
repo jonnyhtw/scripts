@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # this is a script to see where a run has got to...
 
-export suiteid=$1
+export workflow=$1
 
-cd ~/cylc-run/$suiteid/work
+cd ~/cylc-run/$workflow/work
 
 latest_cycle_point=$(ls -ld  ????????T????Z | tail -1)
 
@@ -12,11 +12,10 @@ for dir in $latest_cycle_point/{atmos*,coupled*}
 do
 
 if [ -d "$dir/pe_output" ]; then
-#    echo '---------------------------------'
-    echo  $(basename "$dir")$i
-      # Control will enter here if $DIRECTORY exists.
+    echo 'task name is -------> '$(basename "$dir")$i
     grep -sarh 'Atm_Step: Timestep' $dir/pe_output/*0|tail -1
 fi
 
 done
+
 
