@@ -1,5 +1,5 @@
 #script to find out where all running suites have got to...
-
+ 
 export time=$(TZ=Pacific/Auckland date)
 echo $time > ~/runprogall.txt 
 
