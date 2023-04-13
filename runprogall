@@ -1,12 +1,12 @@
 #script to find out where all running suites have got to...
 
-cylc scan --sort> out
+cylc scan --sort> ./out
 
 clear >$(tty)
 
 echo 'looping through running workflows using...'
 echo '> cylc scan --sort'
-echo -e 'here we go...\n'
+echo 'here we go...'
 
 count=0
 
@@ -14,11 +14,10 @@ while read p
 
     do 
         (( count++ ))
-        echo -e '\n'
         echo ${count}')'
         echo 'workflow name is ---> '${p%% *} 
         runprog ${p%% *} 
-    done < out; 
+    done < ./out; 
 
-rm out
+rm -f ./out
 

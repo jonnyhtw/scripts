@@ -7,21 +7,21 @@ date
 
 export project=niwa00013
 
-for suite in u-ct262 
+for workflow in u-cw073 
 
     do
 
-        cd ~/roses/afterburner/$suite
+        cd ~/roses/afterburner/$workflow
         set-hpc-project
-        FILE=~/cylc-run/$suite/.service/contact
+        FILE=~/cylc-run/$workflow/runN/.service/contact
 
         if [  -f "$FILE" ]; then
-                echo "$FILE exists and so " $suite "is already running!"
+                echo "$FILE exists and so " $workflow "is already running!"
         fi
 
         if [ ! -f "$FILE" ]; then
-                echo "$FILE doesn't exist, running monitoring suite " $SUITE
-                rose suite-run --no-gcontrol --host=w-cylc02
+                echo "$FILE doesn't exist, running monitoring workflow " $workflow
+                cylc vip .
         fi
 
     done
