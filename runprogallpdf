@@ -3,7 +3,7 @@
 export time=$(TZ=Pacific/Auckland date)
 echo $time > ~/runprogallpdf.txt 
 
-cylc scan --sort > out
+cylc scan --sort> ./out
 
 clear >$(tty)
 
