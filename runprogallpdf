@@ -1,15 +1,16 @@
 #script to find out where all running suites have got to...
  
 export time=$(TZ=Pacific/Auckland date)
-echo $time > ~/runprogall.txt 
+echo $time > ~/runprogallpdf.txt 
 
-cylc scan --sort --sort> out
+cylc scan --sort> ./out
 
 clear >$(tty)
 
-echo 'looping through running workflows using...' >> ~/runprogall.txt
-echo '> cylc scan --sort'>> ~/runprogall.txt
-echo -e 'here we go...\n'>> ~/runprogall.txt
+echo 'looping through running workflows using...' >> ~/runprogallpdf.txt
+echo '> cylc scan --sort'>> ~/runprogallpdf.txt
+echo 'refreshing every '$runprogallpdfwatchinterval' s.' >> ~/runprogallpdf.txt 
+echo 'here we go...'>> ~/runprogallpdf.txt
 
 count=0
 
@@ -17,16 +18,15 @@ while read p
 
     do 
         (( count++ ))
-        echo -e '\n'
-        echo ${count}')' >> ~/runprogall.txt
-        echo 'workflow name is ---> '${p%% *} >> ~/runprogall.txt
-        runprog ${p%% *} >> ~/runprogall.txt
-    done < out; 
+        echo ${count}')' >> ~/runprogallpdf.txt
+        echo 'workflow name is ---> '${p%% *} >> ~/runprogallpdf.txt
+        runprog ${p%% *} >> ~/runprogallpdf.txt
+    done < out 
 
 rm out
 
 cd
 
-convert runprogall.txt runprogall.ps
-ps2pdf runprogall.ps runprogall.pdf
-rm runprogall.{txt,ps}
+convert runprogallpdf.txt runprogallpdf.ps
+ps2pdf runprogallpdf.ps runprogallpdf.pdf
+rm runprogallpdf.{txt,ps}
