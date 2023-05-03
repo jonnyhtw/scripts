@@ -1,0 +1,1 @@
+ssh jowill@lander.monsoon-metoffice.co.uk "ssh xcslc0 \" cd /projects/um1/ancil/atmos/GC5/n216e/aerosol_clims/glomap/gregorian/v1/ && tar cf - qrclim.aerosols85.nc \" " | tar xvf -
