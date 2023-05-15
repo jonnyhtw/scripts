@@ -1,6 +1,6 @@
 begin
-   stash = (3217,3234)
-   year=2079
+   stash = 24
+   year=[1988..2007]
 end
 
 

@@ -3,7 +3,7 @@ alias gitfilelist='git ls-tree -r master --name-only'
 # Simple shortcut
 alias l='ls -lrth'
 # Simple shortcut
-alias ll='ls -l'
+alias ll='ls -lh'
 # Simple shortcut
 alias gcon='rose suite-gcontrol'
 # Display line numbers and percentage through file
