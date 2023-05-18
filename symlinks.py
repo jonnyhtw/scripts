@@ -1,17 +1,8 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# In[174]:
-
 
 import os
 import subprocess
-#from IPython.core.interactiveshell import InteractiveShell
-#InteractiveShell.ast_node_interactivity = "all"
 import numpy as np
-
-
-# In[175]:
 
 
 my_dict = {}
@@ -62,20 +53,21 @@ for name in names:
             fp.write("%s\n" % item)
 
 
-# In[ ]:
+with open(os.path.expanduser('~/scripts/projects_files')) as f:
+    projects_files = f.read().splitlines()
 
+with open(os.path.expanduser('~/scripts/projects_readlinks)) as f:
+    projects_files = f.read().splitlines()
 
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
+for i in range(len(projects_files)):
+    print(i)
+    src = projects_readlinks[i]
+    dest = projects_files[i]
+    #if os.path.exists(dest) == True:
+    try:
+        os.remove(dest)
+    except OSError:
+        pass
+    print('src = ',src)
+    print('dest = ',dest)
+    os.symlink(src,dest)
