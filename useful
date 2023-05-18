@@ -10,3 +10,5 @@ export PATH=/nesi/project/niwa00013/williamsjh/miniconda3/bin:$PATH
 
 #vlab
 w-mauivlab01.maui.nesi.org.nz
+
+ssh -N -L 8887:localhost:8887 maui
