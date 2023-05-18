@@ -1,0 +1,15 @@
+
+
+find /gws/nopw/j04/tids/OCEAN/ -type l -exec rsync -avRP {} . \;
+
+cd /gws/nopw/j04/tids/users/williamsjh/gws
+
+rm ~/scripts/files ; rm ~/scripts/readlinks ;  for file in $(find   -type l) ; do echo $PWD/$file >> ~/scripts/files  ; readlink $file >> ~/scripts/readlinks; done
+
+then run ~/scripts/symlinks.py
+
+then 
+
+rsync -rvLP /gws/nopw/j04/tids/users/williamsjh/gws/nopw/j04/tids/OCEAN .
+
+then use globus to transfer files to maui
