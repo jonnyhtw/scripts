@@ -1,15 +1,23 @@
 cd /gws/nopw/j04/tids/users/williamsjh
 
-find /gws/nopw/j04/tids/OCEAN/ -type l -exec rsync -avRP {} . \;
+find /gws/nopw/j04/tids/OCEAN/ -xtype l -exec rsync -avRP {} . \;
 
 cd /gws/nopw/j04/tids/users/williamsjh/gws
 
-rm ~/scripts/files ; rm ~/scripts/readlinks ;  for file in $(find   -type l) ; do echo $PWD/$file >> ~/scripts/files  ; readlink $file >> ~/scripts/readlinks; done
+rm ~/scripts/files ; rm ~/scripts/readlinks ;  for file in $(find -type l) ; do echo $PWD/$file >> ~/scripts/files  ; readlink $file >> ~/scripts/readlinks; done
 
 then run ~/scripts/symlinks.py
 
 then 
 
-rsync -rvLP /gws/nopw/j04/tids/users/williamsjh/gws/nopw/j04/tids/OCEAN .
+cd /gws/nopw/j04/tids/users/williamsjh
+
+mkdir -p brokensymlinks
+rsync -rvLP /gws/nopw/j04/tids/users/williamsjh/gws/nopw/j04/tids/OCEAN ./brokensymlinks/
+
+now get non-broken links from /gws/nopw/j04/tids/OCEAN/
+
+mkdir -p symlinks
+find /gws/nopw/j04/tids/OCEAN/ -type l -exec rsync -rvLPR {} . \;
 
 then use globus to transfer files to maui

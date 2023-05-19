@@ -24,6 +24,7 @@ for i in range(len(my_dict["readlinks"])):
         my_dict["projects_readlinks"].append(my_dict["readlinks"][i])
         my_dict["projects_files"].append(my_dict["files"][i])
 
+for i in range(len(my_dict["projects_readlinks"])):
     my_dict["projects_readlinks"][i] = my_dict["projects_readlinks"][i].replace(
         "/projects/ocean", "/gws/nopw/j04/tids/OCEAN"
     )
@@ -38,7 +39,7 @@ with open(os.path.expanduser("~/scripts/projects_files")) as f:
     projects_files = f.read().splitlines()
 
 with open(os.path.expanduser("~/scripts/projects_readlinks")) as f:
-    projects_files = f.read().splitlines()
+    projects_readlinks = f.read().splitlines()
 
 for i in range(len(projects_files)):
     src = projects_readlinks[i]
