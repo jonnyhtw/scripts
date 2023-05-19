@@ -1,4 +1,4 @@
-
+cd /gws/nopw/j04/tids/users/williamsjh
 
 find /gws/nopw/j04/tids/OCEAN/ -type l -exec rsync -avRP {} . \;
 
