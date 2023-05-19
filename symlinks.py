@@ -4,7 +4,6 @@ import os
 import subprocess
 import numpy as np
 
-
 my_dict = {}
 
 names = ['files','readlinks']
@@ -16,15 +15,9 @@ for name in names:
     with open(os.path.expanduser('~/scripts/'+name)) as file:
         for item in file:
             my_dict[name].append(item.splitlines()[0])
-        
-
-
-# In[176]:
-
 
 my_dict['projects_files'] = []
 my_dict['projects_readlinks'] = []
-
 
 for i in range(len(my_dict['readlinks'])):
     if '/projects' in my_dict['readlinks'][i]:
