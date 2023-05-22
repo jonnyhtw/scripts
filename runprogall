@@ -20,4 +20,3 @@ while read p
     done < ./out; 
 
 rm -f ./out
-
