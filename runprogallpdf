@@ -29,4 +29,5 @@ cd
 
 convert runprogallpdf.txt runprogallpdf.ps
 ps2pdf runprogallpdf.ps runprogallpdf.pdf
-rm runprogallpdf.{txt,ps}
+/nesi/nobackup/niwa00013/williamsjh/miniconda3/envs/metpy/bin/pdf-crop-margins runprogallpdf.pdf
+rm runprogallpdf.{pdf,txt,ps}

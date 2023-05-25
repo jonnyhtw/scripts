@@ -96,3 +96,6 @@ alias pics='cd /Volumes/Data/Pictures'
 #run ~/.bashrc
 alias runbash='. ~/.bashrc'
 alias startx='startxwin -- -listen tcp &'
+alias c7='CYLC_VERSION=7.9.1 ; echo $CYLC_VERSION'
+alias c8='CYLC_VERSION=8.1.4 ; echo $CYLC_VERSION'
+alias cv='echo $CYLC_VERSION'
