@@ -38,4 +38,4 @@ export BROWSER='open -a "Google Chrome"'
 
 export TERM=xterm-256color
 
-fish
+#fish
