@@ -1,6 +1,0 @@
-#!/usr/bin/env bash 
-
-for f in *\ *; do mv "$f" "${f// /_}"; done
-
-for file in * ; do   export date=$(date +%Y%m%d%H%M%S) ;  rsync -vLP --remove-source-files $file /Volumes/Data/Pictures/${date}-$file ; done 
-
