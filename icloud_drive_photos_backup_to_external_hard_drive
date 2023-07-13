@@ -1,13 +1,8 @@
 #!/usr/bin/env bash 
 
-cd /Volumes/Data/Pictures/
+cd /Users/Jonny/Library/Mobile\ Documents/com\~apple\~CloudDocs/
 
-#https://docs.oracle.com/cd/E19857-01/817-6248-10/crtime.html
-export date=$(date +%Y%m%d%H%M%S)
-mkdir $date 
-echo 'created '$PWD/$date
+for f in *\ *; do mv "$f" "${f// /_}"; done
 
-cd $date
-
-rsync -vLP --remove-source-files /Users/Jonny/Library/Mobile\ Documents/com\~apple\~CloudDocs/* .|python ~/scripts/rsyncprogress.py
+for file in * ; do  export date=$(date +%Y%m%d%H%M%S) ;  rsync -vLP --remove-source-files $file /Volumes/Data/Pictures/${date}-$file ; done 
 
