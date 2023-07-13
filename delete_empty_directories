@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+import os
+from tqdm import tqdm
+
+directories=[d for d in os.listdir(os.getcwd()) if os.path.isdir(d)]
+
+for d in tqdm(directories):
+    try:
+        os.rmdir(d)
+        print('deleting '+d)
+    except OSError:
+        pass
