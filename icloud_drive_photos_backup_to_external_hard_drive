@@ -4,5 +4,5 @@ cd /Users/Jonny/Library/Mobile\ Documents/com\~apple\~CloudDocs/
 
 for f in *\ *; do mv "$f" "${f// /_}"; done
 
-for file in * ; do  export date=$(date +%Y%m%d%H%M%S) ;  rsync -vLP --remove-source-files $file /Volumes/Data/Pictures/${date}-$file ; done 
+for file in * ; do  export date=$(date +%Y%m%d%H%M%S) ;  rsync -vLP --remove-source-files $file /Volumes/Data/Pictures/${date}-$file; echo 'new file name is '${date}-$file ; done 
 
