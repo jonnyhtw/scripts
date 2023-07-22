@@ -20,4 +20,4 @@ for f in tqdm(os.listdir(".")):
     os.rename(f,str(date)+'-'+f)
 
 for f in tqdm(os.listdir(".")):
-    shutil.move(f,'/Volumes/Data/Pictures')
+    shutil.move(f,'/Volumes/Data/Pictures/')
