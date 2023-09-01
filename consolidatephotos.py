@@ -5,6 +5,8 @@ from tqdm import tqdm
 from datetime import datetime
 import shutil
 
+
+
 for f in tqdm(os.listdir(".")):
 
     r = f.replace(" ","_")
@@ -18,4 +20,4 @@ for f in tqdm(os.listdir(".")):
     os.rename(f,str(date)+'-'+f)
 
 for f in tqdm(os.listdir(".")):
-    shutil.move(f,'/Volumes/Data/Pictures')
+    shutil.move(f,'/Volumes/Data/Pictures/')
