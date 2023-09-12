@@ -1,12 +1,9 @@
 *.p
 MIDORI*
 *.swo
-*foo
-*bar
 *.err
 *.out
 *.swp
-*foo*
 *.pdf
 *.aux
 *.log
