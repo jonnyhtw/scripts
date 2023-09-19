@@ -21,7 +21,6 @@ set mime_forward=yes
 set sort = reverse-threads
 set sort = reverse-date-received
 set sort_aux = last-date
-source ~/.mutt/dracula.muttrc
 source ~/.mutt/colors-gruvbox-shuber.muttrc
 
 macro index ga "<change-folder>=[Gmail]/All<tab><enter>" "Go to all mail"
