@@ -2,10 +2,3 @@ import os
 
 def pause():
     programPause = raw_input("Press the <ENTER> key to continue...")
-
-#import cartopy.crs as ccrs
-#import matplotlib.pyplot as plt
-#import iris
-#import iris.plot as iplt
-#import iris.quickplot as qplt
-#import numpy as np
