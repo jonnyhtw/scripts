@@ -8,7 +8,6 @@ set header_cache="~/.mutt/cache/bodies"
 set mailcap_path = ~/scripts/.mailcap
 set pager_index_lines=10
 set alias_file=~/.mutt/aliases # where I keep my aliases
-source $alias_file
 auto_view text/x-vcard text/html text/enriched
 set smtp_authenticators = "login"
 set index_format="%Z %D %?X?(%X)&   ? %-22.22F  %.100s %> %5c "

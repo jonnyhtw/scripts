@@ -9,8 +9,10 @@ set ssl_force_tls = yes
 
 # Protocol: smtp for TLS (587), smtps for SSL (465)
 set smtp_url = "smtp://foo@gmail.com@smtp.gmail.com:587/"
+# do this bearing in mind that gmail app passwords can contin spaces!...
 set smtp_pass = ""
 set imap_user = "foo@gmail.com"
+# do this bearing in mind that gmail app passwords can contin spaces!...
 set imap_pass = ""
 set imap_keepalive = 900
 set folder = "imaps://imap.gmail.com:993"
