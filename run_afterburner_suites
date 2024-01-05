@@ -7,7 +7,7 @@ date
 
 export project=niwa00013
 
-for workflow in u-cd861
+for workflow in u-cd861 u-db651
 
     do
 
