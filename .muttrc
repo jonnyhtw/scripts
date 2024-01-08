@@ -22,7 +22,10 @@ set sort = reverse-date-received
 set sort_aux = last-date
 source ~/scripts/vombatidae.mutt
 
+macro index gi "<change-folder>=INBOX<tab><enter>" "Go to inbox"
+
 macro index ga "<change-folder>=[Gmail]/All<tab><enter>" "Go to all mail"
+set trash = "imaps://imap.gmail.com/[Gmail]/Bin"
 macro index A \
     "<tag-pattern>~O<enter><tag-prefix><clear-flag>O<untag-pattern>.<enter>" \
     "mark all old as read"
@@ -43,3 +46,4 @@ set sidebar_visible=yes
 bind index,pager \CP sidebar-prev
 bind index,pager \CN sidebar-next
 bind index,pager \CO sidebar-open
+
