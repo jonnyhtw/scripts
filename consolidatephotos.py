@@ -1,5 +1,10 @@
 #!/Users/Jonny/miniconda3/bin/python/
 
+'''
+this is a script to move photos from an arbitrary directory to my Pictures directory on my external hard drive. it also removes any spaces (makes them underscores) and appends a unique datetime prefix to avoid any overwriting.
+'''
+
+
 import os
 from tqdm import tqdm
 from datetime import datetime
