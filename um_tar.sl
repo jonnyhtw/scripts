@@ -9,12 +9,12 @@
 #SBATCH --hint=nomultithread
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --array=1951-2015
+#SBATCH --array=1950-2014
 #SBATCH --mem-per-cpu=20G
 
-export suite=bl274
+export suite=db320
 
-cd /home/williamsjh/cylc-run/u-${suite}/share/data/History_Data/
+cd /home/williamsjh/cylc-run/u-${suite}/runN/share/data/History_Data/
 
 find . -maxdepth 1 -iname "*a.p${stream}${SLURM_ARRAY_TASK_ID}*" -exec tar --remove-files -rvf ${suite}a.p${stream}${SLURM_ARRAY_TASK_ID}.tar {} \; 
 

@@ -1,6 +1,8 @@
 #!/bin/bash
-echo 'head -3 ...'
-squeue --format="%.18i %.19P %.40j %.8u %.8T %.10M %.9l %.6D" --me|head -3
+echo 'hostname is '
+hostname
+echo 'head -4 ...'
+squeue --format="%.18i %.19P %.40j %.8u %.8T %.10M %.9l %.6D" --me|head -4
 echo 'tail -3 ...'
 squeue --format="%.18i %.19P %.40j %.8u %.8T %.10M %.9l %.6D" --me|tail -3
 echo '--'; ~/scripts/squacount
