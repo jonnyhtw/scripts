@@ -22,3 +22,5 @@ same but nesi specific command i think
 ssh maui01 nn_seff 3269423
 
 ps -fA | grep python|grep $USER|vim -
+
+ssh -N -L 8887:localhost:8887 maui ssh -N -L 8887:localhost:8887 -N w-cylc01
