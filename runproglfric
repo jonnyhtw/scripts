@@ -14,7 +14,7 @@ for dir in $latest_cycle_point/lfric_atm
 do
 
 echo 'task name is -------> '$(basename "$dir")$i
-grep -sarh 'currentDate' $dir/xios_client_000.out|tail 
+grep -sarh 'currentDate' $dir/xios_client_000.out|tail -1
 
 done
 
