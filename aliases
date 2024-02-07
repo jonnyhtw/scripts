@@ -101,3 +101,6 @@ alias runbash='. ~/.bashrc'
 alias startx='startxwin -- -listen tcp &'
 alias cv='echo $CYLC_VERSION'
 alias tui='cylc tui $(basename $PWD)'
+
+alias c7='export CYLC_VERSION=7.9.1'
+alias c8='export CYLC_VERSION=8.2.1'

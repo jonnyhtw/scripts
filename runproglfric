@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# this is a script to see where a run has got to...
+
+export workflow=$1
+
+cd ~/cylc-run/$workflow/work
+
+latest_cycle_point=$(ls -d ????????T????Z 2> /dev/null | tail -1)
+
+if [ ${#latest_cycle_point} == 14 ]; then
+
+for dir in $latest_cycle_point/lfric_atm
+
+do
+
+echo 'task name is -------> '$(basename "$dir")$i
+grep -sarh 'currentDate' $dir/xios_client_000.out|tail 
+
+done
+
+else
+    echo '---> no matching datetime cycle points <---'
+
+fi
