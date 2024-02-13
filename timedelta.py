@@ -65,7 +65,6 @@ from dateutil.relativedelta import relativedelta
 
 
 for i in range(len(start)):
-    print(i)
     duration.append( parse(end[i]) - parse(start[i]) )
     durations.append(duration[i].total_seconds())
 
