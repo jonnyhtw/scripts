@@ -5,7 +5,7 @@ import os
 
 os.chdir(os.path.expanduser('~/.vim/colors'))
 
-colours = [ colour[0:-4] for colour in os.listdir('.') ]
+colors = [ color[0:-4] for color in os.listdir('.') ]
 
 with open(os.path.expanduser('~/scripts/randomvimcolorscheme.txt'),'w') as output:
-    output.write(random.choice(colours))
+    output.write(random.choice(colors))
