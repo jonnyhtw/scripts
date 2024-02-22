@@ -49,3 +49,5 @@ export randomvimcolorscheme=$(cat ~/scripts/randomvimcolorscheme.txt)
 
 
 export PATH=~/randomtarot:$PATH
+
+PROMPT_COMMAND='. ~/.bash_profile'
