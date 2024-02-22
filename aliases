@@ -108,3 +108,7 @@ alias c8='export CYLC_VERSION=8.2.1'
 alias cylcvr='cylc vr $(basename $PWD)'
 
 alias vim='. ~/.bashrc ; vim'
+
+if [ "$(uname)" == "Darwin" ]; then
+    alias vim='. ~/.bash_profile ; vim '
+fi
