@@ -1,4 +1,5 @@
 *.p
+vimcolors.txt
 MIDORI*
 *.swo
 *.err

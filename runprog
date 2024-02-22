@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 # this is a script to see where a run has got to...
 
-export workflow=$1
+if [[ -z $2 ]]
+    then
+        export workflow=$1
+    else
+        export workflow=${1}/run${2}
+
+fi
+    
+
+
 
 cd ~/cylc-run/$workflow/work
 
