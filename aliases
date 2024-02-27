@@ -12,8 +12,6 @@ alias less='less -M -N'
 alias working='cd /hpcf/working/williamsjh/'
 # Go to /hpcf/data/williamsjh directory
 alias data='cd /hpcf/data/williamsjh/'
-# Go to rose bush
-alias rb='firefox http://wrh-1.hpcf.niwa.co.nz:8080/suites/williamsjh &'
 # Go to ~/roses
 alias c='clear'
 # Go to ~/roses
