@@ -16,12 +16,18 @@ latest_cycle_point=$(ls -d ????????T????Z 2> /dev/null | tail -1)
 
 if [ ${#latest_cycle_point} == 14 ]; then
 
-for dir in $latest_cycle_point/lfric_atm
+for dir in $latest_cycle_point/{lfric_atm,coupled}
 
 do
 
+if [ -d "$dir" ]; then
+
+
 echo 'task name is -------> '$(basename "$dir")$i
 grep -sarh 'currentDate' $dir/xios_client_000.out|tail -1
+grep -sarh 'time-step' $dir/ocean.output |tail -1
+
+fi
 
 done
 
