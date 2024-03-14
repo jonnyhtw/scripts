@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 0 /home/williamsjh/cylc-run/u-db797/run14/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
 1 xios_server.exe
 2 /home/williamsjh/cylc-run/u-db797/run14/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
@@ -414,3 +415,22 @@
 413 /home/williamsjh/cylc-run/u-db797/run14/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
 414 /home/williamsjh/cylc-run/u-db797/run14/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
 415 /home/williamsjh/cylc-run/u-db797/run14/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
+=======
+0-3 /opt/nesi/XC50_sles15_skl/XIOS/r2279-CrayIntel-23.02-19-NC4PAR-patched/bin/xios_server.exe
+4-39 /home/williamsjh/cylc-run/u-db797/run16/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
+40-43 /opt/nesi/XC50_sles15_skl/XIOS/r2279-CrayIntel-23.02-19-NC4PAR-patched/bin/xios_server.exe
+44-79 /home/williamsjh/cylc-run/u-db797/run16/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
+80-83 /opt/nesi/XC50_sles15_skl/XIOS/r2279-CrayIntel-23.02-19-NC4PAR-patched/bin/xios_server.exe
+84-119 /home/williamsjh/cylc-run/u-db797/run16/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
+120-123 /opt/nesi/XC50_sles15_skl/XIOS/r2279-CrayIntel-23.02-19-NC4PAR-patched/bin/xios_server.exe
+124-159 /home/williamsjh/cylc-run/u-db797/run16/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
+160-163 /opt/nesi/XC50_sles15_skl/XIOS/r2279-CrayIntel-23.02-19-NC4PAR-patched/bin/xios_server.exe
+164-199 /home/williamsjh/cylc-run/u-db797/run16/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
+200-203 /opt/nesi/XC50_sles15_skl/XIOS/r2279-CrayIntel-23.02-19-NC4PAR-patched/bin/xios_server.exe
+204-239 /home/williamsjh/cylc-run/u-db797/run16/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
+240-243 /opt/nesi/XC50_sles15_skl/XIOS/r2279-CrayIntel-23.02-19-NC4PAR-patched/bin/xios_server.exe
+244-279 /home/williamsjh/cylc-run/u-db797/run16/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
+280-283 /opt/nesi/XC50_sles15_skl/XIOS/r2279-CrayIntel-23.02-19-NC4PAR-patched/bin/xios_server.exe
+284-319 /home/williamsjh/cylc-run/u-db797/run16/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
+320-415 /home/williamsjh/cylc-run/u-db797/run16/share/fcm_make_lfric/build/bin/lfric_atm configuration.nml
+>>>>>>> b58ac746764dbd3523415aa1f54238fe0685a30d
