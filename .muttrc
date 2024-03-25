@@ -12,9 +12,12 @@ source ~/.mutt/aliases
 auto_view text/x-vcard text/html text/enriched
 set smtp_authenticators = "login"
 set index_format="%Z %D %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
+set index_format="%S %D %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
+set index_format="%S %D %-11.11F  %.100s %> %5c "
 set folder_format="%2C %t %8s %d %f "
 set imap_check_subscribed
 set date_format = "%F %H:%M %Z"
+set date_format="%e %b %l%p"
 bind pager <up> previous-line
 bind pager <down> next-line
 set mime_forward=yes
