@@ -1,6 +1,0 @@
-#!/usr/bin/env bash 
-
-cd ~/.vim/colors
-
-git rm ${1}.vim
-
