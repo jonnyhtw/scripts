@@ -1,0 +1,4 @@
+#!/usr/bin/env bash 
+
+echo '$0 is ' $1
+
