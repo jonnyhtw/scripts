@@ -12,7 +12,7 @@
 #SBATCH --array=1950-2014
 #SBATCH --mem-per-cpu=20G
 
-export suite=dc543
+export suite=dc545
 
 cd /home/williamsjh/cylc-run/u-${suite}/runN/share/data/History_Data/
 

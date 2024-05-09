@@ -61,7 +61,7 @@ alias gconall='for folder in *; do cd ~/cylc-run; cd $folder; rose suite-gcontro
 # Alias to `cylc gscan`
 alias gscn='cylc gscan&'
 # Edit command prompt
-export PS1="\h|\d|\t|\W> "
+export PS1="\h|\d|\t \D{%Z}|\W> "
 # Edit command prompt
 # Edit command prompt - simple
 #export PS1="> "
