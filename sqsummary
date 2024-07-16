@@ -1,0 +1,1 @@
+squeue -h -u $USER -o '%t' | uniq -c
