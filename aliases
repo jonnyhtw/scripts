@@ -105,3 +105,4 @@ alias c8='export CYLC_VERSION=8.2.1'
 
 alias cylcvr='cylc vr --yes  $(basename $PWD)'
 
+alias sqs='sqsummary'
