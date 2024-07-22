@@ -1,1 +1,4 @@
 squeue -h -u $USER -o '%t' | uniq -c
+echo '-'
+echo 'total is...'
+squeue -h -u $USER -o '%t' | wc -l
