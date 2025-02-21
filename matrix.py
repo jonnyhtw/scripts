@@ -6,9 +6,9 @@
 
 MAX_CASCADES = 600
 MAX_COLS = 20
-FRAME_DELAY = 0.03
+FRAME_DELAY = 0.5
 
-MAX_SPEED  = 5
+MAX_SPEED  = 2
 
 import shutil, sys, time
 from random import choice, randrange, paretovariate
