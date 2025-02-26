@@ -36,8 +36,6 @@ alias mnr='cylc monitor $(basename "$PWD") -r'
 alias mnro='cylc monitor $(basename "$PWD") -ro'
 alias mno='cylc monitor $(basename "$PWD") -o'
 alias cylcscan=' cylc scan -t rich --colour-blind --sort'
-# cd to a Cylc suite's `work` directory and see how may atmos t steps have run
-alias wtchsuite='watch "grep -ir atm_step */*/pe_output/*00|tail"'
 # Open 'fcm diff' in less
 alias fcmdiff='fcm diff|less'
 # Force tmux to use 256 colours, tip from
@@ -106,3 +104,5 @@ alias c8='export CYLC_VERSION=8.2.1'
 alias cylcvr='cylc vr --yes  $(basename $PWD)'
 
 alias sqs='sqsummary'
+
+alias watchh='watch '
