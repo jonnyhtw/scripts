@@ -1,4 +1,3 @@
-squeue -h -u $USER -o '%t' | uniq -c
+squeue -h -u $USER -o '%t' |sort| uniq -c
 echo '-'
-echo 'total is...'
-squeue -h -u $USER -o '%t' | wc -l
+echo -n 'total is...'; squeue -h -u $USER -o '%t' | wc -l
