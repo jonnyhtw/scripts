@@ -7,8 +7,8 @@ set editor="vim"
 set header_cache="~/.mutt/cache/bodies"
 set mailcap_path = ~/scripts/.mailcap
 set pager_index_lines=10
-set alias_file=~/.mutt/aliases # where I keep my aliases
-source ~/.mutt/aliases
+#set alias_file=~/.mutt/aliases # where I keep my aliases
+#source ~/.mutt/aliases
 auto_view text/x-vcard text/html text/enriched
 set smtp_authenticators = "login"
 set index_format="%Z %D %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
@@ -23,8 +23,6 @@ bind pager <down> next-line
 set mime_forward=yes
 set sort = reverse-threads
 set sort = reverse-date-received
-set sort_aux = last-date
-source ~/scripts/vombatidae.mutt
 
 macro index gi "<change-folder>=INBOX<tab><enter>" "Go to inbox"
 
