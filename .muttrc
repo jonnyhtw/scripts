@@ -1,5 +1,8 @@
 source ~/.mutt/.muttrc-private
+
+#This doesn't seem to do anything.
 bind index G imap-fetch-mail
+
 set mark_old=yes
 set mail_check=90
 set timeout=15

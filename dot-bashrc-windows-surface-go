@@ -122,3 +122,9 @@ source ~/miniconda3/bin/activate
 
 
 set -o vi
+
+
+
+
+export BROWSER=wslview
+
