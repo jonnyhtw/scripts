@@ -3,7 +3,6 @@ source ~/.mutt/.muttrc-private
 #This doesn't seem to do anything.
 bind index G imap-fetch-mail
 
-set mark_old=yes
 set mail_check=90
 set timeout=15
 set editor="vim"
@@ -37,9 +36,9 @@ macro index A \
 set copy = no
 macro attach B "<pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>"
 
-bind index N search-opposite
+#bind index N search-opposite
 # Ctrl-n toggles whether a mail is considered new or not
-bind index \cn toggle-new
+#bind index \cn toggle-new
 
 bind index ? search-reverse
 # ? used to show help, so we remap that
