@@ -1,7 +1,7 @@
 # List files tracked in a Git repo 
 alias gitfilelist='git ls-tree -r master --name-only'
 # Simple shortcut
-alias l='ls -lrth'
+alias l='ls -lrthF'
 # Simple shortcut
 alias ll='ls -lh'
 # Simple shortcut
