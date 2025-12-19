@@ -1,8 +1,5 @@
 source ~/.mutt/.muttrc-private
 
-#This doesn't seem to do anything.
-bind index G imap-fetch-mail
-
 set mail_check=90
 set timeout=15
 set editor="vim"
@@ -34,7 +31,7 @@ macro index A \
     "<tag-pattern>~O<enter><tag-prefix><clear-flag>O<untag-pattern>.<enter>" \
     "mark all old as read"
 set copy = no
-macro attach B "<pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>"
+macro attach B "<pipe-message>cat > /tmp/mutt.html; firefox /tmp/mutt.html<enter>"
 
 #bind index N search-opposite
 # Ctrl-n toggles whether a mail is considered new or not

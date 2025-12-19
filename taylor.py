@@ -1,5 +1,6 @@
 #adapted from https://pythonforundergradengineers.com/creating-taylor-series-functions-with-python.html
 
+
 import math
 
 def func_sinxoverx(x, n):
