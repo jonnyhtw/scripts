@@ -8,24 +8,14 @@ alias ll='ls -lh'
 alias gcon='rose suite-gcontrol'
 # Display line numbers and percentage through file
 alias less='less -M -N'
-# Go to /hpcf/working/williamsjh directory
-alias working='cd /hpcf/working/williamsjh/'
-# Go to /hpcf/data/williamsjh directory
-alias data='cd /hpcf/data/williamsjh/'
 # Go to ~/roses
 alias c='clear'
 # Go to ~/roses
 alias r='cd ~/roses'
-# Go to branches dir
-alias br='cd /nesi/project/niwa00013/williamsjh/branches'
 # Alias log to 'rose suite-log'
 alias log='rose suite-log'
 # Alias cr to 'cd ~$USER/cylc-run'
-alias cr='cd ~williamsjh/cylc-run'
-# Alias crreal to 'cd /nesi/nobackup/niwa00013/williamsjh/cylc-run'
-alias crreal='cd /nesi/nobackup/niwa00013/williamsjh/cylc-run'
-# Alias project
-alias prj='cd /nesi/project/niwa00013/williamsjh'
+alias cr='cd ~jonnyhtw/cylc-run'
 # Alias fdg to 'fcm diff -g &'
 alias fdg='fcm diff -g &'
 # Alias for `cylc trigger` in PWD 
@@ -77,10 +67,6 @@ alias here='$(basename $PWD)'
 alias clim01='ssh -AY w-clim01'
 #cylc01
 alias cylc01='ssh -AY w-cylc01'
-#miniconda3
-alias miniconda3='export PATH=/nesi/project/niwa00013/williamsjh/miniconda3/bin:$PATH'
-#go back to system python 
-alias syspy='export PATH=/usr/bin:$PATH'
 #vi to vim
 alias vi='vim'
 #most recently edited file
