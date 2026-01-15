@@ -92,3 +92,4 @@ alias cylcvr='cylc vr --yes  $(basename $PWD)'
 alias sqs='sqsummary'
 
 alias watchh='watch '
+alias mcli='~/bin/mc'
