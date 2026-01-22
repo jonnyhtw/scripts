@@ -1,0 +1,28 @@
+[meta]
+    title = "Jonny's weekend bakery!"
+
+[scheduling]
+    cycling mode = integer
+    initial cycle point = 1
+    final cycle point = 2
+    [[graph]]
+
+   P1 = """
+            pre_heat_oven => bake_bread
+            bake_bread => sell_bread & clean_oven
+            clean_oven => go_home
+            clean_oven[-P1] => pre_heat_oven
+        """
+            R1/$ = sell_bread & sell_bread[-P1] => go_home
+        
+[runtime]
+        [[pre_heat_oven]]
+        script ="sleep 2"
+        [[go_home]]
+        script ="sleep 1"
+        [[clean_oven]]
+        script ="sleep 2"
+        [[sell_bread]]
+        script ="sleep 5"
+        [[bake_bread]]
+        script ="sleep 2"

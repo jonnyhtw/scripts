@@ -95,3 +95,4 @@ alias watchh='watch '
 
 alias puma-ui='PORT=$(shuf -i 10000-65000 -n 1); ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
 
+alias mcli='~/bin/mc'
