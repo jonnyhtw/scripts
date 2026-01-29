@@ -48,12 +48,6 @@ alias gconall='for folder in *; do cd ~/cylc-run; cd $folder; rose suite-gcontro
 # Some git aliases
 # Alias to `cylc gscan`
 alias gscn='cylc gscan&'
-# Edit command prompt
-export PS1="\h|\d|\t \D{%Z}|\W> "
-# Edit command prompt
-# Edit command prompt - simple
-#export PS1="> "
-#PS1='\[\e[0;32m\u@\w/:\[\e[m '
 # Update contents of directory every 2s
 alias wtch='cd . ; watch "ls -lta"'
 # Update contents of directory every 2s
@@ -94,5 +88,6 @@ alias sqs='sqsummary'
 alias watchh='watch '
 
 alias puma-ui='PORT=$(shuf -i 10000-65000 -n 1); ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
+alias puma-ui='PORT=$(jot -r 1 10000 65000); ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
 
 alias mcli='~/bin/mc'
