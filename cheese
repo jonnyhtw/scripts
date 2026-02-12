@@ -1,4 +1,7 @@
-#!/usr/bin/env bash 
+pug#!/usr/bin/env bash 
 
 echo '$0 is ' $1
+pug
+
+
 
