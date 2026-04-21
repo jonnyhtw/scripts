@@ -92,3 +92,5 @@ alias cylcvr='cylc vr --yes  $(basename $PWD)'
 alias sqs='sqsummary'
 
 alias watchh='watch '
+
+alias work='cd /work/n02/n02/jonnyhtw/'
