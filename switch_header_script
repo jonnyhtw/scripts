@@ -1,5 +1,6 @@
 #! /bin/bash
 
+
 module load NCO
 
 MetO_file="/nesi/nobackup/niwa00013/williamsjh/cylc-run/u-bd889/share/data/History_Data/CICEhist/sea_ice_assess/header/aw310/*.nc"

@@ -3,11 +3,9 @@ alias gitfilelist='git ls-tree -r master --name-only'
 # Simple shortcut
 alias l='ls -lrthF'
 # Simple shortcut
-alias ll='ls -lh'
+alias ll='ls -lhF'
 # Simple shortcut
 alias gcon='rose suite-gcontrol'
-# Display line numbers and percentage through file
-alias less='less -M -N'
 # Go to ~/roses
 alias c='clear'
 # Go to ~/roses
@@ -26,8 +24,6 @@ alias mnr='cylc monitor $(basename "$PWD") -r'
 alias mnro='cylc monitor $(basename "$PWD") -ro'
 alias mno='cylc monitor $(basename "$PWD") -o'
 alias cylcscan=' cylc scan -t rich --colour-blind --sort'
-# Open 'fcm diff' in less
-alias fcmdiff='fcm diff|less'
 # Force tmux to use 256 colours, tip from
 # http://askubuntu.com/questions/125526/vim-in-tmux-display-wrong-colors
 alias tmux='tmux -2'
@@ -48,12 +44,6 @@ alias gconall='for folder in *; do cd ~/cylc-run; cd $folder; rose suite-gcontro
 # Some git aliases
 # Alias to `cylc gscan`
 alias gscn='cylc gscan&'
-# Edit command prompt
-export PS1="\h|\d|\t \D{%Z}|\W> "
-# Edit command prompt
-# Edit command prompt - simple
-#export PS1="> "
-#PS1='\[\e[0;32m\u@\w/:\[\e[m '
 # Update contents of directory every 2s
 alias wtch='cd . ; watch "ls -lta"'
 # Update contents of directory every 2s
@@ -94,3 +84,6 @@ alias sqs='sqsummary'
 alias watchh='watch '
 
 alias work='cd /work/n02/n02/jonnyhtw/'
+alias puma-ui='PORT=$(jot -r 1 10000 65000); ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
+
+alias mcli='~/bin/mc'

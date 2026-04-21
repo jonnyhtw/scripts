@@ -1,5 +1,0 @@
-#script to cylc gui for pwd
-
-echo 'opening the cylc gui for '$(basename $PWD)
-cylc gui $(basename $PWD) &
-
