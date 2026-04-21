@@ -23,7 +23,7 @@ latest_cycle_point=$(ls -d ????????T????Z 2> /dev/null | tail -1)
 
 if [ ${#latest_cycle_point} == 14 ]; then
 
-for dir in $latest_cycle_point/{atmos*,coupled*}
+for dir in $latest_cycle_point/{atmos*,coupled*,*fcst*}
 
 do
 
