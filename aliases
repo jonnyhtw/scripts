@@ -45,9 +45,9 @@ alias gconall='for folder in *; do cd ~/cylc-run; cd $folder; rose suite-gcontro
 # Alias to `cylc gscan`
 alias gscn='cylc gscan&'
 # Update contents of directory every 2s
-alias wtch='cd . ; watch "ls -lta"'
+alias wtch='cd . ; watch "ls -ltaF"'
 # Update contents of directory every 2s
-alias wtchh='cd .; watch "ls -ltha"'
+alias wtchh='cd .; watch "ls -lthFa"'
 # go to my nobackup folder
 alias nobackup='cd /nesi/nobackup/niwa00013/williamsjh'
 # alias 'here' for the name of the current dir you're in. This is then accessed
