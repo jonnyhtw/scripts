@@ -88,3 +88,6 @@ alias puma-ui='PORT=$(jot -r 1 10000 65000); ssh -t -L ${PORT}:localhost:${PORT}
 
 alias mcli='~/bin/mc'
 alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
+
+
+
