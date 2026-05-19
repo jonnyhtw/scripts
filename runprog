@@ -1,40 +1,54 @@
 #!/usr/bin/env bash
 
-# this is a script to see where a run has got to.
+# Optimized runprog script for ARCHER2
+# Handles: u-dx690/run25, u-dx690 run25, u-dx690 25
 
-# Example usage...
-################################################################
-# > runprog u-do527/run1
-# task name is -------> atmos_main
-# Atm_Step: Timestep    11016   Model time:   1989-02-01 00:00:00
-################################################################
+# 1. Clean up inputs
+suite_part=${1%/}  # Remove trailing slash
 
-if [[ -z $2 ]]
-    then
-        export workflow=$1
-    else
-        export workflow=${1}/run${2}
-
+if [[ -z $2 ]]; then
+    export workflow="$suite_part"
+else
+    # Remove "run" prefix if typed, then add it back cleanly
+    run_part=${2#run}
+    export workflow="${suite_part}/run${run_part}"
 fi
 
-cd ~/cylc-run/$workflow/work
+# 2. Set directory path
+target_dir="$HOME/cylc-run/$workflow/work"
 
-latest_cycle_point=$(ls -d ????????T????Z 2> /dev/null | tail -1)
-
-if [ ${#latest_cycle_point} == 14 ]; then
-
-for dir in $latest_cycle_point/{atmos*,coupled*,*fcst*}
-
-do
-
-if [ -d "$dir/pe_output" ]; then
-    echo 'task name is -------> '$(basename "$dir")$i
-    grep -sarh 'Atm_Step: Timestep' $dir/pe_output/*0|tail -1
+if [ ! -d "$target_dir" ]; then
+    echo "---> Error: Directory $target_dir not found <---"
+    exit 1
 fi
 
-done
+cd "$target_dir" || exit
+
+# 3. Find the latest cycle point (e.g., 18500101T0000Z)
+# Sort newest first
+latest_cycle_point=$(ls -d ????????T????Z 2>/dev/null | sort -r | head -n 1)
+
+if [[ ${#latest_cycle_point} -eq 14 ]]; then
+
+    for dir in "$latest_cycle_point"/{atmos*,coupled*,*fcst*}; do
+
+        if [ -d "$dir/pe_output" ]; then
+            echo "task name is -------> $(basename "$dir")"
+            
+            # 4. Search the master PE output file (usually ends in 0)
+            # Using grep on the whole file to ensure we don't miss the line,
+            # but restricted to files ending in 0 to keep it fast.
+            last_stat=$(grep -sh 'Atm_Step: Timestep' "$dir"/pe_output/*0 2>/dev/null | tail -n 1)
+            
+            if [[ -n "$last_stat" ]]; then
+                echo "$last_stat"
+            else
+                echo "      (Timestep info not found in pe_output/*0)"
+            fi
+        fi
+
+    done
 
 else
-    echo '---> no matching datetime cycle points <---'
-
+    echo "---> no matching datetime cycle points found in $workflow <---"
 fi
