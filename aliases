@@ -13,7 +13,7 @@ alias r='cd ~/roses'
 # Alias log to 'rose suite-log'
 alias log='rose suite-log'
 # Alias cr to 'cd ~$USER/cylc-run'
-alias cr='cd ~jonnyhtw/cylc-run'
+alias cr='cd -P ~jonnyhtw/cylc-run'
 # Alias fdg to 'fcm diff -g &'
 alias fdg='fcm diff -g &'
 # Alias for `cylc trigger` in PWD 
@@ -45,9 +45,9 @@ alias gconall='for folder in *; do cd ~/cylc-run; cd $folder; rose suite-gcontro
 # Alias to `cylc gscan`
 alias gscn='cylc gscan&'
 # Update contents of directory every 2s
-alias wtch='cd . ; watch "ls -lta"'
+alias wtch='cd . ; watch "ls -ltaF"'
 # Update contents of directory every 2s
-alias wtchh='cd .; watch "ls -ltha"'
+alias wtchh='cd .; watch "ls -lthFa"'
 # go to my nobackup folder
 alias nobackup='cd /nesi/nobackup/niwa00013/williamsjh'
 # alias 'here' for the name of the current dir you're in. This is then accessed
@@ -83,8 +83,8 @@ alias sqs='sqsummary'
 
 alias watchh='watch '
 
-alias work='cd /work/n02/n02/jonnyhtw/'
 alias puma-ui='PORT=$(jot -r 1 10000 65000); ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
+alias puma-ui='PORT=6969; ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
 
 alias mcli='~/bin/mc'
 alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'

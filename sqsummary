@@ -1,3 +1,14 @@
-squeue -h -u $USER -o '%t' |sort| uniq -c
+#!/bin/bash
+# Capture all states into a variable
+STATES=$(squeue -h -u $USER -o '%t')
+
+# If the variable is empty, exit early
+if [ -z "$STATES" ]; then
+    echo "No jobs in queue."
+    exit 0
+fi
+
+# Process the captured data
+echo "$STATES" | sort | uniq -c
 echo '-'
-echo -n 'total is '; squeue -h -u $USER -o '%t' | wc -l
+echo "total is $(echo "$STATES" | wc -l)"
