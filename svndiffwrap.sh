@@ -1,3 +1,3 @@
 #!/bin/sh
 
-/usr/bin/vimdiff "${6}" "${7}"
+vimdiff "${6}" "${7}"
