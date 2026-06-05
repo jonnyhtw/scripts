@@ -13,7 +13,7 @@ alias r='cd ~/roses'
 # Alias log to 'rose suite-log'
 alias log='rose suite-log'
 # Alias cr to 'cd ~$USER/cylc-run'
-alias cr='cd -P ~jonnyhtw/cylc-run'
+alias cr='cd -P ~/cylc-run'
 # Alias fdg to 'fcm diff -g &'
 alias fdg='fcm diff -g &'
 # Alias for `cylc trigger` in PWD 
