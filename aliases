@@ -90,4 +90,8 @@ alias mcli='~/bin/mc'
 alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
 
 
+# Append to the history file immediately, don't wait for terminal exit
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
+# Avoid overriding history if multiple terminal tabs are open
+shopt -s histappend
