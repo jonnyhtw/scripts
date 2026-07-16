@@ -1,4 +1,4 @@
-# List files tracked in a Git repo 
+# List files tracked in a Git repo
 alias gitfilelist='git ls-tree -r master --name-only'
 # Simple shortcut
 alias l='ls -lrthF'
@@ -16,26 +16,30 @@ alias log='rose suite-log'
 alias cr='cd -P ~/cylc-run'
 # Alias fdg to 'fcm diff -g &'
 alias fdg='fcm diff -g &'
-# Alias for `cylc trigger` in PWD 
-alias trig='cylc trigger $(basename "$PWD")'
-# Aliases for local calls to '> cylc monitor/stop/kill [suite-ID]'. 
-alias mn='cylc monitor $(basename "$PWD")'
-alias mnr='cylc monitor $(basename "$PWD") -r'
-alias mnro='cylc monitor $(basename "$PWD") -ro'
-alias mno='cylc monitor $(basename "$PWD") -o'
+
+# Fixed: Wrapped in double quotes with dynamic execution via \$ so it tracks PWD changes
+alias trig="cylc trigger \$(basename \"\$PWD\")"
+alias mn="cylc monitor \$(basename \"\$PWD\")"
+alias mnr="cylc monitor \$(basename \"\$PWD\") -r"
+alias mnro="cylc monitor \$(basename \"\$PWD\") -ro"
+alias mno="cylc monitor \$(basename \"\$PWD\") -o"
+alias tui="cylc tui \$(basename \"\$PWD\")"
+alias cylcvr="cylc vr --yes \$(basename \"\$PWD\")"
+alias pollhere="cylc poll \$(basename \"\$PWD\")/*//*/*"
+
 alias cylcscan=' cylc scan -t rich --colour-blind --sort'
 # Force tmux to use 256 colours, tip from
 # http://askubuntu.com/questions/125526/vim-in-tmux-display-wrong-colors
 alias tmux='tmux -2'
 # Clear terminal before running fcm commands. This is particularly useful for
-# 'fcm diff'. 
+# 'fcm diff'.
 alias cfcm='clear ; fcm'
 # Remove prompt from git to confirm which graphical diff viewer to view after
 # typing 'git difftool'. This was gleaned from
 # http://stackoverflow.com/questions/7897517/why-git-difftool-does-not-open-the-tool-automatically
 # and was set up using 'git config --global diff.tool gvimdiff' which was in turn gleaned
 # from
-# http://stackoverflow.com/questions/3713765/viewing-all-git-diffs-with-vimdiff 
+# http://stackoverflow.com/questions/3713765/viewing-all-git-diffs-with-vimdiff
 alias gitdifftool='git difftool -y'
 # Saving location of nf-config
 alias nf-config='/opt/niwa/netcdf/AIX/4.3.3.1/parallel/bin/nf-config'
@@ -50,9 +54,10 @@ alias wtch='cd . ; watch "ls -ltaF"'
 alias wtchh='cd .; watch "ls -lthFa"'
 # go to my nobackup folder
 alias nobackup='cd /nesi/nobackup/niwa00013/williamsjh'
-# alias 'here' for the name of the current dir you're in. This is then accessed
-# with `here` (back ticks) or $(here).
-alias here='$(basename $PWD)'
+
+# Fixed to expand dynamically on call
+alias here='basename "\$PWD"'
+
 #clim01
 alias clim01='ssh -AY w-clim01'
 #cylc01
@@ -72,31 +77,25 @@ alias pics='cd /Volumes/Data/Pictures'
 alias runbash='. ~/.bashrc'
 alias startx='startxwin -- -listen tcp &'
 alias cv='echo $CYLC_VERSION'
-alias tui='cylc tui $(basename $PWD)'
 
 alias c7='export CYLC_VERSION=7.9.1'
 alias c8='export CYLC_VERSION=8.2.1'
 
-alias cylcvr='cylc vr --yes  $(basename $PWD)'
-
 alias sqs='sqsummary'
-
 alias watchh='watch '
 
-alias puma-ui='PORT=$(jot -r 1 10000 65000); ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
-alias puma-ui='PORT=6969; ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
+alias puma-ui='PORT=6969; ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; fuser -k ${PORT}/tcp 2>/dev/null; sleep 1; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
 
 alias mcli='~/bin/mc'
+<<<<<<< HEAD
 alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
 
 
-# Force history to save immediately after every single command execution
-share_history() {
-    history -a  # Append the latest command to your history file right away
-    history -c  # Clear current session history memory
-    history -r  # Read the updated history file back into memory
-}
-trap 'share_history' DEBUG
 
-# Avoid overriding history if multiple terminal tabs are open
-shopt -s histappend
+# Append immediately to the history file safely, preventing compounding loops
+if [[ ! "$PROMPT_COMMAND" =~ "history -a" ]]; then
+    export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+fi
+
+
+export PS1='\h|\d|\t \D{%Z}|\W> '
