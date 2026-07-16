@@ -87,7 +87,6 @@ alias watchh='watch '
 alias puma-ui='PORT=6969; ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; fuser -k ${PORT}/tcp 2>/dev/null; sleep 1; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
 
 alias mcli='~/bin/mc'
-<<<<<<< HEAD
 alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
 
 
