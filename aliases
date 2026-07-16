@@ -91,10 +91,6 @@ alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
 
 
 
-# Append immediately to the history file safely, preventing compounding loops
-if [[ ! "$PROMPT_COMMAND" =~ "history -a" ]]; then
-    export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-fi
 
 
 alias 'br=cd ~/branches'
