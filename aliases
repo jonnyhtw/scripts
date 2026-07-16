@@ -89,3 +89,4 @@ alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
 
 
 
+alias 'br=cd ~/branches'
