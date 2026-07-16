@@ -90,8 +90,13 @@ alias mcli='~/bin/mc'
 alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
 
 
-# Append to the history file immediately, don't wait for terminal exit
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# Force history to save immediately after every single command execution
+share_history() {
+    history -a  # Append the latest command to your history file right away
+    history -c  # Clear current session history memory
+    history -r  # Read the updated history file back into memory
+}
+trap 'share_history' DEBUG
 
 # Avoid overriding history if multiple terminal tabs are open
 shopt -s histappend
