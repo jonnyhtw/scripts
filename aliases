@@ -87,15 +87,11 @@ alias watchh='watch '
 alias puma-ui='PORT=6969; ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c \"export CYLC_VERSION=8; fuser -k ${PORT}/tcp 2>/dev/null; sleep 1; cylc gui --no-browser --Application.log_level=WARN --port-retries=0 --port=${PORT}\""'
 
 alias mcli='~/bin/mc'
-
-# --- History and Prompt Controls ---
-# Avoid overriding history if multiple terminal tabs are open
-shopt -s histappend
-
-# Append immediately to the history file safely, preventing compounding loops
-if [[ ! "$PROMPT_COMMAND" =~ "history -a" ]]; then
-    export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-fi
+alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
 
 
-export PS1='\h|\d|\t \D{%Z}|\W> '
+
+
+
+alias 'br=cd ~/branches'
+export PS1='$(hostname -f)|\d|\t \D{%Z}|\W> '
