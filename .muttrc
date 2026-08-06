@@ -44,23 +44,30 @@ bind pager R clear-flag
 # Press 'U' to mark highlighted/tagged message as UNREAD
 bind index U set-flag
 bind pager U set-flag
+
 # ==============================================================================
 # 4. DISPLAY, FORMATTING & SORTING
 # ==============================================================================
 set pager_index_lines = 10
-set date_format = "%e %b %l%p"
-set index_format = "%2Z %D %-11.11F %.100s %> %5c "
+set date_format = "%d %b %H:%M:%S"
+set index_format = "%2Z %D %-40.40F %s %> %5c"
 set folder_format = "%2C %t %8s %d %f "
 
 # Threading & Sorting
 set sort = reverse-date-received
 
+
 # ==============================================================================
 # 5. SIDEBAR CONFIGURATION
 # ==============================================================================
-set sidebar_width = 24
+set sidebar_width = 28
 set sidebar_divider_char = '|'
 set sidebar_visible = yes
+
+# Display unread counts next to mailboxes
+set sidebar_format = "%B%?F? [%F]?%* %?N?(%N)?%?S?/%S?"
+set sidebar_short_path = yes
+set sidebar_folder_indent = yes
 
 # Navigation bindings
 bind index,pager \CP sidebar-prev
@@ -74,8 +81,29 @@ macro index b "<enter-command>toggle sidebar_visible <enter><redraw-screen>"
 # ==============================================================================
 # 6. COLORS & THEMING
 # ==============================================================================
-color status black cyan
-color sidebar_divider white default
+
+# ==============================================================================
+# SECTION 6: COLORS & THEMING (Light Background Matrix)
+# ==============================================================================
+
+# Default background and text (Black text on transparent/default background)
+color normal        black           default
+
+# Index Status Colors
+color index         black           default         "~R"        # Read: Dark black text
+color index         brightblue      default         "~N"        # Unread: Bold vibrant blue
+color index         brightmagenta   default         "~F"        # Flagged/Starred: Bold magenta
+color index         red             default         "~D"        # Deleted: Red
+
+# Indicator (The line highlighting your current selection)
+# Black text on a distinct cyan background
+color indicator     black           cyan
+
+# Status bar & Tree lines
+color status        brightwhite     blue                        # Bottom status line (White on Blue)
+color tree          blue            default                     # Threading arrows/lines
+color sidebar_new   brightblue      default                     # Unread counts in sidebar
+
 
 # ==============================================================================
 # 7. NAVIGATION & CUSTOM BINDINGS / MACROS
@@ -99,3 +127,6 @@ macro index A \
 
 # View HTML attachment in Firefox
 macro attach B "<pipe-message>cat > /tmp/mutt.html; firefox /tmp/mutt.html<enter>"
+
+
+
