@@ -50,12 +50,14 @@ bind pager U set-flag
 # ==============================================================================
 set pager_index_lines = 10
 set date_format = "%d %b %H:%M:%S"
-set index_format = "%2Z %D %-40.40F %s %> %5c"
+set index_format = "%2Z %D %-40.40F 🐶 %s %> %5c"
+
+
 set folder_format = "%2C %t %8s %d %f "
 
 # Threading & Sorting
+# set sort = threads
 set sort = reverse-date-received
-
 
 # ==============================================================================
 # 5. SIDEBAR CONFIGURATION
