@@ -132,3 +132,12 @@ macro attach B "<pipe-message>cat > /tmp/mutt.html; firefox /tmp/mutt.html<enter
 
 
 
+# Strip raw tracking headers and decode MIME before piping
+set pipe_decode = yes
+set weed = yes
+
+# Define which headers you actually want to see
+ignore *
+unignore From: To: Cc: Date: Subject:
+
+macro index,pager V "<pipe-message>vim -c 'set ft=mail' -<enter>" "View message in Vim"
