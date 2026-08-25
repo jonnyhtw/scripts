@@ -10,5 +10,6 @@ MIDORI*
 *.log
 *.nc
 *.pp
+.DS_Store
 *.ipynb_checkpoints
 symlink_transfer.log
