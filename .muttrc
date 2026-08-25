@@ -146,3 +146,12 @@ unignore From: To: Cc: Date: Subject:
 macro index,pager V "<pipe-message>vim -c 'set ft=mail' -<enter>" "View message in Vim"
 source ~/scripts/macros
 
+set markers = no
+
+# Bind backtick in the index view to sync-mailbox (same function as $)
+bind index \` sync-mailbox
+
+
+
+
+set sig_on_top = yes
