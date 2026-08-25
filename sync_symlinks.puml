@@ -1,13 +1,20 @@
 @startuml sync_symlinks
+
 skinparam activity {
-  BackgroundColor White
-  BorderColor #333333
-  BarColor #333333
-  StartColor #333333
-  EndColor #333333
+  BackgroundColor #b6cc27
+  BorderColor black
+  BarColor #8e2424
+  StartColor pink
 }
 
-|Initialization & Discovery|
+skinparam activityDiamond {
+  BackgroundColor #0b41e233
+  BorderColor     #FF6F00
+}
+
+
+
+|Initialisation & Discovery|
 start
 :Capture working directory (`EXEC_DIR`);
 :Set configuration & paths;
