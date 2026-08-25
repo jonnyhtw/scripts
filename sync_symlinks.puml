@@ -1,0 +1,35 @@
+@startuml sync_symlinks
+skinparam activity {
+  BackgroundColor White
+  BorderColor #333333
+  BarColor #333333
+  StartColor #333333
+  EndColor #333333
+}
+
+|Initialization & Discovery|
+start
+:Capture working directory (`EXEC_DIR`);
+:Set configuration & paths;
+if (Change to `SOURCE_DIR`?) then (failed)
+  :Output error;
+  end
+endif
+:Scan symlinks (`find . -type l > LISTFILE`);
+
+|Command Setup & Execution|
+:Build base flags ("-lrtv &#45;&#45;stats &#45;&#45;files-from");
+if (`DRY_RUN` is true?) then (yes)
+  :Append "&#45;&#45;dry-run";
+endif
+:Construct `rsync` command;
+:Write header to `LOGFILE` & record `START_TIME`;
+:Execute `rsync` via `eval`
+(stderr -> stdout -> `tee -a LOGFILE`);
+
+|Wrap-up|
+:Record `END_TIME` & calc duration;
+:Remove temporary `LISTFILE`;
+:Write summary footer to `LOGFILE`;
+stop
+@enduml
