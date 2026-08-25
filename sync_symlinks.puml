@@ -1,7 +1,7 @@
 @startuml sync_symlinks
 
 skinparam activity {
-  BackgroundColor #b6cc27
+  BackgroundColor #b3cc27
   BorderColor black
   BarColor #8e2424
   StartColor pink
