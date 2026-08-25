@@ -11,3 +11,4 @@ MIDORI*
 *.nc
 *.pp
 *.ipynb_checkpoints
+symlink_transfer.log
