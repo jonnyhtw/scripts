@@ -1,54 +1,157 @@
+# ==============================================================================
+# 1. ACCOUNTS & CONNECTIONS
+# ==============================================================================
 source ~/.mutt/.muttrc-private
 
-set mail_check=90
-set timeout=15
-set editor="vim"
-set header_cache="~/.mutt/cache/bodies"
-set mailcap_path = ~/scripts/.mailcap
-set pager_index_lines=10
-#set alias_file=~/.mutt/aliases # where I keep my aliases
-#source ~/.mutt/aliases
-auto_view text/x-vcard text/html text/enriched
+set imap_idle = yes
+set imap_keepalive = 60         # Lowered from 300 to keep TCP connection alive
+set imap_passive = no           # Prevents Mutt from waiting for user action to connect
+set mail_check = 30             # Lowered from 90 for faster fallback checks
+set mail_check_recent = no      # Notifies on ALL unread mail, not just new since last check
+set timeout = 10                # Checks for background IMAP updates after 10s of idle time
+
+set imap_check_subscribed = yes
 set smtp_authenticators = "login"
-set index_format="%Z %D %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
-set index_format="%S %D %?X?(%X)&   ? %-22.22F  %.100s %> %5c "
-set index_format="%S %D %-11.11F  %.100s %> %5c "
-set folder_format="%2C %t %8s %d %f "
-set imap_check_subscribed
-set date_format = "%F %H:%M %Z"
-set date_format="%e %b %l%p"
-bind pager <up> previous-line
-bind pager <down> next-line
-set mime_forward=yes
-set sort = reverse-threads
+set trash = "imaps://imap.gmail.com/[Gmail]/Bin"
+
+# ==============================================================================
+# 2. GENERAL & COMPOSITION
+# ==============================================================================
+set editor = "vim"
+set signature = "~/.mutt/signature"
+set copy = no
+set mime_forward = yes
+set header_cache = "~/.mutt/cache/bodies"
+set mailcap_path = ~/scripts/.mailcap
+
+# Auto-view HTML/VCARD inline using mailcap
+auto_view text/x-vcard text/html text/enriched
+
+# Optional aliases (uncomment if needed)
+# set alias_file = ~/.mutt/aliases
+# source ~/.mutt/aliases
+
+# ==============================================================================
+# 3. GMAIL MANUAL READ-STATUS WORKFLOW
+# ==============================================================================
+# Prevents Mutt from automatically marking messages as read/old upon opening/leaving
+set mark_old = no
+unset read_inc
+set resolve = no
+
+# Direct keys for manual status control:
+# Press 'R' to mark highlighted/tagged message as READ
+bind index R clear-flag
+bind pager R clear-flag
+
+# Press 'U' to mark highlighted/tagged message as UNREAD
+bind index U set-flag
+bind pager U set-flag
+
+# ==============================================================================
+# 4. DISPLAY, FORMATTING & SORTING
+# ==============================================================================
+set pager_index_lines = 10
+set date_format = "%d %b %H:%M:%S"
+set index_format = "%2Z %D %-40.40F 🐶 %s %> %5c"
+
+
+set folder_format = "%2C %t %8s %d %f "
+
+# Threading & Sorting
+# set sort = threads
 set sort = reverse-date-received
 
-macro index gi "<change-folder>=INBOX<tab><enter>" "Go to inbox"
+# ==============================================================================
+# 5. SIDEBAR CONFIGURATION
+# ==============================================================================
+set sidebar_width = 28
+set sidebar_divider_char = '|'
+set sidebar_visible = yes
 
-macro index ga "<change-folder>=[Gmail]/All<tab><enter>" "Go to all mail"
-set trash = "imaps://imap.gmail.com/[Gmail]/Bin"
-macro index A \
-    "<tag-pattern>~O<enter><tag-prefix><clear-flag>O<untag-pattern>.<enter>" \
-    "mark all old as read"
-set copy = no
-macro attach B "<pipe-message>cat > /tmp/mutt.html; firefox /tmp/mutt.html<enter>"
+# Display unread counts next to mailboxes
+set sidebar_format = "%B%?F? [%F]?%* %?N?(%N)?%?S?/%S?"
+set sidebar_short_path = yes
+set sidebar_folder_indent = yes
 
-#bind index N search-opposite
-# Ctrl-n toggles whether a mail is considered new or not
-#bind index \cn toggle-new
-
-bind index ? search-reverse
-# ? used to show help, so we remap that
-bind index <F1> help
-
-set sidebar_width=24
-set sidebar_divider_char='|'
-set sidebar_visible=yes
+# Navigation bindings
 bind index,pager \CP sidebar-prev
 bind index,pager \CN sidebar-next
-bind index,pager \CO sidebar-open
+bind index,pager \CE sidebar-open
 
+# Toggle sidebar visibility
 macro pager b "<enter-command>toggle sidebar_visible <enter><redraw-screen>"
 macro index b "<enter-command>toggle sidebar_visible <enter><redraw-screen>"
 
+# ==============================================================================
+# 6. COLORS & THEMING
+# ==============================================================================
 
+# ==============================================================================
+# SECTION 6: COLORS & THEMING (Light Background Matrix)
+# ==============================================================================
+
+# Default background and text (Black text on transparent/default background)
+color normal        black           default
+
+# Index Status Colors
+color index         black           default         "~R"        # Read: Dark black text
+color index         brightblue      default         "~N"        # Unread: Bold vibrant blue
+color index         brightmagenta   default         "~F"        # Flagged/Starred: Bold magenta
+color index         red             default         "~D"        # Deleted: Red
+
+# Indicator (The line highlighting your current selection)
+# Black text on a distinct cyan background
+color indicator     black           cyan
+
+# Status bar & Tree lines
+color status        brightwhite     blue                        # Bottom status line (White on Blue)
+color tree          blue            default                     # Threading arrows/lines
+color sidebar_new   brightblue      default                     # Unread counts in sidebar
+
+
+# ==============================================================================
+# 7. NAVIGATION & CUSTOM BINDINGS / MACROS
+# ==============================================================================
+# Pager scrolling
+bind pager <up> previous-line
+bind pager <down> next-line
+
+# Search & Help overrides
+bind index ? search-reverse
+bind index <F1> help
+
+# Folder shortcuts
+macro index gi "<change-folder>=INBOX<tab><enter>" "Go to inbox"
+macro index ga "<change-folder>=[Gmail]/All<tab><enter>" "Go to all mail"
+
+# Batch mark old messages as read
+macro index A \
+    "<tag-pattern>~O<enter><tag-prefix><clear-flag>O<untag-pattern>.<enter>" \
+    "mark all old as read"
+
+# View HTML attachment in Firefox
+macro attach B "<pipe-message>cat > /tmp/mutt.html; firefox /tmp/mutt.html<enter>"
+
+
+
+# Strip raw tracking headers and decode MIME before piping
+set pipe_decode = yes
+set weed = yes
+
+# Define which headers you actually want to see
+ignore *
+unignore From: To: Cc: Date: Subject:
+
+macro index,pager V "<pipe-message>vim -c 'set ft=mail' -<enter>" "View message in Vim"
+source ~/scripts/macros
+
+set markers = no
+
+# Bind backtick in the index view to sync-mailbox (same function as $)
+bind index \` sync-mailbox
+
+
+
+
+set sig_on_top = yes
