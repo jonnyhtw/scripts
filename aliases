@@ -92,8 +92,4 @@ alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
 
 
 alias 'br=cd ~/branches'
-<<<<<<< HEAD
-export PS1='$(hostname -f)|\d|\t \D{%Z}|\W$ '
-=======
 export PS1='$(hostname -f)|\d|\t \D{%Z}|\W $ '
->>>>>>> 4998cc4903b1df1d67148fd8bc2fe82440f7910c
