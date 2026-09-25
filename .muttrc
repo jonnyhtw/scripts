@@ -4,10 +4,13 @@
 source ~/.mutt/.muttrc-private
 
 set imap_idle = yes
-set imap_keepalive = 300
+set imap_keepalive = 60         # Lowered from 300 to keep TCP connection alive
+set imap_passive = no           # Prevents Mutt from waiting for user action to connect
+set mail_check = 30             # Lowered from 90 for faster fallback checks
+set mail_check_recent = no      # Notifies on ALL unread mail, not just new since last check
+set timeout = 10                # Checks for background IMAP updates after 10s of idle time
+
 set imap_check_subscribed = yes
-set mail_check = 90
-set timeout = 15
 set smtp_authenticators = "login"
 set trash = "imaps://imap.gmail.com/[Gmail]/Bin"
 
@@ -141,3 +144,14 @@ ignore *
 unignore From: To: Cc: Date: Subject:
 
 macro index,pager V "<pipe-message>vim -c 'set ft=mail' -<enter>" "View message in Vim"
+source ~/scripts/macros
+
+set markers = no
+
+# Bind backtick in the index view to sync-mailbox (same function as $)
+bind index \` sync-mailbox
+
+
+
+
+set sig_on_top = yes
