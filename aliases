@@ -2,6 +2,7 @@
 alias gitfilelist='git ls-tree -r master --name-only'
 # Simple shortcut
 alias l='ls -lrthF'
+alias l='ls -lrthF --time-style="+%Y-%m-%d %H:%M:%S"'
 # Simple shortcut
 alias ll='ls -lhF'
 # Simple shortcut
@@ -50,9 +51,8 @@ alias gscn='cylc gscan&'
 alias wtch='cd . ; watch "ls -ltaF"'
 # Update contents of directory every 2s
 alias wtchh='cd .; watch "ls -lthFa"'
-# go to my nobackup folder
-alias nobackup='cd /nesi/nobackup/niwa00013/williamsjh'
-
+alias wtch="watch -n 2 'ls -ltF --time-style=\"+%Y-%m-%d %H:%M:%S\"'"
+alias wtchh="watch -n 2 'ls -ltaFh --time-style=\"+%Y-%m-%d %H:%M:%S\"'"
 # Fixed to expand dynamically on call
 alias here='basename "\$PWD"'
 
@@ -87,8 +87,8 @@ alias puma-ui='PORT=6969; ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c 
 alias mcli='~/bin/mc'
 alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
 
-
-
+#physical location
+alias 'pwd=pwd -P'
 
 
 alias 'br=cd ~/branches'
