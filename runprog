@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Optimized runprog script for ARCHER2
+# Optimized runprog script for ARCHER2 / Cirrus
 # Handles: u-dx690/run25, u-dx690 run25, u-dx690 25
 
 # 1. Clean up inputs
@@ -24,31 +24,53 @@ fi
 
 cd "$target_dir" || exit
 
-# 3. Find the latest cycle point (e.g., 18500101T0000Z)
-# Sort newest first
-latest_cycle_point=$(ls -d ????????T????Z 2>/dev/null | sort -r | head -n 1)
+# 3. Collect pe_output paths into associative arrays
+declare -A latest_tasks
+declare -A latest_cycles
 
-if [[ ${#latest_cycle_point} -eq 14 ]]; then
+while IFS= read -r pe_dir; do
+    task_path=$(dirname "$pe_dir")
+    
+    task_name=$(basename "$(dirname "$task_path")")
+    cycle_point=$(basename "$task_path")
 
-    for dir in "$latest_cycle_point"/{atmos*,coupled*,*fcst*}; do
+    # If layout is reversed (cycle/task instead of task/cycle)
+    if [[ ! "$cycle_point" =~ ^[0-9]{8}T[0-9]{4}Z$ ]]; then
+        task_name=$(basename "$task_path")
+        cycle_point=$(basename "$(dirname "$task_path")")
+    fi
 
-        if [ -d "$dir/pe_output" ]; then
-            echo "task name is -------> $(basename "$dir")"
-            
-            # 4. Search the master PE output file (usually ends in 0)
-            # Using grep on the whole file to ensure we don't miss the line,
-            # but restricted to files ending in 0 to keep it fast.
-            last_stat=$(grep -sh 'Atm_Step: Timestep' "$dir"/pe_output/*0 2>/dev/null | tail -n 1)
-            
-            if [[ -n "$last_stat" ]]; then
-                echo "$last_stat"
-            else
-                echo "      (Timestep info not found in pe_output/*0)"
+    # Filter for target tasks
+    case "$task_name" in
+        atmos*|coupled*|*fcst*)
+            # Only update if no cycle point set yet OR if this cycle point is newer (greater string value)
+            if [[ -z "${latest_cycles[$task_name]}" || "$cycle_point" > "${latest_cycles[$task_name]}" ]]; then
+                latest_cycles["$task_name"]="$cycle_point"
+                latest_tasks["$task_name"]="$pe_dir"
             fi
-        fi
+            ;;
+    esac
+done < <(find . -maxdepth 3 -type d -name "pe_output" 2>/dev/null)
 
-    done
+# 4. Process and print only the latest cycle point per task
+found_task=0
 
-else
-    echo "---> no matching datetime cycle points found in $workflow <---"
+for task_name in "${!latest_tasks[@]}"; do
+    pe_dir="${latest_tasks[$task_name]}"
+    cycle_point="${latest_cycles[$task_name]}"
+
+    found_task=1
+    echo "task name is -------> ${task_name} (${cycle_point})"
+
+    last_stat=$(grep -sh 'Atm_Step: Timestep' "$pe_dir"/*0 2>/dev/null | tail -n 1)
+
+    if [[ -n "$last_stat" ]]; then
+        echo "    $last_stat"
+    else
+        echo "      (Timestep info not found in pe_output/*0)"
+    fi
+done
+
+if [[ $found_task -eq 0 ]]; then
+    echo "---> No matching tasks or pe_output directories found in $workflow <---"
 fi
