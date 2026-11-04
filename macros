@@ -1,1 +1,2 @@
 macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+macro index,pager,attach \Cb "<pipe-message>cat > /tmp/mutt_email.html && open -a Firefox /tmp/mutt_email.html<enter>" "Open email in Firefox"
