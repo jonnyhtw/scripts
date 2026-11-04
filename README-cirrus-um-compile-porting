@@ -1,0 +1,92 @@
+FCM CONFIGURATION PATCHING GUIDE
+
+This document details the procedure for syncing and porting Cirrus-specific fcm-make build configurations (e.g., ncas-cirrus-cce) between working branches using standard unified diff patches and FCM version control.
+
+NOTE ON WORKFLOW AND VERSIONS:
+In this workflow, the vn13.8 branch (vn13.8_cirrus_compile) was configured and verified manually first to serve as the reference standard. Porting these changes to your target UM version branch is controlled by setting the $VN environment variable in Step 1. The exact same procedure applies when porting these configuration diffs to any version branch (e.g., 13.9, 13.0, 13.5, etc.).
+
+--------------------------------------------------------------------------------
+PREREQUISITES: BRANCH CREATION & CHECKOUT
+--------------------------------------------------------------------------------
+
+1. Create target working branch from reference standard (e.g., vn13.8):
+
+fcm bc cirrus_compile fcm:um.x_tr@vn13.8
+
+Suggested commit message to paste into editor:
+--------------------------------------------------
+Cirrus build porting.
+--------------------------------------------------
+
+2. Checkout working copy of the new branch:
+
+fcm co [new branch address]
+
+
+--------------------------------------------------------------------------------
+WORKFLOW: PORTING FCM-MAKE CONFIGURATIONS BETWEEN BRANCHES
+--------------------------------------------------------------------------------
+
+STEP 1: INITIALISE TARGET CONFIGURATION DIRECTORY
+
+Set your target UM version (e.g., 13.9, 13.0, 13.5) and navigate to the fcm-make directory:
+
+export VN="13.9"
+
+cd /home/n02/n02/jonnyhtw/branches/vn${VN}_cirrus_compile/fcm-make
+
+
+STEP 2: COMMIT BASELINE TEMPLATE TO VERSION CONTROL
+
+If the target configuration directory (e.g., ncas-cirrus-cce) does not yet exist in your target branch, use `fcm cp` to copy and stage the template configuration (e.g., ncas-ex-cce). Then commit it to establish a clean baseline commit before applying any porting patches.
+
+# Copy template and stage for FCM version control in one step
+fcm cp ncas-ex-cce ncas-cirrus-cce
+
+# Commit the initial baseline state (opens editor for log message)
+fcm commit
+
+Suggested commit message to paste into editor:
+--------------------------------------------------
+Initialize ncas-cirrus-cce baseline from ncas-ex-cce template
+--------------------------------------------------
+
+
+STEP 3: GENERATE THE PATCH FILE
+
+Generate a unified diff comparing your freshly initialised target directory against your manually configured reference branch (vn13.8_cirrus_compile):
+
+diff -urN -x ".*" ncas-cirrus-cce /home/n02/n02/jonnyhtw/branches/vn13.8_cirrus_compile/fcm-make/ncas-cirrus-cce > cirrus_config.patch
+
+
+STEP 4: TEST PATCH APPLICATION (DRY-RUN)
+
+Verify that all target files match and the patch applies cleanly without conflicts:
+
+patch -p0 --dry-run < cirrus_config.patch
+
+(Note: "checking file ..." indicates that patch has verified the target file exists and that the hunk context matches without modifying any disk files.)
+
+
+STEP 5: APPLY THE PATCH AND CLEAN UP
+
+Apply the changes directly to the target working copy and remove the temporary patch file:
+
+patch -p0 < cirrus_config.patch
+rm cirrus_config.patch
+
+
+STEP 6: COMMIT PORTED CHANGES TO FCM VERSION CONTROL
+
+Verify working copy status and commit the applied diffs directly from the fcm-make directory:
+
+# Verify working copy status (modified 'M')
+fcm st
+
+# Commit the ported configuration changes (opens editor for log message)
+fcm commit
+
+Suggested commit message to paste into editor:
+--------------------------------------------------
+Port ncas-cirrus-cce build configurations from vn13.8 reference branch
+--------------------------------------------------
