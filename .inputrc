@@ -6,3 +6,10 @@ TAB: menu-complete
 
 # Show the full list of options on the first press instead of hiding them
 set show-all-if-ambiguous on
+
+# Enable vi mode mode indicators in prompt
+set show-mode-in-prompt on
+
+# Customize the prompt indicators (optional)
+set vi-ins-mode-string "(ins) "
+set vi-cmd-mode-string "(cmd) "
