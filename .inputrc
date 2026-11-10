@@ -1,9 +1,3 @@
-# Bind Tab to cycle forward through options
-TAB: menu-complete
-
-# Bind Shift+Tab to cycle backward through options
-"\e[Z": menu-complete-backward
-
 # Show the full list of options on the first press instead of hiding them
 set show-all-if-ambiguous on
 
