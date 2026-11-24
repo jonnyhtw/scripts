@@ -9,6 +9,7 @@ alias ll='ls -lhF'
 alias gcon='rose suite-gcontrol'
 # Go to ~/roses
 alias c='clear'
+alias c='clear -x 2>/dev/null || printf "\033[H\033[2J"'
 # Go to ~/roses
 alias r='cd ~/roses'
 # Alias log to 'rose suite-log'
@@ -26,7 +27,7 @@ alias mnro="cylc monitor \$(basename \"\$PWD\") -ro"
 alias mno="cylc monitor \$(basename \"\$PWD\") -o"
 alias tui="cylc tui \$(basename \"\$PWD\")"
 alias cylcvr="cylc vr --yes \$(basename \"\$PWD\")"
-alias pollhere="cylc poll \$(basename \"\$PWD\")/*//*/*"
+alias pollhere="clear ; cylc poll \$(basename \"\$PWD\")/*//*/*"
 
 alias cylcscan=' cylc scan -t rich --colour-blind --sort'
 # Force tmux to use 256 colours, tip from
@@ -54,7 +55,7 @@ alias wtchh='cd .; watch "ls -lthFa"'
 alias wtch="watch -n 2 'ls -ltF --time-style=\"+%Y-%m-%d %H:%M:%S\"'"
 alias wtchh="watch -n 2 'ls -ltaFh --time-style=\"+%Y-%m-%d %H:%M:%S\"'"
 # Fixed to expand dynamically on call
-alias here='basename "\$PWD"'
+alias here='cd && cd -'
 
 #clim01
 alias clim01='ssh -AY w-clim01'

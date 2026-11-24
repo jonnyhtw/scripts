@@ -1,17 +1,26 @@
 #!/usr/bin/env bash
 
 # Optimized runprog script for ARCHER2 / Cirrus
-# Handles: u-dx690/run25, u-dx690 run25, u-dx690 25
+# Handles: u-dx690/run25, u-dx690 run25, u-dx690 25, u-dx690/mytest, u-dx690 mytest
+
+# 0. Clear the screen to make workflows with multiple tasks more legible (e.g. atmos_main, atmos_pe, ...)
+# clear
 
 # 1. Clean up inputs
 suite_part=${1%/}  # Remove trailing slash
+run_part=${2%/}    # Remove trailing slash if present
 
-if [[ -z $2 ]]; then
+if [[ -z $suite_part ]]; then
+    echo "Usage: runprog <suite>[/<run_name>] [<run_name>|<run_number>]"
+    exit 1
+fi
+
+if [[ -z $run_part ]]; then
     export workflow="$suite_part"
-else
-    # Remove "run" prefix if typed, then add it back cleanly
-    run_part=${2#run}
+elif [[ $run_part =~ ^[0-9]+$ ]]; then
     export workflow="${suite_part}/run${run_part}"
+else
+    export workflow="${suite_part}/${run_part}"
 fi
 
 # 2. Set directory path
@@ -30,7 +39,7 @@ declare -A latest_cycles
 
 while IFS= read -r pe_dir; do
     task_path=$(dirname "$pe_dir")
-    
+
     task_name=$(basename "$(dirname "$task_path")")
     cycle_point=$(basename "$task_path")
 
