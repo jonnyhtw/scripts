@@ -87,8 +87,6 @@ alias puma-ui='PORT=6969; ssh -t -L ${PORT}:localhost:${PORT} puma2 "bash -l -c 
 alias mcli='~/bin/mc'
 alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
 
-#physical location
-alias 'pwd=pwd -P'
 
 
 alias 'br=cd ~/branches'
