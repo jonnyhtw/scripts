@@ -1,3 +1,0 @@
-longitude=(165,185),latitude=(-50, -30)
-
-sellonlatbox,lon1,lon2,lat1,lat2  infile outfile
