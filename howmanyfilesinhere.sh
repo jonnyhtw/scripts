@@ -1,8 +1,16 @@
 #!/bin/bash
 
-echo 'there are this many files in...'
-echo "$PWD"
-find . -true -print | wc -l
+set -euo pipefail
 
-echo 'and this is how they are distributed across folders (including hidden ones)...'
-find . -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 -I {} sh -c 'echo -n "{}      " && { find {} -true -print | wc -l ; }'
+count_files() {
+    find "$1" -type f -print0 | LC_ALL=C tr -cd '\000' | wc -c
+}
+
+total=$(count_files .)
+printf 'Regular files in %s: %d\n' "$PWD" "$total"
+printf 'Files in each immediate folder (including hidden folders):\n'
+find . -mindepth 1 -maxdepth 1 -type d -print0 |
+    while IFS= read -r -d '' directory; do
+        count=$(count_files "$directory")
+        printf '  %q: %d\n' "$directory" "$count"
+    done
