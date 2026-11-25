@@ -1,7 +1,0 @@
-#!/bin/bash
-
-export ROSE_HOME=/home/williamsjh/rose
-export PATH=/home/williamsjh/rose/usr/bin:$PATH
-
-alias myrose='rose'
-
