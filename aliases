@@ -1,14 +1,11 @@
 # List files tracked in a Git repo
-alias gitfilelist='git ls-tree -r master --name-only'
+alias gitfilelist='git ls-tree -r HEAD --name-only'
 # Simple shortcut
 alias l='ls -lrthF'
-alias l='ls -lrthF --time-style="+%Y-%m-%d %H:%M:%S"'
 # Simple shortcut
 alias ll='ls -lhF'
 # Simple shortcut
 alias gcon='rose suite-gcontrol'
-# Go to ~/roses
-alias c='clear'
 alias c='clear -x 2>/dev/null || printf "\033[H\033[2J"'
 # Go to ~/roses
 alias r='cd ~/roses'
@@ -19,15 +16,14 @@ alias cr='cd -P ~/cylc-run'
 # Alias fdg to 'fcm diff -g &'
 alias fdg='fcm diff -g &'
 
-# Fixed: Wrapped in double quotes with dynamic execution via \$ so it tracks PWD changes
-alias trig="cylc trigger \$(basename \"\$PWD\")"
-alias mn="cylc monitor \$(basename \"\$PWD\")"
-alias mnr="cylc monitor \$(basename \"\$PWD\") -r"
-alias mnro="cylc monitor \$(basename \"\$PWD\") -ro"
-alias mno="cylc monitor \$(basename \"\$PWD\") -o"
-alias tui="cylc tui \$(basename \"\$PWD\")"
-alias cylcvr="cylc vr --yes \$(basename \"\$PWD\")"
-alias pollhere="clear ; cylc poll \$(basename \"\$PWD\")/*//*/*"
+alias trig='cylc trigger "$(basename "$PWD")"'
+alias mn='cylc monitor "$(basename "$PWD")"'
+alias mnr='cylc monitor "$(basename "$PWD")" -r'
+alias mnro='cylc monitor "$(basename "$PWD")" -ro'
+alias mno='cylc monitor "$(basename "$PWD")" -o'
+alias tui='cylc tui "$(basename "$PWD")"'
+alias cylcvr='cylc vr --yes "$(basename "$PWD")"'
+alias pollhere='cylc poll "$(basename "$PWD")/*//*/*"'
 
 alias cylcscan=' cylc scan -t rich --colour-blind --sort'
 # Force tmux to use 256 colours, tip from
@@ -43,17 +39,11 @@ alias cfcm='clear ; fcm'
 # from
 # http://stackoverflow.com/questions/3713765/viewing-all-git-diffs-with-vimdiff
 alias gitdifftool='git difftool -y'
-# Open all ~/cylc-run directories in GCylc
-alias gconall='for folder in *; do cd ~/cylc-run; cd $folder; rose suite-gcontrol & cd ..; done'
-# Some git aliases
 # Alias to `cylc gscan`
 alias gscn='cylc gscan&'
 # Update contents of directory every 2s
-alias wtch='cd . ; watch "ls -ltaF"'
-# Update contents of directory every 2s
-alias wtchh='cd .; watch "ls -lthFa"'
-alias wtch="watch -n 2 'ls -ltF --time-style=\"+%Y-%m-%d %H:%M:%S\"'"
-alias wtchh="watch -n 2 'ls -ltaFh --time-style=\"+%Y-%m-%d %H:%M:%S\"'"
+alias wtch="watch -n 2 'ls -ltF'"
+alias wtchh="watch -n 2 'ls -ltaFh'"
 # Fixed to expand dynamically on call
 alias here='cd && cd -'
 
@@ -63,9 +53,23 @@ alias clim01='ssh -AY w-clim01'
 alias cylc01='ssh -AY w-cylc01'
 #vi to vim
 alias vi='vim'
-#most recently edited file
-alias vimlatest='vim `ls -rt | tail -1`'
-alias taillatest='tail `ls -rt | tail -1`'
+# Run a command on the most recently modified non-hidden entry.
+_run_on_latest() {
+    local command=$1 file latest=
+    for file in *; do
+        [[ -e $file || -L $file ]] || continue
+        if [[ -z $latest || $file -nt $latest ]]; then
+            latest=$file
+        fi
+    done
+    if [[ -z $latest ]]; then
+        printf 'No non-hidden entries found in %s\n' "$PWD" >&2
+        return 1
+    fi
+    "$command" "./$latest"
+}
+vimlatest() { _run_on_latest vim; }
+taillatest() { _run_on_latest tail; }
 #go to mac pictures folder
 alias pics='cd /Volumes/Data/Pictures'
 # mutt in japamese
@@ -90,9 +94,5 @@ alias puma-ui-new='PORT=$(jot -r 1 10000 65000); ssh -t -L ${PORT}:localhost:${P
 
 
 alias mcli='~/bin/mc'
-alias 'pollhere=cylc poll $(basename $PWD)/*//*/*'
-
-
-
 alias 'br=cd ~/branches'
 export PS1='$(hostname -f)|\d|\t \D{%Z}|\W $ '
