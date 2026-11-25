@@ -4,120 +4,92 @@
 # gwidion@gmail.com
 # GPL. v3.0
 
-MAX_CASCADES = 600
-MAX_COLS = 20
-FRAME_DELAY = 0.5
+import math
+import random
+import shutil
+import sys
+import time
 
-MAX_SPEED  = 2
-
-import shutil, sys, time
-from random import choice, randrange, paretovariate
-
+FRAME_DELAY = 0.075
+CHARS = "0123456789" + "".join(chr(code) for code in range(0xFF66, 0xFF9E))
 CSI = "\x1b["
-pr = lambda command: print("\x1b[", command, sep="", end="")
-getchars = lambda start, end: [chr(i) for i in range(start, end)]
 
-black, green, white = "30", "32", "37"
 
-latin = getchars(0x30, 0x80)
-greek = getchars(0x390, 0x3d0)
-hebrew = getchars(0x5d0, 0x5eb)
-cyrillic = getchars(0x400, 0x50)
+class Stream:
+    def __init__(self, rows):
+        self.rows = rows
+        self.head = random.uniform(-rows, rows)
+        self.speed = random.uniform(0.35, 1.1)
+        self.length = random.randint(max(2, rows // 3), max(3, rows))
+        self.characters = [random.choice(CHARS) for _ in range(rows)]
 
-chars= latin + greek + hebrew + cyrillic
+    def advance(self):
+        self.head += self.speed
+        if self.head - self.length >= self.rows:
+            self.head = random.uniform(-self.rows, -1)
+            self.speed = random.uniform(0.35, 1.1)
+            self.length = random.randint(max(2, self.rows // 3), max(3, self.rows))
+        if random.random() < 0.2:
+            self.characters[random.randrange(self.rows)] = random.choice(CHARS)
 
-def pareto(limit):
-    scale = lines // 2
-    number = (paretovariate(1.16) - 1) * scale
-    return max(0, limit - number)
-
-def init():
-    global cols, lines
-    cols, lines = shutil.get_terminal_size()
-    pr("?25l")  # Hides cursor
-    pr("s")  # Saves cursor position
-
-def end():
-    pr("m")   # reset attributes
-    pr("2J")  # clear screen
-    pr("u")  # Restores cursor position
-    pr("?25h")  # Show cursor
-
-def print_at(char, x, y, color="", bright="0"):
-    pr("%d;%df" % (y, x))
-    pr(bright + ";" + color + "m")
-    print(char, end="", flush=True)
-
-def update_line(speed, counter, line):
-    counter += 1
-    if counter >= speed:
-        line += 1
-        counter = 0
-    return counter, line
-
-def cascade(col):
-    speed = randrange(1, MAX_SPEED)
-    espeed = randrange(1, MAX_SPEED)
-    line = counter = ecounter = 0
-    oldline = eline = -1
-    erasing = False
-    bright = "1"
-    limit = pareto(lines)
-    while True:
-        counter, line = update_line(speed , counter, line)
-        if randrange(10 * speed) < 1:
-            bright = "0"
-        if line > 1 and line <= limit and oldline != line:
-            print_at(choice(chars),col, line-1, green, bright)
-        if line < limit:
-            print_at(choice(chars),col, line, white, "1")
-        if erasing:
-            ecounter, eline = update_line(espeed, ecounter, eline)
-            print_at(" ",col, eline, black)
+    def cell(self, row):
+        distance = math.floor(self.head) - row
+        if distance < 0 or distance >= self.length:
+            return " ", 0
+        if distance == 0:
+            color = 15
+        elif distance < self.length / 3:
+            color = 46
+        elif distance < self.length * 2 / 3:
+            color = 34
         else:
-            erasing = randrange(line + 1) > (lines / 2)
-            eline = 0
-        yield None
-        oldline = line
-        if eline >= limit:
-            print_at(" ", col, oldline, black)
-            break
+            color = 22
+        return self.characters[row], color
+
+
+def draw_frame(streams, rows, cols):
+    output = []
+    color = None
+    for row in range(rows):
+        output.append(f"{CSI}{row + 1};1H")
+        # Avoid writing the bottom-right cell, which can scroll the terminal.
+        width = cols - 1 if row == rows - 1 else cols
+        for stream in streams[:width]:
+            char, cell_color = stream.cell(row)
+            if cell_color != color:
+                output.append(f"{CSI}38;5;{cell_color}m")
+                color = cell_color
+            output.append(char)
+    sys.stdout.write("".join(output))
+    sys.stdout.flush()
+
 
 def main():
-    cascading = set()
-    added_new = True
+    size = None
+    streams = []
     while True:
-        while add_new(cascading): pass
-        stopped = iterate(cascading)
-        sys.stdout.flush()
-        cascading.difference_update(stopped)
+        cols, rows = shutil.get_terminal_size()
+        if (cols, rows) != size:
+            size = cols, rows
+            streams = [Stream(rows) for _ in range(cols)]
+            sys.stdout.write(f"{CSI}2J")
+        for stream in streams:
+            stream.advance()
+        draw_frame(streams, rows, cols)
         time.sleep(FRAME_DELAY)
 
-def add_new(cascading):
-    if randrange(MAX_CASCADES + 1) > len(cascading):
-        col = randrange(cols)
-        for i in range(randrange(MAX_COLS)):
-            cascading.add(cascade((col + i) % cols))
-        return True
-    return False
-
-def iterate(cascading):
-    stopped = set()
-    for c in cascading:
-        try:
-            next(c)
-        except StopIteration:
-            stopped.add(c)
-    return stopped
 
 def doit():
     try:
-        init()
+        sys.stdout.write(f"{CSI}?1049h{CSI}?25l{CSI}40m{CSI}2J")
+        sys.stdout.flush()
         main()
     except KeyboardInterrupt:
         pass
     finally:
-        end()
+        sys.stdout.write(f"{CSI}0m{CSI}?25h{CSI}?1049l")
+        sys.stdout.flush()
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     doit()
